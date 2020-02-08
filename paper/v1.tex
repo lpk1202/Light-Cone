@@ -43,58 +43,45 @@
 \maketitle
 
 \section{Light Cone Formalism}
-Definition of Fourier modes of a whole light cone:
+General definition of Fourier modes of a whole light cone:
 \be
-\delta^{\LC}(\vk) = \int_{V} d^3 \vr\, \delta(\vr;a(r))\big[ \frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}f_{V}(\vr) e^{-i\vk \cdot\vr} \eql{LC}
+\delta^{\LC}(\vk) = \int_{V} d^3 \vr\, \delta_{\rm m}(\vr;a(r))\big[ \frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}f_{V}(\vr) e^{-i\vk \cdot\vr} \eql{LC}
 \ee
-Here $\LC$ means "light cone". $V$ is the whole volome of the survey. $\delta(\vr;a(r))$ is the matter density perturbation at location $\vr$ with redshift $1/(1+a(r))$. $D$ is the linear growth factor and $D_{\ini} = D(a=a_{\ini})$.\\
-We can write the real space matter inhomogeneity field $\delta(\vr;a(r))$ as:
+Here $\LC$ means "light cone". $V$ is the whole volome of the survey. $\delta_{\rm m}(\vr;a(r))$ is the matter density perturbation at location $\vr$ with redshift $1/(1+a(r))$. $D$ is the linear growth factor and $D_{\ini} = D(a=a_{\ini})$. $f_{V}$ is a position-dependent function and its form will be determined later.\\
+We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vr;a(r))$ as:
 \be 
-\delta(\vr;a(r))=\int \frac{d^3 \vbk}{(2\pi)^3}e^{i\vbk\cdot\vr}\delta(\vbk;a(r))
+\delta_{\rm m}(\vr;a(r))=\int \frac{d^3 \vbk}{(2\pi)^3}e^{i\vbk\cdot\vr}\delta_{\rm m}(\vbk;a(r))
 \ee 
 Here the wave vector with "bar" means it is a wave vector defined at that specific time $a(r)$. Different from the wave vector $\vk$ in \ec{LC} which means the wave vector is defined in the light cone.\\
 Similarly we want to compute the off-diagonal term in order to construct the power spectrum:
 \bea 
-&&\langle \delta^{(1)}(\vk_s)\delta^{(2)}(\vk_s') \rangle \vs 
+&&\langle \delta^{\rm LC,(1)}(\vk_s)\delta^{\rm LC,(2)}(\vk_s') \rangle \vs 
 &=& \int_V d^{3}\vr\int_{V} d^{3} \vr' \int \frac{d^{3}\vbk}{(2\pi)^3}\int \frac{d^{3}\vbkp}{(2\pi)^3} e^{i(\vbk\cdot\vr+\vbkp\cdot\vr')-i(\vk_s\cdot\vr+\vk_s'\cdot\vr')}\vs
-&&\times\big[ \frac{D_{\ini}}{D_{1}(a(r))} \frac{D_{\ini}}{D_{1}(a(r'))} \big]^{2}f_{V}(\vr)f_{V}(\vr') \langle \delta^{(1)}(\vbk;a(r))\delta^{(2)}(\vbkp;a(r')) \rangle \eql{od}
+&&\times\big[ \frac{D_{\ini}}{D_{1}(a(r))} \frac{D_{\ini}}{D_{1}(a(r'))} \big]^{2}f_{V}(\vr)f_{V}(\vr') \langle \delta_{\rm m}^{(1)}(\vbk;a(r))\delta_{\rm m}^{(2)}(\vbkp;a(r')) \rangle \eql{od}
 \eea 
 We have computed the bracket in \ec{od} before where the result is:
 \bea 
-&&\langle \delta^{(1)}(\vbk;a(r))\delta^{(2)}(\vbkp;a(r')) \rangle \vs
-&=&2\big[\frac{D_{1}(a(r'))}{D_{\ini}} \big]^{2}F_{2}(-\vbk,\vbk+\vbkp)P_{\ini}(\bk)\delta^{(1)}(\vbk+\vbkp;a(r)) \eql{odb}
+&&\langle \delta_{\rm m}^{(1)}(\vbk;a(r))\delta_{\rm m}^{(2)}(\vbkp;a(r')) \rangle \vs
+&=&2\big[\frac{D_{1}(a(r'))}{D_{\ini}} \big]^{2}F_{2}(-\vbk,\vbk+\vbkp)P_{\rm m,\ini}(\bk)\delta_{\rm m}^{(1)}(\vbk+\vbkp;a(r)) \eql{odb}
 \eea 
-Plugging \ec{odb} into \ec{od}, we can see that the only $\vr'$ dependent integral can be written as:
+Plugging \ec{odb} into \ec{od}, we can see that the only $\vr'$ dependent integral can be written as (here simply choose a cube volume so that $f_{V}=1$:
 \be 
-\int_{V} d^{3}\vr'f_{V}(\vr')e^{-i(\vbkp-\vk_s')\vr'} = (2\pi)^3\delta(\vbkp-\vk_s')
+\int_{V} d^{3}\vr'f_{V}(\vr')e^{-i(\vbkp-\vk_s')\vr'} \simeq (2\pi)^3\delta_{\rm D}(\vbkp-\vk_s')
 \ee 
-\textbf{is it still true for a finite volome? And whether $\vbkp$ and $\vk_s'$ can show up in the same term?} Thus:
+\textbf{is it still true for a non-cube volome?} Thus:
 \bea 
-&& \langle \delta^{(1)}(\vk_s)\delta^{(2)}(\vk_s') \rangle \vs 
-&=&2\int_{V} d^{3}\vr \int \frac{d^{3}\vbk}{(2\pi)^3}[\frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}e^{-i(\vbk-\vk_s)\vr}\delta^{(1)}(\vbk+\vk_s';a(r))\vs
-&&\times F_{2}(-\vbk,\vbk+\vk_s')P_{\ini}(\bk)\vs
-&=&2\int_{V} d^{3}\vr \int \frac{d^{3}\vbk}{(2\pi)^3}[\frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}e^{-i(\vbk-\vk_s-\vk_s')\vr}\delta^{(1)}(\vbk;a(r)) \vs
-&&\times F_2(\vbk,-\vbk+\vk_s')P_{\ini}(|\vbk-\vk_s'|) \vs
-&\simeq&2F_{2}(-\vk_s,\vk_s+\vk_s')P_{\ini}(k_s)\delta^{(1)}(\vk_s+\vk_s')
+&& \langle \delta_{\rm m}^{(1)}(\vk_s)\delta_{\rm m}^{(2)}(\vk_s') \rangle \vs 
+&=&2\int_{V} d^{3}\vr \int \frac{d^{3}\vbk}{(2\pi)^3}[\frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}e^{-i(\vbk-\vk_s)\vr}\delta_{\rm m}^{(1)}(\vbk+\vk_s';a(r))\vs
+&&\times F_{2}(-\vbk,\vbk+\vk_s')P_{\rm m,\ini}(\bk)\vs
+&=&2\int_{V} d^{3}\vr \int \frac{d^{3}\vbk}{(2\pi)^3}[\frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}e^{-i(\vbk-\vk_s-\vk_s')\vr}\delta_{\rm m}^{(1)}(\vbk;a(r)) \vs
+&&\times F_2(\vbk,-\vbk+\vk_s')P_{\rm m,\ini}(|\vbk-\vk_s'|) \vs
+&\simeq&2F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)\delta_{\rm m}^{(1)}(\vk_s+\vk_s')
 \eea 
 The quadratic estimator can be formed as:
 \bea 
-\hat{\delta}^{(1)}(\vk_l)=A(\vk_l)\int \frac{d^{3}\vk_s}{(2\pi)^3} g(\vk_s,\vk_s')\delta^{\LC}(\vk_s)\delta^{\LC}(\vk_s')
+\hat{\delta}^{\rm LC,(1)}(\vk_l)=A(\vk_l)\int \frac{d^{3}\vk_s}{(2\pi)^3} g(\vk_s,\vk_s')\delta^{\LC}(\vk_s)\delta^{\LC}(\vk_s')
 \eea 
-with $\vk_s' = \vk_l-\vk_s$.\\ \\ \\
-Properties of $f_{V}(\vr)$:
-\be 
-\int_V d^{3}\vr f_{V}(\vr)e^{-i\vk\cdot\vr}=\int d^{3}\vr \,W(\vr)f_{V}(\vr)e^{-i\vk\cdot\vr} = (2\pi)^3\delta_{V}(\vk)
-
-\ee
-where 
-\begin{equation}
-W(\vr)=\left\{
-\begin{aligned}
-&1&,\; \vr\in V \\
-&0&,\; \vr \notin V
-\end{aligned}
-\right.
-\end{equation}
+with $\vk_s' = \vk_l-\vk_s$.\\ 
+The actual form of $\delta_{\rm m}(\vr)$ is approximated in a halo catalog with position $\vr_{i}$ and mass $M_{i}/b_{1}(M_{i},a_{i}(\vr_{i}))$. $b_1$ is Tinker bias function and $i={1,\cdots,N_{\rm h}}$ is the halo index.
 
 \end{document}
