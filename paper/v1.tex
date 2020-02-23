@@ -1,87 +1,219 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{scalerel,stackengine}
-\stackMath
-\newcommand\reallywidehat[1]{%
-\savestack{\tmpbox}{\stretchto{%
-  \scaleto{%
-    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
-    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
-  }{\textheight}% 
-}{0.5ex}}%
-\stackon[1pt]{#1}{\tmpbox}%
-}
-\parskip 1ex
+\documentclass[prd,amsmath,amssymb,floatfix,superscriptaddress,nofootinbib,twocolumn]{revtex4-1}
 
 \def\be{\begin{equation}}
-
 \def\ee{\end{equation}}
-
 \def\bea{\begin{eqnarray}}
-
 \def\eea{\end{eqnarray}}
-
-\newcommand{\vs}{\nonumber\\}
+\newcommand{\C}{\rm C}
 \newcommand{\LC}{\rm LC}
-\newcommand{\vk}{\vec{k}}
-\newcommand{\vr}{\vec{r}}
 \newcommand{\ini}{\rm ini}
 \newcommand{\vbk}{\vec{\bar{k}}}
+\newcommand{\vrr}{\vec{r}}
 \newcommand{\vbkp}{\vec{\bar{k'}}}
 \newcommand{\bk}{{\bar{k}}}
+\newcommand{\vs}{\nonumber\\}
+\newcommand{\Var}{\rm Var}
+\newcommand{\vk}{\vec{k}}
 \newcommand{\ec}[1]{Eq.~(\ref{eq:#1})}
 \newcommand{\eec}[2]{Eqs.~(\ref{eq:#1}) and (\ref{eq:#2})}
 \newcommand{\Ec}[1]{(\ref{eq:#1})}
 \newcommand{\eql}[1]{\label{eq:#1}}
-\title{Large Scale Structure Reconstruction with Short-Wavelength Modes: Light Cone Formalism}
-\author{Peikai Li}
+\newcommand{\rf}[1]{\ref{fig:#1}}
+\newcommand{\sfig}[2]{
+\includegraphics[width=#2]{../plots/#1}
+        }
+%\newcommand{\sfigg}[2]{
+%\includegraphics[width=0.424\paperwidth]{../plots/#1}
+%        }
+\newcommand{\sfigg}[2]{
+\includegraphics[width=#2]{../plots/#1}
+        }
+\newcommand{\sfiggg}[2]{
+\includegraphics[width=0.4\paperwidth]{../plots/#1}
+        }
+\newcommand{\sfigr}[2]{
+\includegraphics[angle=270,origin=c,width=#2]{#1}
+        }
+\newcommand{\sfigra}[2]{
+\includegraphics[angle=90,origin=c,width=#2]{#1}
+        }
+\newcommand{\Sfig}[2]{
+   \begin{figure}[thbp]
+   \begin{center}
+    \sfig{../plots/#1.pdf}{\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+     \end{center}
+   \end{figure}
+}
+\newcommand{\Sfigg}[2]{
+   \begin{figure}[thbp]
+    \sfigg{../plots/#1.pdf}{.8\paperwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+   \end{figure}
+}
+\newcommand{\Spng}[2]{
+   \begin{figure}[thbp]
+   \begin{center}
+    \sfigg{../plots/#1.png}{\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+     \end{center}
+   \end{figure}
+}
 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{simplewick}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[linktocpage=true]{hyperref} 
+\hypersetup{
+    colorlinks=true,       
+    linkcolor=red,         
+    citecolor=blue,        
+    filecolor=magenta,      
+    urlcolor=blue           
+}
+\usepackage[all]{hypcap} 
+\definecolor{darkgreen}{cmyk}{0.85,0.1,1.00,0} 
+\definecolor{darkorange}{rgb}{1.0,0.2,0.0}
+\newcommand{\scott}[1]{{\color{darkgreen} #1}}
+\newcommand{\peikai}[1]{{\color{blue} #1}}
+\newcommand{\prvs}[1]{{\color{magenta} #1}}
+\newcommand{\AL}[1]{{\color{magenta} AL: #1}}
+\newcommand{\MR}[1]{{\color{blue} MR: #1}}
+\newcommand{\RC}[1]{{\color{darkorange} #1}}
+\newcommand{\nl}{\\ \indent}
 \begin{document}
+\title{Large Scale Structure Reconstruction with Short-Wavelength Modes: \\Light Cone Formalism and Halo Bias}
+\author{\large Peikai Li}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\author{\large Scott Dodelson}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
 
+\date{\today}
+\begin{abstract}
+\noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information of small scale perturbations. The idea is to use two-point off-diagonal terms of density contrast modes to build a quadratic estimator for long-wavelength modes. We demonstrate in the first paper that our quadratic estimator works well on a dark-matter-only N-body simulation of the snapshot $z=0$. Here we generalize our theory to the case of a light-cone with halo bias taken into consideration. We successfully apply our generalized version of quadratic estimator to a light cone halo catalog of a N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method in the next generation galaxy surveys.
+\end{abstract}
 \maketitle
+\section{Introduction}
+
 
 \section{Light Cone Formalism}
-General definition of Fourier modes of a whole light cone:
+Here we consider the Fourier transform of the whole light cone, instead of cutting the light cone into thin redshift slices:
 \be
-\delta^{\LC}(\vk) = \int_{V} d^3 \vr\, \delta_{\rm m}(\vr;a(r))\big[ \frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}f_{V}(\vr) e^{-i\vk \cdot\vr} \eql{LC}
+\delta^{\LC}_{\rm m}(\vk) :=\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr} \eql{LC}
 \ee
-Here $\LC$ means "light cone". $V$ is the whole volome of the survey. $\delta_{\rm m}(\vr;a(r))$ is the matter density perturbation at location $\vr$ with redshift $1/(1+a(r))$. $D$ is the linear growth factor and $D_{\ini} = D(a=a_{\ini})$. $f_{V}$ is a position-dependent function and its form will be determined later.\\
-We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vr;a(r))$ as:
+Here $\LC$ stands for "light cone", and $V$ is the whole volome of the light cone. $a(r)$ is the cosmological scale factor. Here we set $a(\vrr=0)$ to be the origin of the light cone thus $a(\vrr)=a(r)$ will not depend of the direction of position $\vrr$. $\delta_{\rm m}(\vrr)$ is the matter density perturbation at location $\vrr$ with redshift $1/(1+a(r))$. $D_1$ is the linear growth factor defined and $D_{\ini} = D_1(a=a_{\ini})$ is the value of $D_1$ at some initial time $a_{\rm ini}$. \peikai{need to define $P^{\rm LC}$ and show $\langle (1)(1) \rangle =0$ somewhere.}
+ 
+We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vrr)$ as:
 \be 
-\delta_{\rm m}(\vr;a(r))=\int \frac{d^3 \vbk}{(2\pi)^3}e^{i\vbk\cdot\vr}\delta_{\rm m}(\vbk;a(r))
+\delta_{\rm m}(\vrr)=\delta_{\rm m}(\vrr;a(r))=\int \frac{d^3 \vbk}{(2\pi)^3}e^{i\vbk\cdot\vrr}\delta_{\rm m}(\vbk;a(r))\eql{snp}
 \ee 
-Here the wave vector with "bar" means it is a wave vector defined at that specific time $a(r)$. Different from the wave vector $\vk$ in \ec{LC} which means the wave vector is defined in the light cone.\\
-Similarly we want to compute the off-diagonal term in order to construct the power spectrum:
-\bea 
-&&\langle \delta^{\rm LC,(1)}(\vk_s)\delta^{\rm LC,(2)}(\vk_s') \rangle \vs 
-&=& \int_V d^{3}\vr\int_{V} d^{3} \vr' \int \frac{d^{3}\vbk}{(2\pi)^3}\int \frac{d^{3}\vbkp}{(2\pi)^3} e^{i(\vbk\cdot\vr+\vbkp\cdot\vr')-i(\vk_s\cdot\vr+\vk_s'\cdot\vr')}\vs
-&&\times\big[ \frac{D_{\ini}}{D_{1}(a(r))} \frac{D_{\ini}}{D_{1}(a(r'))} \big]^{2}f_{V}(\vr)f_{V}(\vr') \langle \delta_{\rm m}^{(1)}(\vbk;a(r))\delta_{\rm m}^{(2)}(\vbkp;a(r')) \rangle \eql{od}
+$\delta_{\rm m}(\vrr)$ is the density contrast at location $\vrr$ of the \textbf{light cone}; while $\delta_{\rm m}(\vrr;a(r))$ is the density contrast at location $\vrr$ of the \textbf{snapshot} at time $a(r)$. \ec{snp} is the inverse Fourier transform of modes $\delta_{\rm m}(\vbk;a(r))$ at a \textbf{fixed} time $a(r)$. If we further transform it back we would get:
+\be 
+\delta_{\rm m}(\vbk;a(r))=\int \frac{d^3 \vrr}{(2\pi)^3}e^{-i\vbk\cdot\vrr}\delta_{\rm m}(\vrr;\underbrace{a(r)}_{\rm fixed})
+\ee 
+Here the range of the integration is the whole space of that snapshot. And this equation still holds because we perform the calculation at a fixed time $a(r)$. We have the usual perturbative expansion of modes $\delta_{\rm m}(\vbk;a(r))$ and the time evolution of each order \cite{Bernardeau:2002rev}:
+\bea
+&&\delta_{\rm m}(\vbk;a(r))=\delta^{(1)}_{\rm m}(\vbk;a(r))+\delta^{(2)}_{\rm m}(\vbk;a(r))+\cdots\vs
+&=&\frac{D_1(a(r))}{D_{\rm ini}}\delta^{(1)}_{\rm m,ini}(\vbk)+\bigg[\frac{D_1(a(r))}{D_{\rm ini}}\bigg]^2\delta^{(2)}_{\rm m,ini}(\vbk)+\cdots
 \eea 
-We have computed the bracket in \ec{od} before where the result is:
+Similar to our previous work, we still want to compute the off-diagonal term of $\delta^{\LC}_{\rm m}(\vk)$ up to second order. And the first and second order term of $\delta^{\LC}_{\rm m}(\vk)$ will be:
+\be 
+\delta^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vbk}{(2\pi)^3}e^{i(\vbk-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vbk;a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
+\ee 
+with $i=1,2$. Using these expressions, we can compute the two-point correlation of two short-wavelength modes $\delta^{\LC}_{\rm m}(\vk_s)$ and $\delta^{\LC}_{\rm m}(\vk_s')$. We take the squeezed limit $\vk_l=\vk_s+\vk_s'$ with $\vk_s,\vk_s' \gg \vk_l$ and $\vk_l$ is a long-wavelength mode:
+\bea 
+ &&\langle \delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
+ =&&\langle \delta^{\LC,(1)}_{\rm m}(\vk_s)\delta^{\LC,(2)}_{\rm m}(\vk_s') \rangle+\langle \delta^{\LC,(2)}_{\rm m}(\vk_s)\delta^{\LC,(1)}_{\rm m}(\vk_s') \rangle \eql{2p}
+\eea 
+Substituting \ec{exp} into \ec{2p} and evaluate the first bracket as an example:
+\bea 
+&&\langle \delta^{\rm LC,(1)}_{\rm m}(\vk_s)\delta^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
+&=& \int_V d^{3}\vrr\int_{V} d^{3} \vrr' \int \frac{d^{3}\vbk}{(2\pi)^3}\int \frac{d^{3}\vbkp}{(2\pi)^3}\vs
+&& e^{i(\vbk\cdot\vrr+\vbkp\cdot\vrr')-i(\vk_s\cdot\vrr+\vk_s'\cdot\vrr')} \frac{D_{\ini}}{D_{1}(a(r))} \frac{D_{\ini}}{D_{1}(a(r'))}  \vs
+&\times &\langle \delta_{\rm m}^{(1)}(\vbk;a(r))\delta_{\rm m}^{(2)}(\vbkp;a(r')) \rangle \eql{od}
+\eea 
+We have computed $\langle \delta_{\rm m,ini}^{(1)}(\vbk)\delta_{\rm m,ini}^{(2)}(\vbkp) \rangle$ in our previous work. We can use the result to further determine the value of the bracket in \ec{od}:
 \bea 
 &&\langle \delta_{\rm m}^{(1)}(\vbk;a(r))\delta_{\rm m}^{(2)}(\vbkp;a(r')) \rangle \vs
-&=&2\big[\frac{D_{1}(a(r'))}{D_{\ini}} \big]^{2}F_{2}(-\vbk,\vbk+\vbkp)P_{\rm m,\ini}(\bk)\delta_{\rm m}^{(1)}(\vbk+\vbkp;a(r)) \eql{odb}
+&=&2\frac{D_{1}(a(r))}{D_{\ini}}\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}\langle \delta_{\rm m,ini}^{(1)}(\vbk)\delta_{\rm m,ini}^{(2)}(\vbkp) \rangle  \vs 
+&=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}F_{2}(-\vbk,\vbk+\vbkp)P_{\rm m,\ini}(\bk)\delta_{\rm m}^{(1)}(\vbk+\vbkp;a(r)) \eql{odb} \vs
 \eea 
-Plugging \ec{odb} into \ec{od}, we can see that the only $\vr'$ dependent integral can be written as (here simply choose a cube volume so that $f_{V}=1$:
+where we take advantage of the the definition of the linear growth factor $D_1(a(r))$. $P_{\rm m,ini}$ is the linear matter power spectrum at some initial time $a_{\rm ini}$. Plugging \ec{odb} into \ec{od}, we can see that the only $\vrr'$ dependent integral can be written as (here we simply choose a cube volume):
 \be 
-\int_{V} d^{3}\vr'f_{V}(\vr')e^{-i(\vbkp-\vk_s')\vr'} \simeq (2\pi)^3\delta_{\rm D}(\vbkp-\vk_s')
+\int_{V} d^{3}\vrr'e^{-i(\vbkp-\vk_s')\vrr'}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vbkp-\vk_s')\eql{dt}
 \ee 
-\textbf{is it still true for a non-cube volome?} Thus:
+since $D_1(a(r'))$ is a slowly varying function. $C$ is a constant and can be further determined via integrating over $\vbk$ on both sides of \ec{dt}. Thus:
 \bea 
-&& \langle \delta_{\rm m}^{(1)}(\vk_s)\delta_{\rm m}^{(2)}(\vk_s') \rangle \vs 
-&=&2\int_{V} d^{3}\vr \int \frac{d^{3}\vbk}{(2\pi)^3}[\frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}e^{-i(\vbk-\vk_s)\vr}\delta_{\rm m}^{(1)}(\vbk+\vk_s';a(r))\vs
-&&\times F_{2}(-\vbk,\vbk+\vk_s')P_{\rm m,\ini}(\bk)\vs
-&=&2\int_{V} d^{3}\vr \int \frac{d^{3}\vbk}{(2\pi)^3}[\frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}e^{-i(\vbk-\vk_s-\vk_s')\vr}\delta_{\rm m}^{(1)}(\vbk;a(r)) \vs
-&&\times F_2(\vbk,-\vbk+\vk_s')P_{\rm m,\ini}(|\vbk-\vk_s'|) \vs
-&\simeq&2F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)\delta_{\rm m}^{(1)}(\vk_s+\vk_s')
+&& \langle \delta^{\rm LC,(1)}_{\rm m}(\vk_s)\delta^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
+&=&2C\int_{V} d^{3} \vrr\int \frac{d^{3}\vbk}{(2\pi)^3}F_2(\vbk,-\vbk+\vk_s')P_{\rm m,\ini}(|\vbk-\vk_s'|) \vs
+&&\times \frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vbk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vbk;a(r)) \vs
+&\simeq & 2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s) \vs
+&& \times \int_{V} d^{3} \vrr\int \frac{d^{3}\vbk}{(2\pi)^3}\frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vbk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vbk;a(r))\vs
+&= &2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)\delta_{\rm m}^{\rm LC,(1)}(\vk_s+\vk_s')
 \eea 
+where in the first step, we perform a redefinition of integration dummy variable. And we use an approximation in the second step in order to get the first order term $\delta_{\rm m}^{\rm LC,(1)}(\vk_l)$ from the integral. 
+
+Again, we have proved that with this construction in \ec{LC}, we can get long-wavelength modes from off-diagonal terms of short-wavelength modes:
+\be 
+\langle \delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l} =f(\vec{k}_s,\vec{k}_s'){\delta}^{\rm LC,(1)}_{\rm m}(\vec{k}_l) \eql{2pt}
+\ee 
+with 
+\bea
+f(\vec{k}_s,\vec{k}_s')&=&2C\,F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s)\vs
+&+&2C\,F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s')       
+\eea 
+
 The quadratic estimator can be formed as:
-\bea 
-\hat{\delta}^{\rm LC,(1)}(\vk_l)=A(\vk_l)\int \frac{d^{3}\vk_s}{(2\pi)^3} g(\vk_s,\vk_s')\delta^{\LC}(\vk_s)\delta^{\LC}(\vk_s')
-\eea 
-with $\vk_s' = \vk_l-\vk_s$.\\ 
-The actual form of $\delta_{\rm m}(\vr)$ is approximated in a halo catalog with position $\vr_{i}$ and mass $M_{i}/b_{1}(M_{i},a_{i}(\vr_{i}))$. $b_1$ is Tinker bias function and $i={1,\cdots,N_{\rm h}}$ is the halo index.
+\be
+\hat{\delta}^{\rm LC,(1)}_{\rm m}(\vk_l)=A(\vk_l)\int \frac{d^{3}\vk_s}{(2\pi)^3} g(\vk_s,\vk_s')\delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \eql{est}
+\ee 
+with $\vk_s' = \vk_l-\vk_s$ and $g$ being a weighting function. $A$ is the normalization factor determined by requiring that $\langle \hat{\delta}^{\rm LC,(1)}(\vec{k}_l) \rangle={\delta}^{\rm LC,(1)}(\vec{k}_l)$:
+\begin{eqnarray}
+A(\vec{k}_l)=\bigg[\int \frac{d^3 \vec{k}_s}{(2\pi)^3} g(\vec{k}_s,\vec{k}_s')f(\vec{k}_s,\vec{k}_s')  \bigg]^{-1} \eql{a}
+\end{eqnarray}
+Similar to our last work, $g$ can be calculated by minimizing the noise term and the result is:
+\begin{eqnarray}
+&&g(\vec{k}_{s},\vec{k}_{s}')
+=\frac{f(\vec{k}_{s},\vec{k}_{s}')}{2P^{\rm LC}_{\rm m}(k_{s})P^{\rm LC}_{\rm m}(k_{s}')}\vs
+&=&C\frac{F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s)+F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s')}{P^{\rm LC}_{\rm m}(k_{s})P^{\rm LC}_{\rm m}(k_{s}')}\vs 
+\end{eqnarray} 
+ 
+\section{Halo Bias}
+\cite{Desjacques:2018rev} Density contrast of a halo catalog can be written as:
+\be 
+\delta_{\rm h}(\vrr)=\frac{\sum_{i}M_{i}\delta_{\rm D}(\vrr-\vrr_{i})-\sum_{i}M_{i}/V}{\sum_{i}M_{i}/V}
+\ee
+Here $i$ is the index for halos. $M_{i}$ and $\vrr_{i}$ is the array for halo mass and position, respectively. We can construct a matter density contrast out of this halo catalog using Tinker bias funtion $b_{1}(M,z)$:
+\be 
+\delta_{\rm m}(\vrr)=\frac{\sum_{i}\frac{M_{i}}{b_{1}(M_{i},z(r_{i}))}\delta_{\rm D}(\vrr-\vrr_{i})-\sum_{i}\frac{M_{i}}{b_{1}(M_{i},z(r_{i}))}/V}{\sum_{i}M_{i}/V}
+\ee 
+ such that $\delta_{\rm h}/\delta_{\rm m}\approx b_{1}$.
+ 
+\section{Demonstration with N-body simulation}
+We use the MICE Grand Challenge light-cone N-body simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII} to demonstrate the power of the estimator.
+
+\acknowledgements
+This work has made use of CosmoHub. CosmoHub has been developed by the Port d'Informació Científica (PIC), maintained through a collaboration of the Institut de Física d'Altes Energies (IFAE) and the Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas (CIEMAT), and was partially funded by the "Plan Estatal de Investigación Científica y Técnica y de Innovación" program of the Spanish government.
+
+\bibliography{refs}
+
+\appendix
+
+\section{Non-cube Volume}
+For a more generic case, we might have a non-cube volume. Thus:
+\be
+\delta^{\LC}_{\rm m}(\vk) :=\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr;a(r))\big[ \frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}f_{V}(\vrr) e^{-i\vk \cdot\vrr}
+\ee
+ $f_{V}$ is a position-dependent function and its form will be fully determined by the light cone's shape. For a cube volume, simply we have $f_V=1$.
 
 \end{document}
