@@ -104,8 +104,9 @@
 \end{abstract}
 \maketitle
 \section{Introduction}
+We also need to account for halo bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev} if eventually we want to apply the estimator to real cosmological surveys. Typically 
 
-
+We begin with our treatment of matter density contrast in a light cone and then build the quadratic estimator. We then construct the approximated form of matter perturbation field using information of halo masses and positions. We assess the detectability of the quadratic estimator. Finally we apply the estimator to a light cone halo catalog and successfully extract large scale modes. We use a flat $\Lambda$CDM model with cosmological parameters $\Omega_{\rm m}=0.25$, $\sigma_{8}=0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$ (to match the parameters of the N-body simulation).
 \section{Light Cone Formalism}
 Here we consider the Fourier transform of the whole light cone, instead of cutting the light cone into thin redshift slices:
 \be
@@ -130,7 +131,14 @@ Similar to our previous work, we still want to compute the off-diagonal term of 
 \be 
 \delta^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vbk}{(2\pi)^3}e^{i(\vbk-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vbk;a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
 \ee 
-with $i=1,2$. Using these expressions, we can compute the two-point correlation of two short-wavelength modes $\delta^{\LC}_{\rm m}(\vk_s)$ and $\delta^{\LC}_{\rm m}(\vk_s')$. We take the squeezed limit $\vk_l=\vk_s+\vk_s'$ with $\vk_s,\vk_s' \gg \vk_l$ and $\vk_l$ is a long-wavelength mode:
+with $i=1,2$. It's easy to prove that the first order term of $\delta^{\LC}_{\rm m}$ satisfies the following relation:
+\be 
+\langle \delta^{\LC,(\rm 1)}_{\rm m}(\vk) \delta^{\LC,(\rm 1)}_{\rm m}(\vk') \rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k)\eql{lps}
+\ee 
+with $\delta_{\rm D}$ being the Dirac delta function. This relation \ec{lps} tells us that the first order term still characterizes the linear evolution information of the light cone, since redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$ of the integrand.
+
+\section{Quadratic Estimator}
+Using expressions of \ec{exp}, we can compute the two-point correlation of two short-wavelength modes $\delta^{\LC}_{\rm m}(\vk_s)$ and $\delta^{\LC}_{\rm m}(\vk_s')$. We take the squeezed limit $\vk_l=\vk_s+\vk_s'$ with $\vk_s,\vk_s' \gg \vk_l$ and $\vk_l$ is a long-wavelength mode:
 \bea 
  &&\langle \delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
  =&&\langle \delta^{\LC,(1)}_{\rm m}(\vk_s)\delta^{\LC,(2)}_{\rm m}(\vk_s') \rangle+\langle \delta^{\LC,(2)}_{\rm m}(\vk_s)\delta^{\LC,(1)}_{\rm m}(\vk_s') \rangle \eql{2p}
@@ -189,7 +197,7 @@ Similar to our last work, $g$ can be calculated by minimizing the noise term and
 \end{eqnarray} 
  
 \section{Halo Bias}
-\cite{Desjacques:2018rev} Density contrast of a halo catalog can be written as:
+Density contrast of a halo catalog can be written as:
 \be 
 \delta_{\rm h}(\vrr)=\frac{\sum_{i}M_{i}\delta_{\rm D}(\vrr-\vrr_{i})-\sum_{i}M_{i}/V}{\sum_{i}M_{i}/V}
 \ee
@@ -200,7 +208,8 @@ Here $i$ is the index for halos. $M_{i}$ and $\vrr_{i}$ is the array for halo ma
  such that $\delta_{\rm h}/\delta_{\rm m}\approx b_{1}$.
  
 \section{Demonstration with N-body simulation}
-We use the MICE Grand Challenge light-cone N-body simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII} to demonstrate the power of the estimator.
+We use the MICE Grand Challenge light-cone N-body simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII} to demonstrate the power of the estimator. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LC}, as shown in Fig.~\rf{Cube}. With the boxsize being $1774\, h^{-1}\, \rm Mpc$ we can numerically compute the constant $C$ in \ec{dt} and the result gives $12345$.
+\Sfig{Cube}{Boxsize of the cube is $L=3072/\sqrt{3}\, h^{-1}\, \rm Mpc\sim 1774\, h^{-1}\, \rm Mpc$. Volume is $V=L^3\sim 5.6\,(h^{-1}\,\rm Mpc)^3$. Only one point in the cube can reach redshift $1.4$, and $z=0$ is at the origin $O$ of the octant.}
 
 \acknowledgements
 This work has made use of CosmoHub. CosmoHub has been developed by the Port d'Informació Científica (PIC), maintained through a collaboration of the Institut de Física d'Altes Energies (IFAE) and the Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas (CIEMAT), and was partially funded by the "Plan Estatal de Investigación Científica y Técnica y de Innovación" program of the Spanish government.
