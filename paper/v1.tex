@@ -90,7 +90,7 @@
 \newcommand{\RC}[1]{{\color{darkorange} #1}}
 \newcommand{\nl}{\\ \indent}
 \begin{document}
-\title{Large Scale Structure Reconstruction with Short-Wavelength Modes: \\Light Cone Formalism and Halo Bias}
+\title{Large Scale Structure Reconstruction with Short-Wavelength Modes: \\Halo Bias and Light Cone Formalism}
 \author{\large Peikai Li}
 %\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
 %\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
@@ -104,17 +104,41 @@
 \end{abstract}
 \maketitle
 \section{Introduction}
-We also need to account for halo bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev} if eventually we want to apply the estimator to real cosmological surveys. Typically 
+Directly measuring the distribution of matter on large scales is nearly impossible right now as pointed out by \cite{Modi:2019hydr}. In our first work \cite{Li:2020fir}, we proposes a method of indirectly measuring large scale structure using small scale information. Physically, long- and short-wavelength modes are correlated in the sense that small scale modes will grow differently depending on the large scale structure they reside in. Mathematical feature of this phenomena is that the two-point statistics of short-wavelength matter density modes will have non-zero off-diagonal terms proportional to long-wavelength modes. This is our starting point of constructing the quadratic estimator for long-wavelength modes. We test the power of the quadratic estimator using a dark-matter only catalog from an N-body simulation in the first paper. In this work, we generalize our theory to a halo catalog within a light cone for observational requirements.
 
-We begin with our treatment of matter density contrast in a light cone and then build the quadratic estimator. We then construct the approximated form of matter perturbation field using information of halo masses and positions. We assess the detectability of the quadratic estimator. Finally we apply the estimator to a light cone halo catalog and successfully extract large scale modes. We use a flat $\Lambda$CDM model with cosmological parameters $\Omega_{\rm m}=0.25$, $\sigma_{8}=0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$ (to match the parameters of the N-body simulation).
-\section{Light Cone Formalism}
-Here we consider the Fourier transform of the whole light cone, instead of cutting the light cone into thin redshift slices:
-\be
-\delta^{\LC}_{\rm m}(\vk) :=\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr} \eql{LC}
-\ee
-Here $\LC$ stands for "light cone", and $V$ is the whole volome of the light cone. $a(r)$ is the cosmological scale factor. Here we set $a(\vrr=0)$ to be the origin of the light cone thus $a(\vrr)=a(r)$ will not depend of the direction of position $\vrr$. $\delta_{\rm m}(\vrr)$ is the matter density perturbation at location $\vrr$ with redshift $1/(1+a(r))$. $D_1$ is the linear growth factor defined and $D_{\ini} = D_1(a=a_{\ini})$ is the value of $D_1$ at some initial time $a_{\rm ini}$. \peikai{need to define $P^{\rm LC}$ and show $\langle (1)(1) \rangle =0$ somewhere.}
+First need to account for halo bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev} since eventually we want to apply the estimator to future cosmological surveys \cite{LSST:2012ls}\cite{Wfirst:2012jg}\cite{DESI:2019ds}. Halo bias is a term relating halo number density perturbation to matter density perturbation. \peikai{fill in}
+
+Observationally the halo/galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. Typically treatment is to cut a light cone into several thin redshift bins \peikai{need some citations here, can't find a proper one}, and analyze the properties within each bin. By doing this we will lose information about long-wavelength modes along line of sight. Thus in this paper we propose a novel method of considering all the halos/galaxies in a light cone together, despite redshift difference, simply by multiplying an extra function proportional to the inverse of linear growth function. Since the universe is linear on sufficiently large scales, two linear order matter density modes at different redshifts will still be correlated. With this knowledge we can recover linear power spectrum on large scales from our construction. Assuming a cube volume, we can construct the quadratic estimator for long-wavelength modes using information of non-zero off-diagonal terms like what we did before.
+
+We begin with our treatment of halo bias in a snapshot by constructing the approximated form of matter perturbation field using information of halo positions. We then deal with matter density contrast in a light cone and then build the quadratic estimator. Finally we apply the estimator to different N-body simulations and successfully extract large scale modes both in a snapshot and in a light cone.
+
+\section{Halo Bias}
+Ignoring higher order halo bias, the density contrast of halos can be related to that of matter at a fixed time as\cite{Bernardeau:2002rev}:
+\be 
+\delta_{\rm h}(\vrr) \equiv \frac{n_{\rm n}(\vrr)-\bar{n}_{\rm h}}{\bar{n}_{\rm h}}=b_{1}\delta_{\rm m}(\vrr) \eql{hdc}
+\ee 
+here '$\rm h$' stands for 'halo' while '$\rm m$' stands for 'matter'. $n_{\rm h}$ is the halo number density field at a given position and $\bar{n}_{\rm h}$ is the mean number density of halos. $b_{1}$ is the linear bias parameter relating halo and matter density contrasts. Linear bias is a function of halo mass and position and has been well approximated using analytical expressions\cite{Seljak:2004SW}\cite{Bhattacharya:2011MF}. We will use Tinker halo bias function throughout this paper\cite{Tinker:2010Tinker}. Halo density contrast in \ec{hdc} can be explicitly written as:
+\be 
+\delta_{\rm h}(\vrr) \equiv \frac{\sum_{i=1}^{N_{\rm h}}\delta_{\rm D}(\vrr-\vrr_{i})-N_{\rm h}/V}{N_{\rm h}/V}
+\ee 
+Here $\delta_{\rm D}$ is the Dirac delta function. $N_{\rm h}$ is the total number of halos and $V$ is the total volume of a survey. Since the linear bias $b_1$ depends not only on halo mass but also halo redshift, it will be more challenging for us to use $\delta_{\rm h}$ than $\delta_{\rm m}$ within a light cone \ref{sec2}. Here we build an approximated matter density contrast out of halo positions following \cite{Pervical:2007GPS}:
+\be 
+\delta_{\rm m}(\vrr) \equiv \frac{\sum_{i=1}^{N_{\rm h}}\frac{\delta_{\rm D}(\vrr-\vrr_{i})}{b_{1}(M_{i},a_{i})}-\sum_{i=1}^{N_{\rm h}}\frac{1}{b_{1}(M_{i},a_{i})\,V}}{N_{\rm h}/V} \eql{hm}
+\ee 
+$a_{i}$ is the cosmological growth factor of the $i$-th halo. In this section we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$ since we only consider a fixed time. In real surveys the bias can be expressed as a function of halo luminosity and color \cite{Cresswell:2008Col}. 
+
+We then have the exact same formalism of quadratic estimator for long-wavelength modes as our previous work \cite{Li:2020fir}. We will not repeat the detailed formalism here. We demonstrate in \ref{sec5} that this formalism \ec{hm} works well with N-body simulation.
  
-We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vrr)$ as:
+\section{Light Cone Formalism} \label{sec2}
+We define the matter density contrast in a light cone as the usual matter density times the inverse of linear growth function, to compensate the large scale lack of growth at higher redshifts:
+\be
+\delta^{\LC}_{\rm m}(\vrr) :=\delta_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))} \eql{LC}
+\ee
+where $\LC$ stands for "light cone". We set $a(\vrr=0)$ to be the origin of the light cone thus $a(\vrr)=a(r)$ will not depend of the direction of position $\vrr$. $\delta_{\rm m}(\vrr)$ is the matter density perturbation at location $\vrr$ with redshift $1/(1+a(r))$. $D_1$ is the linear growth factor defined and $D_{\ini} = D_1(a=a_{\ini})$ is the value of $D_1$ at some initial time $a_{\rm ini}$. Consider the fourier transform of this density contrast:
+\be
+\delta^{\LC}_{\rm m}(\vk) =\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr} \eql{LCM}
+\ee
+$V$ is the whole volume of the light cone. We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vrr)$ as:
 \be 
 \delta_{\rm m}(\vrr)=\delta_{\rm m}(\vrr;a(r))=\int \frac{d^3 \vbk}{(2\pi)^3}e^{i\vbk\cdot\vrr}\delta_{\rm m}(\vbk;a(r))\eql{snp}
 \ee 
@@ -135,13 +159,13 @@ with $i=1,2$. It's easy to prove that the first order term of $\delta^{\LC}_{\rm
 \be 
 \langle \delta^{\LC,(\rm 1)}_{\rm m}(\vk) \delta^{\LC,(\rm 1)}_{\rm m}(\vk') \rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k)\eql{lps}
 \ee 
-with $\delta_{\rm D}$ being the Dirac delta function. This relation \ec{lps} tells us that the first order term still characterizes the linear evolution information of the light cone, since redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$ of the integrand.
+with $\delta_{\rm D}$ being the Dirac delta function. This relation tells us that the first order term still characterizes the linear evolution information of the light cone, since redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$ of the integrand.
 
 \section{Quadratic Estimator}
 Using expressions of \ec{exp}, we can compute the two-point correlation of two short-wavelength modes $\delta^{\LC}_{\rm m}(\vk_s)$ and $\delta^{\LC}_{\rm m}(\vk_s')$. We take the squeezed limit $\vk_l=\vk_s+\vk_s'$ with $\vk_s,\vk_s' \gg \vk_l$ and $\vk_l$ is a long-wavelength mode:
 \bea 
  &&\langle \delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
- =&&\langle \delta^{\LC,(1)}_{\rm m}(\vk_s)\delta^{\LC,(2)}_{\rm m}(\vk_s') \rangle+\langle \delta^{\LC,(2)}_{\rm m}(\vk_s)\delta^{\LC,(1)}_{\rm m}(\vk_s') \rangle \eql{2p}
+ =&&\langle \delta^{\LC,(1)}_{\rm m}(\vk_s)\delta^{\LC,(2)}_{\rm m}(\vk_s') \rangle+\langle \delta^{\LC,(2)}_{\rm m}(\vk_s)\delta^{\LC,(1)}_{\rm m}(\vk_s') \rangle \vs \eql{2p}
 \eea 
 Substituting \ec{exp} into \ec{2p} and evaluate the first bracket as an example:
 \bea 
@@ -160,7 +184,11 @@ where we take advantage of the the definition of the linear growth factor $D_1(a
 \be 
 \int_{V} d^{3}\vrr'e^{-i(\vbkp-\vk_s')\vrr'}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vbkp-\vk_s')\eql{dt}
 \ee 
-since $D_1(a(r'))$ is a slowly varying function. $C$ is a constant and can be further determined via integrating over $\vbk$ on both sides of \ec{dt}. Thus:
+since $D_1(a(r'))$ is a slowly varying function. $C$ is a constant and can be further determined via integrating over $\vbk$ on both sides of \ec{dt}, which gives:
+\be 
+C=\frac{D_{1}(a=1)}{D_{\rm ini}}
+\ee 
+thus:
 \bea 
 && \langle \delta^{\rm LC,(1)}_{\rm m}(\vk_s)\delta^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
 &=&2C\int_{V} d^{3} \vrr\int \frac{d^{3}\vbk}{(2\pi)^3}F_2(\vbk,-\vbk+\vk_s')P_{\rm m,\ini}(|\vbk-\vk_s'|) \vs
@@ -195,23 +223,29 @@ Similar to our last work, $g$ can be calculated by minimizing the noise term and
 =\frac{f(\vec{k}_{s},\vec{k}_{s}')}{2P^{\rm LC}_{\rm m}(k_{s})P^{\rm LC}_{\rm m}(k_{s}')}\vs
 &=&C\frac{F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s)+F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s')}{P^{\rm LC}_{\rm m}(k_{s})P^{\rm LC}_{\rm m}(k_{s}')}\vs 
 \end{eqnarray} 
+
  
-\section{Halo Bias}
-Density contrast of a halo catalog can be written as:
-\be 
-\delta_{\rm h}(\vrr)=\frac{\sum_{i}M_{i}\delta_{\rm D}(\vrr-\vrr_{i})-\sum_{i}M_{i}/V}{\sum_{i}M_{i}/V}
-\ee
-Here $i$ is the index for halos. $M_{i}$ and $\vrr_{i}$ is the array for halo mass and position, respectively. We can construct a matter density contrast out of this halo catalog using Tinker bias funtion $b_{1}(M,z)$:
-\be 
-\delta_{\rm m}(\vrr)=\frac{\sum_{i}\frac{M_{i}}{b_{1}(M_{i},z(r_{i}))}\delta_{\rm D}(\vrr-\vrr_{i})-\sum_{i}\frac{M_{i}}{b_{1}(M_{i},z(r_{i}))}/V}{\sum_{i}M_{i}/V}
-\ee 
- such that $\delta_{\rm h}/\delta_{\rm m}\approx b_{1}$.
+\section{Demonstration with N-body simulation I} \label{sec5}
+ We test the power of the quadratic estimator using a halo catalog from a cosmological N-body simulation. We use the $z=0$ snapshot from BigMDPL, one of the Multi-Dark cosmological simulations \cite{Klypin:2014nov}. This simulation used a flat $\Lambda$CDM model with Planck Collaboration XVI (2014) \cite{Planck:2014cos} cosmological parameters. Halos were found in this catalog using \textit{Rockstar} code \cite{Behroozi:2013Rock}. We will focus on halos with masses between $5 \times 10^{12}h^{-1}M_{\odot}<M < 10^{13}h^{-1}M_{\odot}$ for simplicity. And we have similar results in other mass bins as well.
  
-\section{Demonstration with N-body simulation}
-We use the MICE Grand Challenge light-cone N-body simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII} to demonstrate the power of the estimator. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LC}, as shown in Fig.~\rf{Cube}. With the boxsize being $1774\, h^{-1}\, \rm Mpc$ we can numerically compute the constant $C$ in \ec{dt} and the result gives $12345$.
-\Sfig{Cube}{Boxsize of the cube is $L=3072/\sqrt{3}\, h^{-1}\, \rm Mpc\sim 1774\, h^{-1}\, \rm Mpc$. Volume is $V=L^3\sim 5.6\,(h^{-1}\,\rm Mpc)^3$. Only one point in the cube can reach redshift $1.4$, and $z=0$ is at the origin $O$ of the octant.}
+\Sfig{real_snap}{Comparison of the true density field of the BigMDPL halo catalog within mass bin $5 \times 10^{12}h^{-1}M_{\odot}<M < 10^{13}h^{-1}M_{\odot}$ ($\delta_{\rm m}(\vrr)$ computed using the directly measured large scale modes, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $2500\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 357\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
+\section{Demonstration with N-body simulation II} \label{sec6}
+We use the MICE Grand Challenge light-cone N-body simulation (MICE-GC) \cite{Fosalba:2015MI}\cite{Fosalba:2015MII} to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LCM}, as shown in Fig.~\rf{Cube}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. We also assume $D_{\ini}=1$ throughout this section.
+
+\Sfig{Cube}{Boxsize of the cube is $L=3072/\sqrt{3}\, h^{-1}\, \rm Mpc\sim 1774\, h^{-1}\, \rm Mpc$. Volume is $V=L^3\sim 5.6\,(h^{-1}\,\rm Mpc)^3$. Only one point in the cube can reach the redshift of $1.4$, and $z=0$ is at the origin $O$ of the octant.}
+
+We first extract $1$ in $700$  matter particles' positions in the full the light cone of MICE-GC simulation and then focus on the largest cube within it. This corresponds to $\sim 5.14\times 10^{7}$ particles in total each with $2.9\times 10^{10} h^{-1}M_{\odot}$ particle mass. 
+
+\Sfig{real_dm}{Comparison of the true density field of the $1$ in $700$ matter particles of the Mice-GC simulation ($\delta^{\rm LC}_{\rm m}(\vrr)$, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}^{\rm LC}(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $1774\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 253\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
+
+Then we consider the halo catalog in the same light cone with halo masses between $5 \times 10^{12}h^{-1}M_{\odot}<M < 10^{13}h^{-1}M_{\odot}$ for brevity. We have similar results in other mass bins too. We use \ec{hm} as the approximated matter density contrast and substitute it into \ec{LC}, with linear bias $b_{1}$ being a function of both halo mass and redshift. 
+
+\Sfig{real_halo}{Comparison of the true density field of the halo number density contrast in mass bin $5 \times 10^{12}h^{-1}M_{\odot}<M < 10^{13}h^{-1}M_{\odot}$ of the Mice-GC simulation ($\delta^{\rm LC}_{\rm m}(\vrr)$, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}^{\rm LC}(\vrr)$, middle row) in the same light cone as Fig.~\rf{real_dm}, and their difference (bottom row). The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.} 
+
 
 \acknowledgements
+We thank Duncan Campbell and Rachel Mandelbaum for resourceful discussions. We also thank Enrique Gaztanaga for providing us with the $1$ in $700$ matter particles' positions of Mice-GC simulation. This work is supp orted by U.S. Dept. of Energy contract DE-SC0019248 and NSF AST-1909193.
+The BigMDPL simulation was performed at LRZ Munich within the PRACE project pr86bu. The CosmoSim database (\url{www.cosmosim.org}) providing the file access is a service by the Leibniz-Institute for Astrophysics Potsdam (AIP).
 This work has made use of CosmoHub. CosmoHub has been developed by the Port d'Informació Científica (PIC), maintained through a collaboration of the Institut de Física d'Altes Energies (IFAE) and the Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas (CIEMAT), and was partially funded by the "Plan Estatal de Investigación Científica y Técnica y de Innovación" program of the Spanish government.
 
 \bibliography{refs}
