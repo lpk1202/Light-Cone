@@ -196,11 +196,11 @@ $\delta_{\rm m}(\vrr)$ is the density contrast at location $\vrr$ of the \textbf
 \be 
 \delta_{\rm m}(\vk;a(r))=\int \frac{d^3 \vrr}{(2\pi)^3}e^{-i\vk\cdot\vrr}\delta_{\rm m}(\vrr;\underbrace{a(r)}_{\rm fixed})
 \ee 
-here the range of the integration is the whole space of that \textbf{snapshot}. Thus this equation still holds because we perform the calculation at a \textbf{fixed} time $a(r)$. We have the usual perturbative expansion of modes $\delta_{\rm m}(\vbk;a(r))$ and the time evolution of each order in \ec{tayl}.
+here the range of the integration is the whole space of that \textbf{snapshot}. Thus this equation still holds because we perform the calculation at a \textbf{fixed} time $a(r)$. We have the usual perturbative expansion of modes $\delta_{\rm m}(\vk;a(r))$ and the time evolution of each order in \ec{tayl}.
 
 Similar to our previous work, we still want to compute the off-diagonal term of $\delta^{\LC}_{\rm m}(\vk)$ up to second order. And the first and second order term of $\delta^{\LC}_{\rm m}(\vk)$ will be:
 \be 
-\delta^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vbk}{(2\pi)^3}e^{i(\vbk-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vbk;a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
+\delta^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vk}{(2\pi)^3}e^{i(\vk-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vk;a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
 \ee 
 with $i=1,2$. They are defined simply by substituting the first and second order term of \ec{snp} into \ec{LCM}. It's easy to prove that the first order term of $\delta^{\LC}_{\rm m}$ satisfies the following relation:
 \be 
@@ -231,25 +231,25 @@ We have computed $\langle \delta_{\rm m,ini}^{(1)}(\vk)\delta_{\rm m,ini}^{(2)}(
 \ee
 $P_{\rm m,ini}$ is the linear matter power spectrum at some initial time $a_{\rm ini}$. We can use this result to further determine the value of the bracket in \ec{od}:
 \bea 
-&&\langle \delta_{\rm m}^{(1)}(\vbk;a(r))\delta_{\rm m}^{(2)}(\vbkp;a(r')) \rangle \vs
-&=&2\frac{D_{1}(a(r))}{D_{\ini}}\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}\langle \delta_{\rm m,ini}^{(1)}(\vbk)\delta_{\rm m,ini}^{(2)}(\vbkp) \rangle  \vs 
-&=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}F_{2}(-\vbk,\vbk+\vbkp)P_{\rm m,\ini}(\bk)\delta_{\rm m}^{(1)}(\vbk+\vbkp;a(r)) \eql{odb} \vs
+&&\langle \delta_{\rm m}^{(1)}(\vk;a(r))\delta_{\rm m}^{(2)}(\vk';a(r')) \rangle \vs
+&=&2\frac{D_{1}(a(r))}{D_{\ini}}\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}\langle \delta_{\rm m,ini}^{(1)}(\vk)\delta_{\rm m,ini}^{(2)}(\vk') \rangle  \vs 
+&=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}F_{2}(-\vk,\vk+\vk')P_{\rm m,\ini}(\bk)\delta_{\rm m}^{(1)}(\vk+\vk';a(r)) \eql{odb} \vs
 \eea 
 where we use the definition of the the linear growth factor $D_1(a(r))$ twice. Plugging \ec{odb} into \ec{od}, we can see that the only $\vrr'$ dependent integral can be written as (here we simply choose a cube volume):
 \be 
-\int_{V} d^{3}\vrr'e^{-i(\vbkp-\vk_s')\vrr'}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vbkp-\vk_s')\eql{dt}
+\int_{V} d^{3}\vrr'e^{-i(\vk'-\vk_s')\vrr'}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vk'-\vk_s')\eql{dt}
 \ee 
-since $D_1(a(r'))$ is a slowly varying function. $C$ is a constant and can be further determined via integrating over $\vbk$ on both sides of \ec{dt}, which gives:
+since $D_1(a(r'))$ is a slowly varying function. $C$ is a constant and can be further determined via integrating over $\vk$ on both sides of \ec{dt}, which gives:
 \be 
 C=\frac{D_{1}(a=1)}{D_{\rm ini}}
 \ee 
 thus:
 \bea 
 && \langle \delta^{\rm LC,(1)}_{\rm m}(\vk_s)\delta^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
-&=&2C\int_{V} d^{3} \vrr\int \frac{d^{3}\vbk}{(2\pi)^3}F_2(\vk,-\vk+\vk_s')P_{\rm m,\ini}(|\vk-\vk_s'|) \vs
+&=&2C\int_{V} d^{3} \vrr\int \frac{d^{3}\vk}{(2\pi)^3}F_2(\vk,-\vk+\vk_s')P_{\rm m,\ini}(|\vk-\vk_s'|) \vs
 &&\times \frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r)) \vs
 &\simeq & 2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s) \vs
-&& \times \int_{V} d^{3} \vrr\int \frac{d^{3}\vbk}{(2\pi)^3}\frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r))\vs
+&& \times \int_{V} d^{3} \vrr\int \frac{d^{3}\vk}{(2\pi)^3}\frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r))\vs
 &= &2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)\delta_{\rm m}^{\rm LC,(1)}(\vk_s+\vk_s')
 \eea 
 where in the first step, we perform a redefinition of integration dummy variable. And we use an approximation in the second step in order to get the first order term $\delta_{\rm m}^{\rm LC,(1)}(\vk_l)$ from the integral. 
