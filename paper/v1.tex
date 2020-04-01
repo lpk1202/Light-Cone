@@ -97,10 +97,10 @@
 \author{\large Peikai Li}
 \affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
 \affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
-\author{\large Scott Dodelson}
+\author{\large Rupert A. C. Croft}
 \affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
 \affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
-\author{\large Rupert A. C. Croft}
+\author{\large Scott Dodelson}
 \affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
 \affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
 
@@ -108,14 +108,15 @@
 \begin{abstract}
 \noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information from small scale perturbations. The idea is to build a quadratic estimator from small scale modes that provides a map of structure on large scales.
 We demonstrated in the first paper that the quadratic estimator works well on a dark-matter-only N-body simulation at snapshot $z=0$. Here we generalize our theory to the case of a light-cone with halo bias taken into consideration. We successfully apply our generalized version of quadratic estimator to a light cone halo catalog of a N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
+\noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information of small scale perturbations. The idea is to use two-point off-diagonal terms of density contrast modes to build a quadratic estimator for long-wavelength modes. We demonstrate in the first paper that our quadratic estimator works well on a dark-matter-only N-body simulation of the snapshot $z=0$. Here we generalize our theory to the case of a light-cone with halo bias taken into consideration. We successfully apply our generalized version of the quadratic estimator to a light cone halo catalog of a N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
 \end{abstract}
 \maketitle
 \section{Introduction} \label{sec1}
-\noindent Directly measuring the distribution of matter on large scales is nearly impossible right now as pointed out by \cite{Modi:2019hydr}. In our first work \cite{Li:2020fir}, we proposes a method of indirectly measuring large scale structure using small scale information. Physically, long- and short-wavelength modes are correlated in the sense that small scale modes will grow differently depending on the large scale structure they reside in. Mathematical feature of this phenomena is that the two-point statistics of short-wavelength matter density modes will have non-zero off-diagonal terms proportional to long-wavelength modes. This is our starting point of constructing the quadratic estimator for long-wavelength modes. We test the power of the quadratic estimator using a dark-matter-only catalog from an N-body simulation in the first paper. In this work, we generalize our theory to a halo catalog within a light cone for observational requirements.
+\noindent Directly measuring the distribution of matter on large scales is nearly impossible right now as pointed out by \cite{Modi:2019hydr}. In our first work \cite{Li:2020fir}, we proposed a method of indirectly measuring large scale structure using small scale information. Physically, long- and short-wavelength modes are correlated in the sense that small scale modes will grow differently depending on the large scale structure they reside in. This phenomena leaves a signature that the Fourier statistics of short-wavelength matter density modes will have non-zero off-diagonal terms proportional to long-wavelength modes. This is our starting point for constructing the quadratic estimator for long-wavelength modes. We tested the power of the quadratic estimator using a dark-matter-only catalog from an N-body simulation in the first paper. In this work, we generalize our theory to a halo catalog within a light cone for observational requirements.
 
 First need to account for halo bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev} since eventually we want to apply the estimator to future cosmological surveys \cite{LSST:2012ls}\cite{Wfirst:2012jg}\cite{DESI:2019ds}. Halo bias is a term relating halo number density perturbation to matter density perturbation. \peikai{fill in}
 
-Observationally the halo/galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. Typically treatment is to cut a light cone into several thin redshift bins \peikai{need some citations here, can't find a proper one}, and analyze the properties within each bin. By doing this we will lose information about long-wavelength modes along line of sight. Thus in this paper we propose a novel method of considering all the halos/galaxies in a light cone together, despite redshift difference, simply by multiplying an extra function proportional to the inverse of linear growth function. Since the universe is linear on sufficiently large scales, two linear order matter density modes at different redshifts will still be correlated. With this knowledge we can recover linear power spectrum on large scales from our construction. Assuming a cube volume, we can construct the quadratic estimator for long-wavelength modes using information of non-zero off-diagonal terms like what we did before.
+Observationally a galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. Typical  treatment is to cut a light cone into several thin redshift bins \peikai{need some citations here, can't find a proper one}, and analyze the properties within each bin. By doing this we will lose information about long-wavelength modes along line of sight. Thus in this paper we propose a novel method of considering all the halos/galaxies in a light cone together, despite redshift difference, simply by multiplying an extra function proportional to the inverse of linear growth function. Since the universe is linear on sufficiently large scales, two linear order matter density modes at different redshifts will still be correlated. With this knowledge we can recover linear power spectrum on large scales from our construction. Assuming a cube volume, we can construct the quadratic estimator for long-wavelength modes using information of non-zero off-diagonal terms like what we did before.
 
 We begin with our treatment of halo bias in a snapshot by constructing the approximated form of matter perturbation field using information of halo positions. We then deal with matter density contrast in a light cone and then build the quadratic estimator. Finally we apply the estimator to different N-body simulations and successfully extract large scale modes both in a snapshot and in a light cone.
 
@@ -181,47 +182,70 @@ We also transform the true Fourier modes $\delta_{\rm m}(\vk_l)$ and the estimat
 \Sfig{real_snap}{Comparison of the true density field of the BigMDPL halo catalog within mass bin $5 \times 10^{12}h^{-1}M_{\odot}<M < 10^{13}h^{-1}M_{\odot}$ ($\delta_{\rm m}(\vrr)$ computed using the directly measured large scale modes, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $2500\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 357\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
 
 \section{Light Cone Formalism} \label{sec4}
-We define the matter density contrast in a light cone as the usual matter density times the inverse of linear growth function, to compensate the large scale lack of growth at higher redshifts:
+We define the modified matter density contrast in a light cone as the usual matter density times the inverse of linear growth function, to try to set the large scale amplitude the same for the whole light cone:
 \be
-\delta^{\LC}_{\rm m}(\vrr) :=\delta_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))} \eql{LC}
+d^{\LC}_{\rm m}(\vrr) :=d_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))} \eql{LC}
 \ee
-where $\LC$ stands for "light cone". We set $a(\vrr=0)$ to be the origin of the light cone thus $a(\vrr)=a(r)$ will not depend of the direction of position $\vrr$. $\delta_{\rm m}(\vrr)$ is the matter density perturbation at location $\vrr$ with redshift $1/(1+a(r))$. Consider the fourier transform of this density contrast:
-\be
-\delta^{\LC}_{\rm m}(\vk) =\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr} \eql{LCM}
-\ee
-$V$ is the whole volume of the light cone. We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vrr)$ as:
-\be
-\delta_{\rm m}(\vrr)=\delta_{\rm m}(\vrr;a(r))=\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\delta_{\rm m}(\vk;a(r))\eql{snp}
-\ee 
-$\delta_{\rm m}(\vrr)$ is the density contrast at location $\vrr$ of the \textbf{light cone}; while $\delta_{\rm m}(\vrr;a(r))$ is the density contrast at location $\vrr$ of the \textbf{snapshot} at time $a(r)$. \ec{snp} is the inverse Fourier transform of modes $\delta_{\rm m}(\vk;a(r))$ at a \textbf{fixed} time $a(r)$. If we further transform it back we would get:
+where $\LC$ stands for "light cone". We set $a(\vrr=0)$ to be the origin of the light cone thus $a(\vrr)=a(r)$ will not depend of the direction of position $\vrr$. $d_{\rm m}(\vrr)$ is a field defined as:
 \be 
-\delta_{\rm m}(\vk;a(r))=\int \frac{d^3 \vrr}{(2\pi)^3}e^{-i\vk\cdot\vrr}\delta_{\rm m}(\vrr;\underbrace{a(r)}_{\rm fixed})
+d_{\rm m}(\vrr) = \frac{\rho_{\rm m}(\vrr)-\bar{\rho}_{\rm m}(a(r))}{\bar{\rho}_{\rm m}(a(r))}
 \ee 
-here the range of the integration is the whole space of that \textbf{snapshot}. Thus this equation still holds because we perform the calculation at a \textbf{fixed} time $a(r)$. We have the usual perturbative expansion of modes $\delta_{\rm m}(\vk;a(r))$ and the time evolution of each order in \ec{tayl}.
+$\rho_{\rm m}(\vrr)$ is the matter density at position $\vrr$, $\bar{\rho}_{\rm m}(a(r))$ is the mean matter density at snapshot $a(r)$. Notice \ec{LC} can be fully determined observationally since we get to know $\rho_{\rm m}(\vrr)$ in surveys. And if we cut the light cone into several thin slices we are able to get a interpolation function for each value of $\bar{\rho}_{\rm m}(a(r))$. 
 
-Similar to our previous work, we still want to compute the off-diagonal term of $\delta^{\LC}_{\rm m}(\vk)$ up to second order. And the first and second order term of $\delta^{\LC}_{\rm m}(\vk)$ will be:
+Each point $\vrr$ in the light cone corresponds to a snapshot of cosmological scale factor $a(r)$. In that snapshot we have the usual matter density contrast $\delta_{\rm m}(\vec{x};a(r))$ and its Fourier transform $\delta_{\rm m}(\vec{k};a(r))$ satisfying \ec{tayl}. Both $\delta_{\rm m}(\vec{x};a(r))$ and $\delta_{\rm m}(\vec{k};a(r))$ are defined at a \textbf{fixed} time $a(r)$, and we cannot measure them neither in surveys nor light cone simulations. We take advantage of their well-known analytical properties (such as \ec{tayl}) and use them during analytical derivations. Luckily they will not show up in our final results thus our formalism can be applied in light cone simulations, and eventually surveys. $\delta_{\rm m}(\vec{x};a(r))$ can be explicitly written as:
 \be 
-\delta^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vk}{(2\pi)^3}e^{i(\vk-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vk;a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
+\delta_{\rm m}(\vec{x};a(r))=\frac{\rho_{\rm m}(\vec{x};a(r))-\bar{\rho}_{\rm m}(a(r))}{\bar{\rho}_{\rm m}(a(r))}
 \ee 
-with $i=1,2$. They are defined simply by substituting the first and second order term of \ec{snp} into \ec{LCM}. It's easy to prove that the first order term of $\delta^{\LC}_{\rm m}$ satisfies the following relation:
+We can relate $d_{\rm m}(\vrr)$ and $\delta_{\rm m}(\vec{x};a)$ by noticing that:
+\be
+\rho_{\rm m}(\vrr)=\rho_{\rm m}(\vec{x};a(r))|_{\vec{x}=\vrr}=\rho_{\rm m}(\vrr;a(r))
+\ee
+this equality holds obviously and we further get:
 \be 
-\langle \delta^{\LC,(\rm 1)}_{\rm m}(\vk) \delta^{\LC,(\rm 1)}_{\rm m}(\vk') \rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k)\eql{lps}
+d_{\rm m}(\vrr) = \delta_{\rm m}(\vrr;a(r)) =\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\delta_{\rm m}(\vk;a(r))\eql{feq}
 \ee 
-with $\delta_{\rm D}$ being the Dirac delta function. This relation tells us that the first order term (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$ of the integrand. Or equivalently speaking, we have $P_{\rm m}^{\rm LC}(k)\simeq P_{\rm m,ini}(k)$ for long-wavelength modes (when $k\rightarrow 0$). $P_{\rm m}^{\rm LC}(k)$ is the power spectrum of density contrast \ec{LC} defined as the diagonal term of the two-point correlation:
+In the second step, we explicitly write down the definition of Fourier transform of matter density contrast in a snapshot of $a(r)$. 
+
+\ec{feq} is of great importance since it relates an observable $d_{\rm m}(\vrr)$ (thus $d^{\rm LC}_{\rm m}(\vrr)$) in a light cone to some unmeasurable quantity $\delta_{\rm m}(\vk;a(r))$ in a snapshot, but we know the properties of $\delta_{\rm m}(\vk;a(r))$ quite well theoretically. We can use this relation \ec{feq} to further perform analytical calculations.
+%We can write the real space matter inhomogeneity field $\delta_{\rm m}(\vrr)$ as:
+%\be
+%\delta_{\rm m}(\vrr)=\delta_{\rm m}(\vrr;a(r))=\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\delta_{\rm m}(\vk;a(r))\eql{snp}
+%\ee 
+%$\delta_{\rm m}(\vrr)$ is the density contrast at location $\vrr$ of the \textbf{light cone}; while $\delta_{\rm m}(\vrr;a(r))$ is the density contrast at location $\vrr$ of the \textbf{snapshot} at time $a(r)$. \ec{snp} is the inverse Fourier transform of modes $\delta_{\rm m}(\vk;a(r))$ at a \textbf{fixed} time $a(r)$. If we further transform it back we would get:
+%\be 
+%\delta_{\rm m}(\vk;a(r))=\int \frac{d^3 \vrr}{(2\pi)^3}e^{-i\vk\cdot\vrr}\delta_{\rm m}(\vrr;\underbrace{a(r)}_{\rm fixed})
+%\ee 
+%here the range of the integration is the whole space of that \textbf{snapshot}. Thus this equation still holds because we perform the calculation at a \textbf{fixed} time $a(r)$. We have the usual perturbative expansion of modes $\delta_{\rm m}(\vk;a(r))$ and the time evolution of each order in \ec{tayl}.
+
+\noindent Consider the Fourier transform of this modified density contrast within the light cone:
+\be
+d^{\LC}_{\rm m}(\vk) =\int_{V} d^3\vrr  \, d_{\rm m}(\vrr) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr} \eql{LCM}
+\ee
+$V$ is the whole volume of the light cone. Similar to our previous work, we still want to compute the off-diagonal term of $d^{\LC}_{\rm m}(\vk)$ up to second order. With small scale perturbations of $d^{\LC}_{\rm m}(\vk)$ which can be measured observationally, we can estimate long-wavelength modes of $d^{\LC}_{\rm m}(\vk)$. The first and second order term of $d^{\LC}_{\rm m}(\vk)$ will be:
 \be 
-\langle \delta_{\rm m}^{\rm LC} (\vk)\delta_{\rm m}^{\rm LC}(\vk')\rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m}^{\rm LC}(k) \eql{2ptlc}
+d^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vk}{(2\pi)^3}e^{i(\vk-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vk;a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
 \ee 
-There are also off-diagonal terms in \ec{2ptlc} which contains extremely valuable information, and we will look into them in next section \ref{sec5}. To further generalize this formalism to a light cone halo catalog, we simply adopt the approximated matter density contrast defined in \ec{hm}. Notice in this case, the linear bias is also a function of halo redshift.
+with $i=1,2$. These are defined simply by substituting the first and second order term of \ec{feq} into \ec{LCM}. It's easy to prove that the first order term of $\delta^{\LC}_{\rm m}$ satisfies the following relation:
+\be 
+\langle d^{\LC,(\rm 1)}_{\rm m}(\vk) d^{\LC,(\rm 1)}_{\rm m}(\vk') \rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k)\eql{lps}
+\ee 
+with $\delta_{\rm D}$ being the Dirac delta function. This relation tells us that the first order term (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$ of the integrand. Or equivalently speaking, we have $P_{\rm m}^{\rm LC}(k)\simeq P_{\rm m,ini}(k)$ for long-wavelength modes (when $k\rightarrow 0$), as shown in Fig.~\rf{psLC}. $P_{\rm m}^{\rm LC}(k)$ is the power spectrum of density contrast \ec{LC} defined as the diagonal term of the two-point correlation:
+\be 
+\langle d_{\rm m}^{\rm LC} (\vk)d_{\rm m}^{\rm LC}(\vk')\rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m}^{\rm LC}(k) \eql{2ptlc}
+\ee 
+There are also off-diagonal terms in \ec{2ptlc} which contains extremely valuable information, and we will look into them in next section \ref{sec5}. To further generalize this formalism to a light cone halo catalog, we simply adopt the approximated matter density contrast defined in \ec{hm}. Notice in this case, the linear bias $b_{1}$ is also a function of halo redshift.\
+
+\Sfig{psLC}{Comparison of the light cone power spectrum $P_{\rm m}^{\LC}(k)$ with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. $P_{\rm m, ini}(k)$ is plotted according to theory predicted linear power spectrum, and $P_{\rm m}^{\LC}(k)$ is computed using halo catalog of MICE Grand Challenge light-cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error.}
 
 \section{Quadratic Estimator} \label{sec5}
-Using expressions of \ec{exp}, we can compute the two-point correlation of two short-wavelength modes $\delta^{\LC}_{\rm m}(\vk_s)$ and $\delta^{\LC}_{\rm m}(\vk_s')$. Again we take the squeezed limit $\vk_l=\vk_s+\vk_s'$:
+Using expressions of \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d^{\LC}_{\rm m}(\vk_s)$ and $d^{\LC}_{\rm m}(\vk_s')$. Again we take the squeezed limit $\vk_l=\vk_s+\vk_s'$:
 \bea 
- &&\langle \delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
- =&&\langle \delta^{\LC,(1)}_{\rm m}(\vk_s)\delta^{\LC,(2)}_{\rm m}(\vk_s') \rangle+\langle \delta^{\LC,(2)}_{\rm m}(\vk_s)\delta^{\LC,(1)}_{\rm m}(\vk_s') \rangle \vs \eql{2p}
+ &&\langle d^{\LC}_{\rm m}(\vk_s)d^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
+ =&&\langle d^{\LC,(1)}_{\rm m}(\vk_s)d^{\LC,(2)}_{\rm m}(\vk_s') \rangle+\langle d^{\LC,(2)}_{\rm m}(\vk_s)d^{\LC,(1)}_{\rm m}(\vk_s') \rangle \vs \eql{2p}
 \eea 
 Substituting \ec{exp} into \ec{2p} and evaluate the first bracket as an example:
 \bea 
-&&\langle \delta^{\rm LC,(1)}_{\rm m}(\vk_s)\delta^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
+&&\langle d^{\rm LC,(1)}_{\rm m}(\vk_s)d^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
 &=& \int_V d^{3}\vrr\int_{V} d^{3} \vrr' \int \frac{d^{3}\vk}{(2\pi)^3}\int \frac{d^{3}\vk'}{(2\pi)^3}\vs
 && e^{i(\vk\cdot\vrr+\vk'\cdot\vrr')-i(\vk_s\cdot\vrr+\vk_s'\cdot\vrr')} \frac{D_{\ini}}{D_{1}(a(r))} \frac{D_{\ini}}{D_{1}(a(r'))}  \vs
 &\times &\langle \delta_{\rm m}^{(1)}(\vk;a(r))\delta_{\rm m}^{(2)}(\vk';a(r')) \rangle \eql{od}
@@ -236,7 +260,7 @@ $P_{\rm m,ini}$ is the linear matter power spectrum at some initial time $a_{\rm
 &=&2\frac{D_{1}(a(r))}{D_{\ini}}\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}\langle \delta_{\rm m,ini}^{(1)}(\vk)\delta_{\rm m,ini}^{(2)}(\vk') \rangle  \vs 
 &=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}F_{2}(-\vk,\vk+\vk')P_{\rm m,\ini}(\bk)\delta_{\rm m}^{(1)}(\vk+\vk';a(r)) \eql{odb} \vs
 \eea 
-where we use the definition of the the linear growth factor $D_1(a(r))$ twice. Plugging \ec{odb} into \ec{od}, we can see that the only $\vrr'$ dependent integral can be written as (here we simply choose a cube volume):
+where we use the definition of the the linear growth factor $D_1(a(r))$. Plugging \ec{odb} into \ec{od}, we can see that the only $\vrr'$ dependent integral can be written as (here we simply choose a cube volume):
 \be 
 \int_{V} d^{3}\vrr'e^{-i(\vk'-\vk_s')\vrr'}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vk'-\vk_s')\eql{dt}
 \ee 
@@ -246,18 +270,18 @@ C=\frac{D_{1}(a=1)}{D_{\rm ini}}
 \ee 
 thus:
 \bea 
-&& \langle \delta^{\rm LC,(1)}_{\rm m}(\vk_s)\delta^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
+&& \langle d^{\rm LC,(1)}_{\rm m}(\vk_s)d^{\rm LC,(2)}_{\rm m}(\vk_s') \rangle \vs 
 &=&2C\int_{V} d^{3} \vrr\int \frac{d^{3}\vk}{(2\pi)^3}F_2(\vk,-\vk+\vk_s')P_{\rm m,\ini}(|\vk-\vk_s'|) \vs
 &&\times \frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r)) \vs
 &\simeq & 2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s) \vs
 && \times \int_{V} d^{3} \vrr\int \frac{d^{3}\vk}{(2\pi)^3}\frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r))\vs
-&= &2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)\delta_{\rm m}^{\rm LC,(1)}(\vk_s+\vk_s')
+&= &2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)d_{\rm m}^{\rm LC,(1)}(\vk_s+\vk_s')
 \eea 
-where in the first step, we perform a redefinition of integration dummy variable. And we use an approximation in the second step in order to get the first order term $\delta_{\rm m}^{\rm LC,(1)}(\vk_l)$ from the integral. 
+where in the first step, we perform a redefinition of integration dummy variable. And we use an approximation in the second step in order to get the first order term $d_{\rm m}^{\rm LC,(1)}(\vk_l)$ from the integral. 
 
 Again, we have proved that with this construction in \ec{LC}, we can get long-wavelength modes from off-diagonal terms of short-wavelength modes:
 \be 
-\langle \delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l} =\mathpzc{f}(\vec{k}_s,\vec{k}_s'){\delta}^{\rm LC,(1)}_{\rm m}(\vec{k}_l) \eql{2pt}
+\langle d^{\LC}_{\rm m}(\vk_s)d^{\LC}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l} =\mathpzc{f}(\vec{k}_s,\vec{k}_s'){d}^{\rm LC,(1)}_{\rm m}(\vec{k}_l) \eql{2pt}
 \ee 
 with 
 \bea
@@ -267,9 +291,9 @@ with
 
 The quadratic estimator can be formed as:
 \be
-\hat{\delta}^{\rm LC,(1)}_{\rm m}(\vk_l)=\mathpzc{A}(\vk_l)\int \frac{d^{3}\vk_s}{(2\pi)^3} \mathpzc{g}(\vk_s,\vk_s')\delta^{\LC}_{\rm m}(\vk_s)\delta^{\LC}_{\rm m}(\vk_s') \eql{estlc}
+\hat{d}^{\rm LC,(1)}_{\rm m}(\vk_l)=\mathpzc{A}(\vk_l)\int \frac{d^{3}\vk_s}{(2\pi)^3} \mathpzc{g}(\vk_s,\vk_s')d^{\LC}_{\rm m}(\vk_s)d^{\LC}_{\rm m}(\vk_s') \eql{estlc}
 \ee 
-with $\vk_s' = \vk_l-\vk_s$ and $\mathpzc{g}$ being a weighting function. $\mathcal{A}$ is the normalization function determined similarly by requiring that $\langle \hat{\delta}^{\rm LC,(1)}(\vec{k}_l) \rangle={\delta}^{\rm LC,(1)}(\vec{k}_l)$:
+with $\vk_s' = \vk_l-\vk_s$ and $\mathpzc{g}$ being a weighting function. $\mathcal{A}$ is the normalization function determined similarly by requiring that $\langle \hat{d}^{\rm LC,(1)}(\vec{k}_l) \rangle={d}^{\rm LC,(1)}(\vec{k}_l)$:
 \begin{eqnarray}
 \mathpzc{A}(\vec{k}_l)=\bigg[\int \frac{d^3 \vec{k}_s}{(2\pi)^3} \mathpzc{g}(\vec{k}_s,\vec{k}_s')\mathpzc{f}(\vec{k}_s,\vec{k}_s')  \bigg]^{-1} \eql{a}
 \end{eqnarray}
@@ -281,12 +305,12 @@ Similar to our last work, $\mathpzc{g}$ can be calculated by minimizing the nois
 \end{eqnarray} 
 with this choice of $\mathpzc{g}$ the noise term $\mathpzc{N}$ is identical to the normalization factor $\mathpzc{A}$. And the projected detectability is defined similarly as \ec{error}:
 \be
-\frac{1}{\sigma^{\rm LC}(k_l)^2}=\frac{V k_l^2 \Delta k }{(2\pi)^2}\bigg[\frac{P_{\rm m,lin}(k_l)}{P_{\rm m,lin}(k_l)+A(k_l) }\bigg]^2 \eql{error1},
+\frac{1}{\sigma^{\rm LC}(k_l)^2}=\frac{V k_l^2 \Delta k }{(2\pi)^2}\bigg[\frac{P_{\rm m,lin}(k_l)}{P_{\rm m,lin}(k_l)+\mathpzc{A}(k_l) }\bigg]^2 \eql{error1},
 \ee
-Using the quadratic estimator \ec{estlc} we can again use small scale information of the whole light cone (for now we only consider a cube-shaped volume) to infer large scale field of \ec{LC}. Since we know the linear growth function pretty well, we are able to fully recover the actual matter density contrast within the light cone.
+Using the quadratic estimator \ec{estlc} we can use small scale information of the whole light cone (for now we only consider a cube-shaped volume) to infer large scale field of \ec{LC}. According to \ec{lps}, this is equivalent to linear matter perturbations in the light cone.
 
 \section{Demonstration with N-body simulation II} \label{sec6}
-\noindent We use the MICE Grand Challenge light-cone N-body simulation (MICE-GC) \cite{Fosalba:2015MI}\cite{Fosalba:2015MII} to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LCM}, as shown in Fig.~\rf{Cube}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. We also assume $D_{\ini}=1$ throughout this section\footnote{$D_{\rm ini}=1$ is physically ill-defined, because the maximum value of $D_{\rm ini}$ is about $0.997$ for a flat universe with $\Omega_{\rm m}=0.25$. But $D_{\rm ini}$ is simply a normalization constant and the choice of its value does not affect the feature of the final result.}.
+\noindent We use the MICE Grand Challenge light-cone N-body simulation (MICE-GC) to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LCM}, as shown in Fig.~\rf{Cube}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. We also assume $D_{\ini}=1$ throughout this section\footnote{$D_{\rm ini}=1$ is physically ill-defined, because the maximum value of $D_{\rm ini}$ is about $0.997$ for a flat universe with $\Omega_{\rm m}=0.25$. But $D_{\rm ini}$ is simply a normalization constant and the choice of its value does not affect the feature of the final result.}.
 
 \Sfig{Cube}{Boxsize of the cube is $L=3072/\sqrt{3}\, h^{-1}\, \rm Mpc\sim 1774\, h^{-1}\, \rm Mpc$. Volume is $V=L^3\sim 5.6\,(h^{-1}\,\rm Mpc)^3$. Only one point in the cube can reach the redshift of $1.4$, and $z=0$ is at the origin $O$ of the octant.}
 
@@ -306,13 +330,5 @@ This work has made use of CosmoHub. CosmoHub has been developed by the Port d'In
 \clearpage
 \bibliography{refs}
 
-\appendix
-
-\section{Non-cube Volume}
-For a more generic case, we might have a non-cube volume. Thus:
-\be
-\delta^{\LC}_{\rm m}(\vk) :=\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr;a(r))\big[ \frac{D_{\ini}}{D_{1}(a(r))} \big]^{2}f_{V}(\vrr) e^{-i\vk \cdot\vrr}
-\ee
- $f_{V}$ is a position-dependent function and its form will be fully determined by the light cone's shape. For a cube volume, simply we have $f_V=1$.
 
 \end{document}
