@@ -95,6 +95,7 @@
 \newcommand{\RC}[1]{{\color{darkorange} #1}}
 \newcommand{\nl}{\\ \indent}
 \newcommand\dmh{\delta_{\rm m,h}}
+\newcommand\hdmh{\hat{\delta}_{\rm m,h}}
 \begin{document}
 \title{Large Scale Structure Reconstruction with Short-Wavelength Modes: \\Halo Bias and Light Cone Formalism}
 \author{\large Peikai Li}
@@ -193,9 +194,9 @@ We use the approximate density contrast defined in \ec{hm} and compute its power
 
 \Sfig{SN_BIGMDPL}{Long-wavelength power spectrum and its error from \ec{error} which can be expressed as $P_{\rm m, lin}(k_l)\sigma(k_l)$. The box size of the survey is be $L=2.5\, h^{-1}\rm\, Gpc$ thus volume $V=L^3$ and width $\Delta k = 2\pi/L$. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.22\,h\,\rm Mpc^{-1}$.\scott{Is this using halos?}}
 
-We also transform the true Fourier modes $\dmh(\vk_l)$ and the long-wavelength modes estimated using the quadratic estimator, $\hat{\dmh}(\vk_l)$, back into real space and compare them in Fig.~\rf{real_snap}. We can see that this quadratic estimator is able to successfully recapture large scale over/under densities. 
+We also transform the true Fourier modes $\dmh(\vk_l)$ and the long-wavelength modes estimated using the quadratic estimator, $\hdmh(\vk_l)$, back into real space and compare them in Fig.~\rf{real_snap}. We can see that this quadratic estimator is able to successfully recapture large scale over/under densities. 
  
-\Sfig{real_snap}{Comparison of the true density field of the BigMDPL halo catalog within mass bin $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ ($\delta_{\rm m}(\vrr)$ computed using the directly measured large scale modes, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $2500\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 357\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
+\Sfig{real_snap}{Comparison of the true density field of the BigMDPL halo catalog within mass bin $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ ($\dmh(\vrr)$ computed using the directly measured large scale modes, top row) and the density field from the quadratic estimator ($\hdmh(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $2500\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 357\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
 
 \section{Light Cone Formalism} \label{sec4}
 We first define an observable, which is the modified matter density contrast in a light cone as:
