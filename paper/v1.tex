@@ -87,13 +87,14 @@
 \usepackage[all]{hypcap} 
 \definecolor{darkgreen}{cmyk}{0.85,0.1,1.00,0} 
 \definecolor{darkorange}{rgb}{1.0,0.2,0.0}
-\newcommand{\scott}[1]{{\color{darkgreen} #1}}
+\newcommand{\scott}[1]{{\color{darkgreen} \, [Scott: #1]}}
 \newcommand{\peikai}[1]{{\color{blue} #1}}
 \newcommand{\prvs}[1]{{\color{magenta} #1}}
 \newcommand{\AL}[1]{{\color{magenta} AL: #1}}
 \newcommand{\MR}[1]{{\color{blue} MR: #1}}
 \newcommand{\RC}[1]{{\color{darkorange} #1}}
 \newcommand{\nl}{\\ \indent}
+\newcommand\dmh{\delta_{\rm m,h}}
 \begin{document}
 \title{Large Scale Structure Reconstruction with Short-Wavelength Modes: \\Halo Bias and Light Cone Formalism}
 \author{\large Peikai Li}
@@ -149,7 +150,7 @@ Here $P_{\rm m,lin}$ is the linear matter power spectrum and $F_{2}$ is a functi
 \be
 F_{2}(\vk_1,\vk_2)=\frac{5}{7}+\frac{2}{7}\frac{(\vk_1\cdot \vk_2)^2}{k_1^2 k_2^2}+\frac{\vk_1\cdot \vk_2}{2k_1k_2}\bigg[\frac{k_1}{k_2}+\frac{k_2}{k_1}\bigg].\eql{f2}
 \ee
-\ec{2pt} indicates that we can estimate long-wavelength modes using small scale information with the following minimum variance quadratic estimator:
+\ec{2pt} indicates that we can estimate the long-wavelength modes using small scale information with the following minimum variance quadratic estimator:
 \begin{eqnarray}
 \hat{\delta}^{(1)}_{\rm m}(\vec{k}_l;a)=A(\vec{k}_l)\int \frac{d^3 \vec{k}_s}{(2\pi)^3} g(\vec{k}_s,\vec{k}_s'){\delta}_{\rm m}(\vec{k}_s;a){\delta}_{\rm m}(\vec{k}_s';a)\vs \eql{quadest}
 \end{eqnarray} 
@@ -158,30 +159,32 @@ with $\vk_s'=\vk_l-\vk_s$. The normalization factor $A$ is defined by requiring 
 A(\vec{k}_l)&=&\bigg[\int \frac{d^3 \vec{k}_s}{(2\pi)^3} g(\vec{k}_s,\vec{k}_s')f(\vec{k}_s,\vec{k}_s')  \bigg]^{-1} \eql{a} \vs
 g(\vec{k}_{s},\vec{k}_{s}')&=&\frac{f(\vec{k}_{s},\vec{k}_{s}')}{2P_{\rm m,nl}(k_{s})P_{\rm m,nl}(k_{s}')}
 \end{eqnarray}
-where $P_{\rm m,nl}$ is the nonlinear matter power spectrum. With this choice of the weighting function $g$, the Gaussian noise term is equal to the normalization factor $N(\vk_l)=A(\vk_l)$. And the projected detectability of a power spectrum measurement using this quadratic estimator can be written as:
+where $P_{\rm m,nl}$ is the nonlinear matter power spectrum. With this choice of the weighting function $g$, the noise on the estimator $N(\vk_l)=A(\vk_l)$ if non-gaussian terms in the four-point function are neglected. Therefore, the projected detectability of a power spectrum measurement using this quadratic estimator can be written as:
 \be
 \frac{1}{\sigma^{2}(k_l)}=\frac{V k_l^2 \Delta k }{(2\pi)^2}\bigg[\frac{P_{\rm m,lin}(k_l)}{P_{\rm m,lin}(k_l)+A(k_l) }\bigg]^2 \eql{error},
 \ee
 where $V$ is the volume of a survey and $\Delta k$ is the width of long-wavelength mode bins. We also take advantage of the fact that $A(\vk_l)$ does not depend on the direction of the long mode $\vk_l$.
 
-So far we have finished reviewing the general formalism of the large scale quadratic estimator in a dark-matter-only catalog. Now we generalize to a halo catalog.
+So far we have reviewed the formalism of the large scale quadratic estimator in a dark-matter-only catalog. Now we generalize to a halo catalog.
 
 Ignoring higher order halo bias, the number density contrast of halos can be related to the matter density contrast at a fixed time $a$ as \cite{Desjacques:2018rev}:
 \be 
 \delta_{\rm h}(\vrr;a) \equiv \frac{n_{\rm h}(\vrr;a)-\bar{n}_{\rm h}(a)}{\bar{n}_{\rm h}(a)}=b_{1}\delta_{\rm m}(\vrr;a) \eql{hdc}
 \ee 
-here ``$\rm h$" denotes halo, $n_{\rm h}$ is the halo number density field at a given position, $\bar{n}_{\rm h}$ is the mean number density of halos and $b_{1}$ is the linear bias parameter relating halo and matter density contrasts. The linear bias $b_{1}$ is a function of halo mass and position and has been well approximated using analytical expressions \cite{Seljak:2004SW}\cite{Bhattacharya:2011MF}. We will use the Tinker halo bias function throughout this paper \cite{Tinker:2010Tinker}. Since the linear bias $b_1$ depends not only on halo mass but also halo redshift, it will be more challenging for us to use $\delta_{\rm h}$ than $\delta_{\rm m}$ within a light cone unless we use a very narrow mass bin. Therefore we choose to build an approximate matter density contrast out of halo positions in a snapshot following \cite{Pervical:2007GPS}:
+here ``$\rm h$" denotes halo, $n_{\rm h}$ is the halo number density field at a given position, $\bar{n}_{\rm h}$ is the mean number density of halos and $b_{1}$ is the linear bias parameter relating halo and matter density contrasts. The linear bias $b_{1}$ is a function of halo mass and position and has been well approximated using analytical expressions \cite{Seljak:2004SW}\cite{Bhattacharya:2011MF}. We will use the Tinker halo bias function throughout this paper \cite{Tinker:2010Tinker}. Since the linear bias $b_1$ depends not only on halo mass but also halo redshift, it will be more challenging for us to use $\delta_{\rm h}$ than $\delta_{\rm m}$ within a light cone unless we use a very narrow mass bin. Therefore we choose to build an approximate matter density contrast out of halo positions in a snapshot following \cite{Pervical:2007GPS}. To distinguish this from the standard matter contrast, we add an $h$ to the subscript. Then,
 \be 
-\delta_{\rm m}(\vrr;a) \equiv \frac{\eta_{\rm h}(\vrr;a)-\bar{\eta}_{\rm h}(a)}{\bar{n}_{\rm h}(a)} \eql{hm}
+\dmh(\vrr;a) \equiv \frac{\eta_{\rm h}(\vrr;a)-\bar{\eta}_{\rm h}(a)}{\bar{n}_{\rm h}(a)} \eql{hm}
 \ee 
-where $\eta_{\rm h}(\vrr;a)$ is the usual halo density field with each halo weighted by the inverse of its own halo bias, and $\bar{\eta}_{\rm h}(a)$ is its mean value. They can be explicitly written as:
+where $\eta_{\rm h}(\vrr;a)$ is the usual halo density field with each halo weighted by the inverse of its own halo bias, and $\bar{\eta}_{\rm h}(a)$ is its mean value. They can be explicitly written as\scott{Is the $g$ subscript a typo? Shouldn't the second line define $\bar\eta$?, not $n_h$?}:
 \bea
 \eta_{\rm h}(\vrr;a)&=&\sum_{i=1}^{N_{\rm h}}\frac{\delta_{\rm D g}(\vrr-\vrr_{i})}{b_{1}(M_{i};a_{i})}\bigg|_{a_{i}=a} \eql{nob}\\
 n_{\rm h}(\vrr;a)&=&\sum_{i=1}^{N_{\rm h}}\delta_{\rm D}(\vrr-\vrr_{i})\bigg|_{a}
 \eea
-where $\delta_{\rm D}$ is the Dirac delta function, $N_{\rm h}$ is the total number of halos and $a_{i}$, $M_{i}$ and $\vrr_{i}$ are the cosmological growth factor, mass and position of the $i$-th halo, respectively. Since we consider only a fixed time in this section, we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$. We can use the Cloud-in-Cell (CIC) or the Triangular Shaped Cloud (TSC) scheme \cite{Sefusatti:2015CIC} to smooth the sharply peaked Dirac delta function numerically\footnote{We use the TSC scheme in this work.}.
+where $\delta_{\rm D}$ is the Dirac delta function, $N_{\rm h}$ is the total number of halos and $a_{i}$, $M_{i}$ and $\vrr_{i}$ are the cosmological scale factor, mass and position of the $i$-th halo, respectively. Since we consider only a fixed time in this section, we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$. We can use the Cloud-in-Cell (CIC) or the Triangular Shaped Cloud (TSC) scheme \cite{Sefusatti:2015CIC} to smooth the sharply peaked Dirac delta function numerically\footnote{We use the TSC scheme in this work.}.
 
-We consider \ec{hm} as the general way of estimating the matter density using the information of halos/galaxies only, since in real surveys the bias can be expressed as a function of galaxy luminosity and color \cite{Cresswell:2008Col}. We will not use the halo density contrast $\delta_{\rm h}$ directly, instead we will use $\delta_{\rm m}$ defined in \ec{hm} as the approximate matter density contrast during the calculation of the quadratic estimator \ec{quadest} both in a snapshot and in a light cone.
+\scott{As I mentioned in the email, it might be nice to demonstrate how well this estimator does.} 
+
+We consider \ec{hm} as the general way of estimating the matter density using the information of halos/galaxies only, since in real surveys the bias can be expressed as a function of galaxy luminosity and color \cite{Cresswell:2008Col}. We will not use the halo density contrast $\delta_{\rm h}$ directly, instead we will use $\dmh$ defined in \ec{hm} as the approximate matter density contrast during the calculation of the quadratic estimator \ec{quadest} both in a snapshot and in a light cone.
 
 \section{Demonstration with N-body simulation I} \label{sec3}
 \noindent We test the power of the quadratic estimator using a halo catalog from a cosmological N-body simulation. We use the $z=0$ snapshot from BigMDPL, one of the Multi-Dark cosmological simulations \cite{Klypin:2014nov}. This simulation used a flat $\Lambda$CDM model with Planck Collaboration XVI (2014) \cite{Planck:2014cos} cosmological parameters. Halos were found in this catalog using \textit{Rockstar} code \cite{Behroozi:2013Rock}. We will focus on halos with masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ for simplicity. And we have similar results in other mass bins as well.
