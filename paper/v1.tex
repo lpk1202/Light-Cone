@@ -203,6 +203,8 @@ We also transform the true Fourier modes $\dmh(\vk_l)$ and the long-wavelength m
 The difficulty with applying this formalism to real data is that we are able to observe a galaxy a distance $r$ from us as it was when the scale factor was equal to $a(r)$. Here $a=1$ when $r=0$ and decreases as the distance from us increases. Therefore, we do not have access to the full $\dmh(\vec r; a)$ for all values of $\vec r$, only for that thin shell from which light emitted when the scale factor was equal to $a$ would have reached us by now.
 
 \newcommand\dlc{d^{\LC}_{\rm m,h}}
+\newcommand\dolc{d^{\LC, 1}_{\rm m,h}}
+\newcommand\dtlc{d^{\LC, 2}_{\rm m,h}}
 To deal with this, we first define a quantity that can be observed: 
 \be
 \dlc(\vrr) \equiv \dmh(\vrr;a(r)) \frac{D_{\ini}}{D_{1}(a(r))} \eql{LC}
@@ -218,24 +220,34 @@ We multiply this observable by the ratio of growth factors so that the large sca
 %\eea 
 %where $\rho_{\rm m}(\vrr\, ';a(r'))$  is the matter density at position $\vrr\, '$ of snapshot $a(r')$, and $\bar{\rho}_{\rm m}(a(r))$ is the mean matter density of snapshot $a(r)$. In this case $\delta_{\rm m}(\vrr\, ';a(r))$ is an observable since we get to know $\rho_{\rm m}(\vrr\, ';a(r'))$ in cosmic surveys, since $\rho_{\rm m}(\vrr\, ';a(r'))$ is the matter density field at position $\vrr\, '$ of the light cone. And if we cut the light cone into several thin slices we are able to get a interpolation function for each value of $\bar{\rho}_{\rm m}(a(r))$. Thus for each snapshot with scale factor $a(r)$, we can measure its matter density contrast $\delta_{\rm m}(\vrr\, ';a(r))$ on a shell (when $|\vrr\, '|=|\vrr|$). Finally we come to the conclusion that the modified density contrast $d_{\rm m}^{\LC}$ is an observable. The point of this construction \ec{LC} is that we know the properties of matter density contrast in a snapshot very well (e.g. \ec{tayl}). 
 And we can take advantage of these properties to further perform our derivation. Inverse Fourier transform of the density modes in a snapshot can be written as:
-\be 
-\delta_{\rm m}(\vrr;a(r)) =\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\delta_{\rm m}(\vk;a(r))\eql{feq}
-\ee 
 Again, we still do not have access to the value of the Fourier modes $\delta_{\rm m}(\vk;a(r))$. Luckily they will not show up in our final results thus our formalism can be applied in light cone simulations, and eventually surveys. 
 
 Now consider the Fourier transform of the modified density contrast within the light cone:
-\be
-d^{\LC}_{\rm m}(\vk) =\int_{V} d^3\vrr  \, \delta_{\rm m}(\vrr;a(r)) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr} \eql{LCM}
-\ee
-Insert the inverse Fourier transform \ec{feq} of $\delta_{\rm m}(\vrr;a(r))$ into the above expression, and further break the expression \ec{LCM} into perturbative series using \ec{tayl}. We can get:
+\bea
+\dlc(\vk) &=&\int_{V} d^3\vrr  \, \dlc(\vrr)  e^{-i\vk \cdot\vrr} \vs
+&=&\int_{V} d^3\vrr  \, \dmh(\vrr;a(r)) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr}.
+\eql{LCM}
+\eea
+We can make progress now by writing $\dmh$ in the integrand as
 \be 
-d^{\LC}_{\rm m}(\vk) = d^{\LC,(1)}_{\rm m}(\vk)+d^{\LC,(2)}_{\rm m}(\vk)+\cdots
+\dmh(\vrr;a(r)) =\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\dmh(\vk;a(r))\eql{feq}
+.\ee 
+Therefore,
+\bea
+\dlc(\vk) &=&\int \frac{d^3 \vk'}{(2\pi)^3}\, \int_{V} d^3\vrr \, e^{i(\vk-\vk') \cdot\vrr} \vs
+&&\times  \left[ \frac{D_{\ini}}{D_{1}(a(r))}  
+\,\dmh(\vk';a(r))\right].
+\eea
+In the case of the snapshot the term in brackets had no $\vrr$ dependence, so the integral over space led to a Dirac delta function, and then the integral over $\vk'$ to a tautology. Now, though, we have an expression for an observable $\dlc(\vk)$ in terms of a theoretical quantity $\dmh(\vk';a(r))$ that cannot be observed but whose behavior is governed by perturbation theory as outlined in \ec{tayl}. 
+Therefore, perturbation theory predicts that 
+\be 
+\dlc(\vk) = \dolc(\vk)+\dtlc(\vk)+\cdots
 \ee 
 with each order given by:
 \be 
 d^{\LC,(\rm i)}_{\rm m}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vk'}{(2\pi)^3}e^{i(\vk'-\vk)\cdot\vrr}\delta^{(\rm i)}_{\rm m}(\vk';a(r))\frac{D_{\ini}}{D_{1}(a(r))}  \eql{exp}
 \ee 
-We can prove that the first order term of $d^{\LC}_{\rm m}$ satisfies the following relation:
+We can prove \scott{Need to add some steps in here.} that the first order term of $d^{\LC}_{\rm m}$ satisfies the following relation:
 \be 
 \langle d^{\LC,(\rm 1)}_{\rm m}(\vk) d^{\LC,(\rm 1)}_{\rm m}(\vk') \rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k)\eql{lps}
 \ee 
