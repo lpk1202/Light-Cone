@@ -183,8 +183,9 @@ n_{\rm h}(\vrr;a)&=&\sum_{i=1}^{N_{\rm h}}\delta_{\rm D}(\vrr-\vrr_{i})\bigg|_{a
 \eea
 where $\delta_{\rm D}$ is the Dirac delta function, $N_{\rm h}$ is the total number of halos and $a_{i}$, $M_{i}$ and $\vrr_{i}$ are the cosmological scale factor, mass and position of the $i$-th halo, respectively. Since we consider only a fixed time in this section, we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$. We can use the Cloud-in-Cell (CIC) or the Triangular Shaped Cloud (TSC) scheme \cite{Sefusatti:2015CIC} to smooth the sharply peaked Dirac delta function numerically\footnote{We use the TSC scheme in this work.}.
 
-\Sfig{hm}{$P_{\rm m}^{\rm h}(k)$ is the approximate matter power spectrum using halo information \ec{hm}.}
-\scott{As I mentioned in the email, it might be nice to demonstrate how well this estimator does.} 
+\Sfig{hm}{$P_{\rm m}^{\rm h}(k)$ is the approximate matter power spectrum using halo information \ec{hm} at a snapshot when the scale factor $a=1$. We use the halo catalog from BIGMDPL, see section \ref{sec3} for a more detailed description.}
+
+\Sfig{real_comp}{Comparison between the real matter density contrast $\delta_{\rm m}(\vrr)$ and the approximate matter density contrast using halo information $\dmh(\vrr)$ at a snapshot when the scale factor $a=1$. We use the halo catalog from BIGMDPL, see section \ref{sec3} for a more detailed description.}
 
 We consider \ec{hm} as the general way of estimating the matter density using the information of halos/galaxies only, since in real surveys the bias can be expressed as a function of galaxy luminosity and color \cite{Cresswell:2008Col}. We will not use the halo density contrast $\delta_{\rm h}$ directly, instead we will use $\dmh$ defined in \ec{hm} as the approximate matter density contrast during the calculation of the quadratic estimator \ec{quadest} both in a snapshot and in a light cone.
 
@@ -299,7 +300,7 @@ where we make use of the definition of the the linear growth factor $D_1(a(r))$.
 \be 
 \int_{V} d^{3}\vrr\, 'e^{-i(\vk'-\vk_s')\vrr\, '}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vk'-\vk_s')\eql{dt}
 \ee 
-since $D_1(a(r'))$ is a slowly varying function. Constant $C$ can be further determined via integrating over $\vk\, '$ on both sides of \ec{dt}, which gives:
+since $D_1(a(r'))$ is a slowly varying function. See appendix \ref{appenda} for a more detailed analysis. Constant $C$ can be further determined via integrating over $\vk\, '$ on both sides of \ec{dt}, which gives:
 \be 
 C=\frac{D_{1}(a=1)}{D_{\rm ini}}
 \ee 
@@ -361,7 +362,7 @@ In Fig.~\rf{real_dm}, the left top cell of each row corresponds to the cell cont
 \Sfig{real_dm}{Comparison of the true density field of the $1$ in $700$ matter particles of the Mice-GC simulation ($\delta_{\rm m}(\vrr)$, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $1774\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 253\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
 \Sfig{cube_dm}{Comparison of the true density field and the estimated density field of dark-matter-only catalog in a light cone with the same colorbar as Fig.~\rf{real_dm}. First row shows the modified matter density contrast near the origin (inner surfaces of the cube, $0\leqslant z \lesssim 0.69$); second row shows the modified matter density contrast far from the origin (outer surfaces of the cube, $0.69\lesssim z \lesssim 1.4$).}
 
-Then we consider the halo catalog in the same light cone with halo masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ for brevity. We have similar results in other mass bins as well. We use \ec{hm} as the approximated matter density contrast, $\mathpzc{n}_{\rm h}(\vrr)$ can be easily computed using halo positions and the Tinker bias function. We cut the whole light cone (the octant) into several slices and compute the mean density field $\bar{{n}}_{\rm h}$ and $\bar{\mathpzc{n}}_{\rm h}$ of each slice, then get the mean field  $\bar{{n}}_{\rm h}(a(r))$ and $\bar{\mathpzc{n}}_{\rm h}(a(r))$ at each position by interpolation. We compute the directly measured modified matter contrast $d_{\rm m}(\vrr)$ and also the power spectrum in Fig.~\rf{psLC}. The power spectrum perfectly characterizes linear matter power spectrum on large scales. We use the quadratic estimator \ec{estlc} to get the reconstructed modified field and transform them back into real space. Again we have two similar plots Fig.~\rf{real_halo} and Fig.~\rf{cube_halo}. From Fig.~\rf{real_halo} we can see that our quadratic estimator is still able to extract large scale information, especially large over- or under-density cells on first few low-redshift panels. The difference seems larger when we go higher into redshift, and we have the worst performance on the very right panel. We observe the same feature in Fig.~\rf{cube_halo} where the cells near the origin match each other better than cells far from the origin. The main reason for this effect is that nonlinear bias ($b_{2}$, $b_{3}\,\cdots$) becomes more important when we go deeper into the light cone \cite{Lazeyras:2016nbs}.
+Then we consider the halo catalog in the same light cone with halo masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ for brevity. We have similar results in other mass bins as well. We use \ec{hm} as the approximated matter density contrast, $\mathpzc{n}_{\rm h}(\vrr)$ can be easily computed using halo positions and the Tinker bias function. We cut the whole light cone (the octant) into several slices and compute the mean density field $\bar{{n}}_{\rm h}$ and $\bar{\mathpzc{n}}_{\rm h}$ of each slice, then get the mean field  $\bar{{n}}_{\rm h}(a(r))$ and $\bar{\mathpzc{n}}_{\rm h}(a(r))$ at each position by interpolation. We compute the directly measured modified matter contrast $d_{\rm m}^{\rm h}(\vrr)$ and also the power spectrum in Fig.~\rf{psLC}. The power spectrum perfectly characterizes linear matter power spectrum on large scales. We use the quadratic estimator \ec{estlc} to get the reconstructed modified field and transform them back into real space. Again we have two similar plots Fig.~\rf{real_halo} and Fig.~\rf{cube_halo}. From Fig.~\rf{real_halo} we can see that our quadratic estimator is still able to extract large scale information, especially large over- or under-density cells on first few low-redshift panels. The difference seems larger when we go higher into redshift, and we have the worst performance on the very right panel. We observe the same feature in Fig.~\rf{cube_halo} where the cells near the origin match each other better than cells far from the origin. The main reason for this effect is that nonlinear bias ($b_{2}$, $b_{3}\,\cdots$) becomes more important when we go deeper into the light cone \cite{Lazeyras:2016nbs}.
 
 \Sfig{real_halo}{Comparison of the true density field of the halo number density contrast in mass bin $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ of the Mice-GC simulation ($\delta_{\rm m}(\vrr)$, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row) in the same light cone as Fig.~\rf{real_dm}, and their difference (bottom row). The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.35\, h \rm \, Mpc^{-1}$. We use a larger upper limit to slightly reduce the noise term.} 
 \Sfig{cube_halo}{Comparison of the true density field and the estimated density field of halo catalog in a light cone with the same colorbar as Fig.~\rf{real_dm} (or Fig.~\rf{real_halo}). First row shows the modified matter density contrast near the origin (inner surfaces of the cube, $0\leqslant z \lesssim 0.69$); second row shows the modified matter density contrast far from the origin (outer surfaces of the cube, $0.69\lesssim z \lesssim 1.4$).}
@@ -391,7 +392,7 @@ The modified matter density contrast in the redshift space of a light cone can t
 \be 
 d_{\rm m,\rs}(\vk)=\int_{V} d^3\vrr  \, \int \frac{d^3 \vk'}{(2\pi)^3}e^{i(\vk'-\vk)\cdot\vrr}\delta_{\rm m,\rs}(\vk';a(r))\frac{D_{\ini}}{D_{1}(a(r))} 
 \ee 
-One can prove that this definition still satisfies the relation (see appendix \ref{appenda} for a detailed derivation):
+One can prove that this definition still satisfies the relation (see appendix \ref{appendb} for a detailed derivation):
 \be 
 \langle d_{\rm m,\rs }(\vk_s)d_{\rm m,\rs }(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l} =\mathpzc{f}_{\rs}(\vec{k}_s,\vec{k}_s'){d}^{(1)}_{\rm m,\rs}(\vec{k}_l) \eql{2ptddrs}
 \ee 
@@ -405,152 +406,63 @@ where $L=3072\, h^{-1}\, \rm Mpc$ when we use MICE-GC simulation which is the de
 
 In Fig.~\rf{SN_RS} we use the halo catalog of MICE-GC simulation to reconstruct the monopole moment of the redshift space matter power spectrum.
 
-\Sfig{SN_RS}{Solid curve is the theoretical curve for the monopole moment of the linear redshift space matter power spectrum from Kaiser formula (detailed discussion in appendix \ref{appenda}). Blue dots and their corresponding error bars are measured using the quadratic estimator in redshift space. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.35\,h\,\rm Mpc^{-1}$.}
+\Sfig{SN_RS}{Solid curve is the theoretical curve for the monopole moment of the linear redshift space matter power spectrum from Kaiser formula (detailed discussion in appendix \ref{appendb}). Blue dots and their corresponding error bars are measured using the quadratic estimator in redshift space. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.35\,h\,\rm Mpc^{-1}$.}
 
 \section{Conclusion} \label{sec8}
 \subsection{Summary}
-In prior work \cite{Li:2020fir} we have shown that the amplitude and phase of
-large scale density fluctuations can be recovered  by applying a quadratic
-estimator to measurements of
-small scale Fourier  modes and their correlations..
-In this paper we extend that work
-(which was limited to a matter density field at a single instance in
-cosmic time) in the following three ways in order to make it applicable
-to observational data. All extensions
-are tested on appropriate mock survey
-datasets derived from N-body simulations.
+In prior work \cite{Li:2020fir} we have shown that the amplitude and phase of large scale density fluctuations can be recovered by applying a quadratic estimator to measurements of small scale Fourier  modes and their correlations. In this paper we extend that work (which was limited to a matter density field at a single instance in cosmic time) in the following three ways in order to make it applicable to observational data. All extensions are tested on appropriate mock survey datasets derived from N-body simulations.
 
 \begin{enumerate}
-\item  Halos bias. We allow for the effect of clustering bias between
-  galaxies and dark matter by including an appropriate weighting scheme
-  applied to invidual halos.
+\item  Halos bias. We allow for the effect of clustering bias between galaxies and dark matter by including an appropriate weighting scheme applied to individual halos.
 
-\item Light cone effect. The redshift difference between parts of large
-  volume surveys can be considerable. We prove that using a suitable
-  weighting involving the linear growth factor, the quadratic estimator
-  can correctly recover large scale modes from small wavelength modes
-  measured on the light cone.
+\item Light cone effect. The redshift difference between parts of large volume surveys can be considerable. We prove that using a suitable weighting involving the linear growth factor, the quadratic estimator can correctly recover large scale modes from small wavelength modes measured on the light cone.
 
-\item Redshift space distortions.  We  prove that the relevant relationship
-  between small and large scale modes applies in redshift space, and show
- show how redshift space distortions
- can be included in our formalism.
+\item Redshift space distortions. We prove that the relevant relationship between small and large scale modes applies in redshift space, and show how redshift space distortions can be included in our formalism.
 \end{enumerate}
  
 \subsection{Discussion}
 
-Our formalism include the major effects that are relevant for an application
-to observational data. There are some minor aspects however which will need to
-be dealt with when this occurs. One is the fact that we have tested on
-homogeneous mock surveys, when real observations will include masked data (to
-account for bright stars for example), and a potentially complex window
-function. We have also used a cubical volume excised from the full
-lightcone in our mock surveys in order to compute Fourier space clustering.
-This simplification means that a significant quantity of
-data is not used for analysis. It will therefore be useful to develop
-an approach to account for the effect of convolution with
-the window function in Fourier space. Because we are concerned with the
-direct meaasurement of small scale modes this should not
-be such a large effect,
-particularly for surveys with significant sky coverage.
+Our formalism includes the major effects that are relevant for an application to observational data. There are some minor aspects however which will need to be dealt with when this occurs. One is the fact that we have tested on homogeneous mock surveys, when real observations will include masked data (to account for bright stars for example), and a potentially complex window function. We have also used a cubical volume excised from the full light cone in our mock surveys in order to compute Fourier space clustering. This simplification means that a significant quantity of data is not used for analysis. It will therefore be useful to develop an approach to account for the effect of convolution with the window function in Fourier space. Because we are concerned with the direct measurement of small scale modes this should not be such a large effect, particularly for surveys with significant sky coverage.
 
-At present the large-scale limitations on direct measurement of clustering
-are observational systematics (e.g.,
-\cite{https://ui.adsabs.harvard.edu/abs/2012ApJ...761...14H/abstract}.
-These include angular variations in obscuration, seeing, sky brightness,
-colors, extinction and magnitude errors. Because these result
-in relatively small modulations of the measured galaxy density, they
-will affect large scale modes most importantly, hence the utiliity of
-our
-indirect measurements of clustering on these scales. Quantification
-of these effects on the scales for which we do measure clustering will
-still be needed though. It will be also be instructive to apply large-scale
-low amplitude modulations to our mock surveys in order to test how
-well the quadratic estimator works with imperfect data. Even small
-scale issues with clustering, such as fiber collisions \cite{} could
-affect our reconstruction, depending on how their effects propagate through
-the quadratic estimator.
+At present the large-scale limitations on direct measurement of clustering are observational systematics (e.g., \cite{Ho:2012sh}). These include angular variations in obscuration, seeing, sky brightness, colors, extinction and magnitude errors. Because these result in relatively small modulations of the measured galaxy density, they will affect large scale modes most importantly, hence the utility of our indirect measurements of clustering on these scales. Quantification of these effects on the scales for which we do measure clustering will still be needed though. It will be also be instructive to apply large-scale low amplitude modulations to our mock surveys in order to test how well the quadratic estimator works with imperfect data. Even small scale issues with clustering, such as fiber collisions \cite{Hahn:2016kiy} could affect our reconstruction, depending on how their effects propagate through the quadratic estimator.
 
+Observational datasets exist at present which could be used to carry out measurements using our methods. These include the SDSS surveys BOSS \cite{Dawson:2013boss} and eBOSS \cite{Dawson:2015wdb} (both luminous red galaxies and emission line galaxies). Substantial extent in both angular coordinates and redshift are necessary, so that deep but narrow surveys such as VIMOS \cite{Fevre:2014tna} or DEEP2 \cite{Coil:2005ap} would not be suitable. In the near future, the available useful data will increase rapidly with the advent of WEAVE \cite{Dalton:2014wv} and DESI \cite{DESI:2019ds}. Space based redshift surveys  with EUCLID \cite{Amiaux:2012ec} and WFIRST \cite{Wfirst:2012jg} will expand the redshift range, and SPHEREx \cite{Dore:2014cca}, due for launch even earlier will offer maximum sky coverage, and likely the largest volume of all.
 
-Observational datasets exist at present which could be used to carry out
-measurements using our methods. These include the SDSS surveys BOSS and eBOSS
-\cite{SDSSBOSS,eBOSS}
-(both Luminous Red Galaxies and Emission Line galaxies). Substantial
-extent in both angular coordinates and redshift are necessary, so
-that deep but narrow surveys such as VIMOS or DEEP2 would not be suitable.
-In the near future, the available useful data will increase rapidly
-with the advent of WEAVE \cite{weave} and DESI \cite{DESI}.
-Space based redshift
-surveys  with EUCLID and the  Roman Space telescope \cite{Euclid,Roman}
-will expand the redshift range, and SPHEREx \cite{spherex},
-due for launch even earlier will offer maximum sky coverage, and likely the
-largest volume of all.
+In order to model what is expected from all these datasets, the effective range of wavelengths used in the reconstruction of large-scale modes should be considered. Surveys covering large volumes but with low galaxy number density will have large shot noise contributions to density fluctuations, and this will limit the range of scales that can be used. For example, in our present work we have successfully tested number densities of $\sim 3\times10^{-3}$ galaxies per (Mpc/h)$^{3}$. Surveys such as the eBOSS quasar redshift survey \cite{Ata:2017dya} with a number density $\sim 100$ times lower will not be useful, for example.
 
-In order to model what is expected from all these datasets, the effective
-range of wavelengths used in the reconstruction of large-scale modes
-should be considered. Surveys covering large volumes but
-with low galaxy number density will have large
-shot noise contributions to density fluctuations, and this
-will limit the range of scales that can be used. For example, in
-our present work we have succesfully
-tested number densities of $\sim 3\times10^{-3}$
-galaxies per (Mpc/h)$^{3}$. Surveys such as the eBOSS quasar redshift
-survey \cite{ebossquasars} with a number density ? times lower will
-not be useful, for example.
+Once an indirect measurement of large scale modes has been made from an observational dataset, there are many different potential applications. We can break these up into two groups, involving the power spectrum itself, and the map (and statistics beyond $P_{\rm m}(k)$) which can be derived from it.
 
-Once an indirect measurement of large scale modes has been made from
-an observational dataset, there are many different potential
-applications. We can break these up into two groups, involving the
-power spectrum itself, and the map (and statistics beyond P(k))
-which can be derived from it.
+First, because of the effect of observational systematics mentioned above, and the fact the our indirect estimate of clustering is sensitive to fluctuations beyond the survey boundaries itself, then it is likely that the measurement we propose would correspond to the largest scale estimate of three dimensional matter clustering yet made. This would in itself be an exciting test of theories, for example probing the power spectrum beyond the matter-radiation equality turnover, and allowing access to the Harrison-Zeldovich portion. There has been much work analyzing large-scale anomalies in the clustering measured from the CMB \cite{Copi:2010na}\cite{Rassat:2014yna}\cite{Schwarz:2015cma}, and it would be extremely useful to see if anything comparable is seen from galaxy large-scale structure data. On smaller scales, one could use the matter-radiation equality turnover as a cosmic ruler \cite{Hasenkamp:2012ii}, and this would allow comparison to measurements based on BAO \cite{Lazkoz:2007cc}.
 
-First, because of the effect of observational systematics mentioned above,
-and the fact the our indirect estimate of clustering is sensitive
-to fluctuations beyond the survey boundaries itself, then it is likely
-that the measurement we propose would correspond to the largest scale
-estimate of three dimensional matter clustering yet made. This would in
-itself be an exciting test of theories, for example probing the power
-spectrum beyond the matter-radiation equality turnover, and allowing
-access to the Harrison-Zeldovich portion. There has been much work
-analyzing large-scale anomalies in the clustering measured from
-the CMB \cite{many}, and it would be extremely useful to see if anything
-comparable is seen from galaxy large-scale structure data. On smaller
-scales, one could use the matter-radiation equality turnover as
-a cosmic ruler \cite{}, and this would allow comparison to measurements
-based on BAO.
+Second, there will be much information in the reconstructed maps of the large-scale densities (such as Fig.~\rf{real_halo}). One could look at statistics beyond the power spectrum, such as counts-in-cells \cite{Yang:2011cic}, or the bispectrum, and see how consistent they are with model expectations. One can also compare to the directly measured density field and obtain information on the large-scale systematic effects which are modulating the latter. Cross-correlation of the maps with those of different tracers can also be carried out. For example the large-scale potential field inferred can be used in conjunction with CMB observations to constrain the Integrated Sachs Wolfe effect\cite{Nishizawa:2014vga}.
 
-Second, there will be much information in the reconstructed maps
-of the large-scale densities (such as Figure\ref{}). One could look at
-statistics beyond the power spectrum, such as counts-in-cells
-\cite{}, or the bispectrum, and see how consistent they are with
-model expectations. One can also compare to the directly measured
-density field and obtain information on the large-scale systematic
-effects which are modulating the latter. Cross-correlatiun of the maps
-with those of different tracers can also be carried out. For example the
-large-scale potential field inferred can be used in conjunction with
-CMB observations to constrain the Integrated Sachs Wolfe effect.
-
-In general, as we will be looking at large scale fluctuations beyond
-current limits by perhaps an order of magnitude in scale or more, one may
-expect to find interesting constraints on new physics. For example evidence
-for the $\Lambda$CDM model was seen in the first reliable measurements
-of large-scale galaxy clustering on scales greater than 10 h$^{-1}$Mpc
-(e.g.,\cite{https://ui.adsabs.harvard.edu/abs/1990Natur.348..705E/abstract}.
-Moving to wavelengths  beyond $2\pi/(k=0.02) \sim 300 \rm \, Mpc$
-may yet lead to surprises.
+In general, as we will be looking at large scale fluctuations beyond current limits by perhaps an order of magnitude in scale or more, one may expect to find interesting constraints on new physics. For example evidence for the $\Lambda$CDM model was seen in the first reliable measurements of large-scale galaxy clustering on scales greater than $10\,h^{-1}\rm Mpc$ (e.g., \cite{Efstathio:1990cdm}). Moving to wavelengths beyond $2\pi/(k=0.02) \sim 300 \rm \, Mpc$ may yet lead to more surprises.
 
 \acknowledgements
-We thank Duncan Campbell for resourceful discussions. We also thank Enrique Gaztanaga for providing us with the $1$ in $700$ matter particles' positions of Mice-GC simulation. This work is supported by U.S. Dept. of Energy contract DE-SC0019248 and NSF AST-1909193.
+We thank Duncan Campbell and Rachel Mandelbaum for resourceful discussions. We also thank Enrique Gaztanaga for providing us with the $1$ in $700$ matter particles' positions of Mice-GC simulation. This work is supported by U.S. Dept. of Energy contract DE-SC0019248 and NSF AST-1909193.
 The BigMDPL simulation was performed at LRZ Munich within the PRACE project pr86bu. The CosmoSim database (\url{www.cosmosim.org}) providing the file access is a service by the Leibniz-Institute for Astrophysics Potsdam (AIP).
 This work has made use of CosmoHub. CosmoHub has been developed by the Port d'Informació Científica (PIC), maintained through a collaboration of the Institut de Física d'Altes Energies (IFAE) and the Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas (CIEMAT), and was partially funded by the ``Plan Estatal de Investigación Científica y Técnica y de Innovación" program of the Spanish government.
 \clearpage
 
 \appendix 
 
-\section{Approximation in \ec{dt}}
-We use
+\section{Approximation in \ec{dt}}\label{appenda}
+In Fig.~\rf{approx} we use a simple 1D example to demonstrate that the approximation we made in \ec{dt} is valid:
+\be 
+\int_{V} d^{3}\vrr\, 'e^{-i\vec{q}\cdot \vrr\, '}{D_{1}(a(r'))}  \simeq D_{1}(a=1)\,(2\pi)^3\delta_{\rm D}(\vec{q})
+\ee 
+This 1D result can be also be applied to 3D \peikai{since...} 
+
+The blue curve corresponds to the Dirac delta function in a finite volume multiplied by $D_{1}(a=1)$ (right-hand-side of the above equation), and the orange curve is the left-hand-side. We can see that the orange curve is still sharply peaked at $q=0$. 
+
+For a relatively large scale, e.g., $L=3072\, h^{-1}\rm Mpc$, we have $\Delta k=2\pi/L\approx 0.002 \, h \, \rm Mpc^{-1}$. Generally we want to further evaluate the following integral:
+\be
+\int \frac{d^{3}\vec{q}}{(2\pi)^3}f(\vec{q}) \int_{V} d^{3}\vrr\, 'e^{-i\vec{q}\cdot \vrr\, '}{D_{1}(a(r'))}
+\ee 
+Unless $f(\vec{q})$ is a rapidly fluctuating function at scales $q \approx 0.002$, \ec{dt} remains a good approximation. Recall that $f(\vec{q})$ in our case is a combination of $F_{2}$ and $\delta_{\rm m}$, it is slowly varying compared to the scale $q \approx 0.002$. So it is a convincing approximation based on our analysis.
+
 \Sfig{approx}{1D demonstration of the approximation made in \ec{dt}. Here $\Delta k=2\pi /L$.}
-\section{Proof of \ec{2ptddrs} in Redshift Space} \label{appenda}
+\section{Proof of \ec{2ptddrs} in Redshift Space} \label{appendb}
 One can prove that the leading order term of of $d_{\rm m}(\vk)$ still characterizes the linear matter power spectrum in redshift space:
 \bea 
 &&\langle d^{( 1)}_{\rm m}(\vk) d^{(1)}_{\rm m}(\vk') \rangle\vs
@@ -595,7 +507,6 @@ Another interesting thing to notice in the redshift space construction is that, 
 \ee 
 One benefit we can take from this numerical result is that the projected detectability in redshift space still will not depend on the direction of $\vk_l$. So the error bars will be the same for both real space and redshift space.
 
-\clearpage 
 
 
 \bibliography{refs}
