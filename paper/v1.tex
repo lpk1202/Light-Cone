@@ -186,22 +186,31 @@ where $\eta_{\rm h}(\vrr;a)$ is the usual halo density field with each halo weig
 \eea
 where $\delta_{\rm D}$ is the Dirac delta function, $N_{\rm h}$ is the total number of halos and $a_{i}$, $M_{i}$ and $\vrr_{i}$ are the cosmological scale factor, mass and position of the $i$-th halo, respectively.\scott{I changed the second equation above and propose to add this sentence:} In the second line, the brackets denote an average over all $\vrr$ in the shell defined by $a(|\vrr|)=a$. Since we consider only a fixed time in this section, we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$. We can use the Cloud-in-Cell (CIC) or the Triangular Shaped Cloud (TSC) scheme \cite{Sefusatti:2015CIC} to smooth the sharply peaked Dirac delta function numerically\footnote{We use the TSC scheme in this work.}.
 
-\Sfig{hm}{$P_{\rm m}^{\rm h}(k)$ is the approximate matter power spectrum using halo information \ec{hm} at a snapshot when the scale factor $a=1$. We use the halo catalog from BIGMDPL, see section \ref{sec3} for a more detailed description.}
+\Sfig{real_comp}{Comparison between the real matter density contrast $\delta_{\rm m}(\vrr)$ and the approximate matter density contrast using halo information $\dmh(\vrr)$ at a snapshot when $z=0$. We use the halo catalog from BIGMDPL.}
 
-\Sfig{real_comp}{Comparison between the real matter density contrast $\delta_{\rm m}(\vrr)$ and the approximate matter density contrast using halo information $\dmh(\vrr)$ at a snapshot when the scale factor $a=1$. We use the halo catalog from BIGMDPL, see section \ref{sec3} for a more detailed description.}
+We consider \ec{hm} to be a practical and general way of estimating the matter density using the positions of galaxies, since in real surveys the bias can be expressed as a function of galaxy luminosity and color \cite{Cresswell:2008Col}. We will not use the halo density contrast $\delta_{\rm h}$ directly, instead we will use $\dmh$ defined in \ec{hm} as the approximate matter density contrast during the calculation of the quadratic estimator \ec{quadest} both in a snapshot and in a light cone.
+We test this using a halo catalog from a cosmological N-body simulation. We use the $z=0$ snapshot from BigMDPL, one of the Multi-Dark cosmological simulations \cite{Klypin:2014nov}. This simulation used a flat $\Lambda$CDM model with Planck Collaboration XVI (2014) \cite{Planck:2014cos} cosmological parameters. Halos were found in this catalog using the \textit{Rockstar} code \cite{Behroozi:2013Rock}. We will focus on halos with masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ for simplicity (although we have found similar results in other mass bins).
 
-We consider \ec{hm} as the general way of estimating the matter density using the information of halos/galaxies only, since in real surveys the bias can be expressed as a function of galaxy luminosity and color \cite{Cresswell:2008Col}. We will not use the halo density contrast $\delta_{\rm h}$ directly, instead we will use $\dmh$ defined in \ec{hm} as the approximate matter density contrast during the calculation of the quadratic estimator \ec{quadest} both in a snapshot and in a light cone.
+The top panel of Fig.~\rf{real_comp} shows the actual matter density $\delta_{\rm m}$ in a set of seven slices, each broken up into 49 square regions on volume \scott{add number here}. The second panel shows the matter density inferred via \ec{hm} and the bottom panel shows the difference between them. The differences are small, showing the $\dmh$ is a good estimator for the underlying matter density.
 
-\section{Demonstration with N-body simulation I} \label{sec3}
-\noindent We test the power of the quadratic estimator using a halo catalog from a cosmological N-body simulation. We use the $z=0$ snapshot from BigMDPL, one of the Multi-Dark cosmological simulations \cite{Klypin:2014nov}. This simulation used a flat $\Lambda$CDM model with Planck Collaboration XVI (2014) \cite{Planck:2014cos} cosmological parameters. Halos were found in this catalog using the \textit{Rockstar} code \cite{Behroozi:2013Rock}. We will focus on halos with masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ for simplicity (although we have found similar results in other mass bins).
+\Sfig{hm}{$P_{\rm m}^{\rm h}(k)$ is the approximate matter power spectrum using the halo catalog from BIGMDPL at a snapshot $z=0$ and \ec{hm}, while $P_m(k)$ is the true matter spectrum; the bottom panel is the ratio of the two, showing that over the scales of interest, $\dmh$ is a good estimator for the density contrast.}
 
-We use the approximate density contrast defined in \ec{hm} and compute its power spectrum; this is equal to the matter power spectrum \scott{can we show both?}. Thus the projected detectability will be the same as our last work, shown in Fig.~\rf{SN_BIGMDPL} \scott{Not sure what the figure is supposed to show; there is one computed power spectrum; does that come from the quadratic estimator on $\dmh$ or $\delta_m$?}.
+We use the approximate density contrast defined in \ec{hm} and compute its power spectrum; as shown in Fig.~\rf{hm} this is equal to the true matter power spectrum within ten percent. Note that the plot covers the scales of interest, those that will be used to construct the quadratic estimator.
+We therefore expect the projected detectability will be the same as when applied to the dark matter field itself, as in  \cite{Li:2020fir}. 
 
-\Sfig{SN_BIGMDPL}{Long-wavelength power spectrum using the BigMDPL halo catalog, and its error from \ec{error} which can be expressed as $P_{\rm m, lin}(k_l)\sigma(k_l)$. The box size of the survey is be $L=2.5\, h^{-1}\rm\, Gpc$ thus volume $V=L^3$ and width $\Delta k = 2\pi/L$. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.22\,h\,\rm Mpc^{-1}$.\scott{Is this using halos?}\peikai{yes}}
-
-We also transform the true Fourier modes $\dmh(\vk_l)$ and the long-wavelength modes estimated using the quadratic estimator, $\hdmh(\vk_l)$, back into real space and compare them in Fig.~\rf{real_snap}. We can see that this quadratic estimator is able to successfully recapture large scale over/under densities. 
- 
 \Sfig{real_snap}{Comparison of the true density field of the BigMDPL halo catalog within mass bin $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ ($\dmh(\vrr)$ computed using the directly measured large scale modes, top row) and the density field from the quadratic estimator ($\hdmh(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $2500\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 357\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
+
+We apply the quadratic estimator to the field defined in \ec{hm}. We transform the true Fourier modes $\dmh(\vk_l)$ \scott{Shouldn't we show $\delta_m$ here?} and the long-wavelength modes estimated using the quadratic estimator, $\hdmh(\vk_l)$, back into real space and compare them in Fig.~\rf{real_snap}. We can see that this quadratic estimator is able to successfully recapture large-scale over/under densities. 
+As further evidence of this, 
+Fig.~\rf{SN_BIGMDPL} shows the large-scale power spectrum obtained using the quadratic estimator on the halos and compares it with the theoretical matter power spectrum \scott{is this right? is the spectrum linear?}. Also shown are the error bars on the inferred spectrum using \ec{error}. Using halos to infer the matter power spectrum appears to work well in this case when the halo masses are well-determined.
+
+
+%\section{Demonstration with N-body simulation I} \label{sec3}
+
+
+\Sfig{SN_BIGMDPL}{Long-wavelength power spectrum using the BigMDPL halo catalog, and its error from \ec{error} which can be expressed as $P_{\rm m, lin}(k_l)\sigma(k_l)$. The box size of the survey is be $L=2.5\, h^{-1}\rm\, Gpc$ thus volume $V=L^3$ and width $\Delta k = 2\pi/L$. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.22\,h\,\rm Mpc^{-1}$.\scott{Is this using halos?}\peikai{yes} \scott{and the quadratic estimator? Also, explain what the solid curve is.}}
+
+ 
 
 \section{Light Cone Formalism} \label{sec4}
 
