@@ -214,7 +214,7 @@ Fig.~\rf{SN_BIGMDPL} shows the large-scale power spectrum obtained using the qua
 
 \section{Light Cone Formalism} \label{sec4}
 
-The difficulty with applying this formalism to real data is that we are able to observe a galaxy a distance $r$ from us as it was when the scale factor was equal to $a(r)$. Here $a=1$ when $r=0$ and decreases as the distance from us increases. Therefore, we do not have access to the full $\dmh(\vec r; a)$ for all values of $\vec r$, only for that thin shell from which light emitted when the scale factor was equal to $a$ would have reached us by now.
+The difficulty with applying this formalism to real data is that we are able to observe a galaxy a distance $r$ from us only as it was when the scale factor was equal to $a(r)$. Here $a=1$ when $r=0$ and decreases as the distance from us increases. Therefore, we do not have access to the full $\dmh(\vec r; a)$ for all values of $\vec r$, only for that thin shell from which light emitted when the scale factor was equal to $a$ would have reached us by now.
 
 \newcommand\dm{\delta_{\rm m}}
 \newcommand\dlc{d_{\rm m}}
@@ -226,7 +226,7 @@ To deal with this, we first define a quantity -- the modified matter density con
 \be
 \dlc(\vrr) \equiv \dm(\vrr;a(r)) \frac{D_{\ini}}{D_{1}(a(r))} \eql{LC}
 \ee
-\peikai{This quantity is defined within a light cone.} Note that -- even apart from the ratio of growth factors -- $\dlc(\vrr)$ is very different than $\dm(\vrr; a)$. The latter is defined at a fixed value of the scale factor and requires knowledge of the density at all positions at that value of $a$, knowledge that we cannot obtain. The former, $\dlc$, is the density at the position $\vrr$ at the time at which we observe it $a(|\vrr|)$.
+Note that -- even apart from the ratio of growth factors -- $\dlc(\vrr)$ is very different than $\dm(\vrr; a)$. The latter is defined at a fixed value of the scale factor and requires knowledge of the density at all positions at that value of $a$, knowledge that we cannot obtain. The former, $\dlc$, is the density at the position $\vrr$ at the time at which we observe it $a(|\vrr|)$. That is, this quantity is defined within a light cone.
 %
 %Thus $a(\vrr)=a(r)$ will not depend on the direction of position $\vrr$. The position $\vrr$ runs over the whole light cone. 
 We multiply this observable by the ratio of growth factors so that the large scale mode amplitudes at different times will share the same normalization. 
@@ -236,21 +236,21 @@ We multiply this observable by the ratio of growth factors so that the large sca
 %\delta_{\rm m}(\vrr\, ';a(r))= \frac{\rho_{\rm m}(\vrr\, ';a(r'))-\bar{\rho}_{\rm m}(a(r))}{\bar{\rho}_{\rm m}(a(r))} \eql{dmm} \vs
 %\eea 
 %where $\rho_{\rm m}(\vrr\, ';a(r'))$  is the matter density at position $\vrr\, '$ of snapshot $a(r')$, and $\bar{\rho}_{\rm m}(a(r))$ is the mean matter density of snapshot $a(r)$. In this case $\delta_{\rm m}(\vrr\, ';a(r))$ is an observable since we get to know $\rho_{\rm m}(\vrr\, ';a(r'))$ in cosmic surveys, since $\rho_{\rm m}(\vrr\, ';a(r'))$ is the matter density field at position $\vrr\, '$ of the light cone. And if we cut the light cone into several thin slices we are able to get a interpolation function for each value of $\bar{\rho}_{\rm m}(a(r))$. Thus for each snapshot with scale factor $a(r)$, we can measure its matter density contrast $\delta_{\rm m}(\vrr\, ';a(r))$ on a shell (when $|\vrr\, '|=|\vrr|$). Finally we come to the conclusion that the modified density contrast $d_{\rm m}^{\LC}$ is an observable. The point of this construction \ec{LC} is that we know the properties of matter density contrast in a snapshot very well (e.g. \ec{tayl}). 
-And we can take advantage of these properties to further perform our derivation. Inverse Fourier transform of the density modes in a snapshot can be written as:
-\be 
-\dm(\vrr;a(r)) =\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\dm(\vk;a(r))\eql{feq}
-.\ee 
-Again, we still do not have access to the value of the Fourier modes $\delta_{\rm m}(\vk;a(r))$. Luckily they will not show up in our final results thus our formalism can be applied in light cone simulations, and eventually surveys. 
-
-Now consider the Fourier transform of the modified density contrast within the light cone:
+We can take advantage of this definition to generalize the quadratic estimator to the real-life situation of light-cone observations.
+%First, we decompose the density field into Fourier modes 
+%%This is not a standard decomposition the integrand $\dm$ still depends on $r$. This will lead to a more complex expression for the Fourier modes. 
+%The standard procedure is to multiply \ec{feq} by an oscillating exponential and then integrate over space:
+Consider the Fourier transform
 \bea
 \dlc(\vk) &=&\int_{V} d^3\vrr  \, \dlc(\vrr)  e^{-i\vk \cdot\vrr} \vs
 &=&\int_{V} d^3\vrr  \, \dm(\vrr;a(r)) \frac{D_{\ini}}{D_{1}(a(r))}  e^{-i\vk \cdot\vrr}
 \eql{LCM}
 \eea
-\peikai{where $V$ is the volume of the light cone.} We can make progress by \peikai{inserting \ec{feq} into the above expression.}
-
-Therefore,
+where $V$ is the volume of the light cone. We can make progress by writing
+\be 
+\dm(\vrr;a(r)) =\int \frac{d^3 \vk}{(2\pi)^3}e^{i\vk\cdot\vrr}\dm(\vk;a(r))\eql{feq}
+\ee 
+so that
 \bea
 \dlc(\vk) &=&\int \frac{d^3 \vk'}{(2\pi)^3}\, \int_{V} d^3\vrr \,  e^{i(\vk'-\vk) \cdot\vrr} \vs
 &&\times  \left[ \frac{D_{\ini}}{D_{1}(a(r))}  
@@ -267,23 +267,27 @@ with each order given by:
 &&\times  \left[ \frac{D_{\ini}}{D_{1}(a(r))}  
 \, \dm^{(i)}(\vk';a(r))\right]. \eql{exp}
 \eea
-\peikai{In the case of the snapshot we have the following relation:
+Theoretically, we know that
 \bea 
 &&\langle \dm^{(1)}(\vk;a)\dm^{(1)}(\vk';a') \rangle \vs
 &=&\frac{D_1(a)}{D_{\ini}}\frac{D_1(a')}{D_{\ini}}\langle \dmi^{(1)}(\vk_1)\dmi^{(1)}(\vk_2) \rangle \vs
 &=&\frac{D_1(a)}{D_{\ini}}\frac{D_1(a')}{D_{\ini}}(2\pi)^3\delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k)
 \eea 
-where $\delta_{\rm m,ini}^{(1)}(\vk)\equiv\delta_{\rm m}^{(1)}(\vk;a_{\ini})$ and where $P_{\rm m,ini}$ is the linear matter power spectrum at the initial time $a_{\rm ini}$. Using this relation} we can prove that the first order term of $d^{(1)}_{\rm m}$ satisfies the following relation:
+where $\delta_{\rm m,ini}^{(1)}(\vk)\equiv\delta_{\rm m}^{(1)}(\vk;a_{\ini})$ and where $P_{\rm m,ini}$ is the linear matter power spectrum at the initial time $a_{\rm ini}$. Equating the second and third lines shows that the first order term of $d^{(1)}_{\rm m}$ satisfies \scott{why is this approximate? Isn't is exact?}
 \be 
 \langle d^{(\rm 1)}_{\rm m}(\vk) d^{(\rm 1)}_{\rm m}(\vk') \rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k).\eql{lps}
 \ee 
-This relation \ec{lps} tells us that the first order term of the modified light cone matter density contrast $d_{\rm m}(\vk)$ (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$ of the integrand. Or equivalently speaking, we have $P_{\rm m}^{\rm LC}(k)\simeq P_{\rm m,ini}(k)$ for long-wavelength modes (when $k\rightarrow 0$), as shown in Fig.~\rf{psLC}. \peikai{$\mathcal{P}_{\rm m}^{}(k)$} is the power spectrum of the modified density contrast \ec{LC} defined as the diagonal term of the two-point correlation:
+This relation \ec{lps} tells us that the first order term of the modified light cone matter density contrast $d_{\rm m}(\vk)$ (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since the redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$. We define $\mathcal{P}_{\rm m}^{}(k)\equiv P_{\rm m}^{\rm LC}(k)$ so that
 \be 
 \langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}(k) \eql{2ptlc}
 \ee 
+Fig.~\rf{psLC} shows that this power spectrum is approximately equal to the matter power spectrum on large scales.
+%\simeq P_{\rm m,ini}(k)$ for long-wavelength modes (when $k\rightarrow 0$), as shown in Fig..
 There are also off-diagonal terms in \ec{2ptlc} which contains extremely valuable information, and we will look into them in next section \ref{sec5}.
 
-\Sfig{psLC}{Comparison of the light cone power spectrum $\mathcal{P}_{\rm m}^{\rm h}(k)$\footnote{The superscript ``$\rm h$'' means $\mathcal{P}$ is computed using halo information similarly as $P_{\rm m}^{\rm h}$ in Fig.~\rf{hm}.} with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. Here $P_{\rm m,ini}(k)$ is plotted according to theory predicted linear power spectrum, and $\mathcal{P}_{\rm m}^{\rm h}(k)$ is computed using halo catalog of MICE Grand Challenge light cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error. The error bars shows errors due to limited number of independent modes in each bin.}
+\Sfig{psLC}{\scott{I think it would be simplest to remove the line connecting the points with error bars.} Comparison of the light cone power spectrum $\mathcal{P}_{\rm m}^{\rm h}(k)$ (the superscript ``$\rm h$'' means $\mathcal{P}$ is computed using halo information as was $P_{\rm m}^{\rm h}$ in Fig.~\rf{hm}). with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. Here $P_{\rm m,ini}(k)$ is plotted according to theory predicted linear power spectrum, and $\mathcal{P}_{\rm m}^{\rm h}(k)$ is computed using halo catalog of MICE Grand Challenge light cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error. The error bars shows errors due to limited number of independent modes in each bin.}
+
+\scott{I think there is enough complicated notation with 4 or so different delta's and a similar number of different power spectra that it makes sense to have a table that explains/defines each of them.}
 
 \section{Quadratic Estimator} \label{sec5}
 Using the expressions of \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d_{\rm m}(\vk_s)$ and $d_{\rm m}(\vk_s')$. Again we assume the squeezed limit $\vk_l=\vk_s+\vk_s'$:
