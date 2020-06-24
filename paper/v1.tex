@@ -117,18 +117,50 @@ We demonstrated in the first paper that the quadratic estimator works well on a 
 %\noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information of small scale perturbations. The idea is to use two-point off-diagonal terms of density contrast modes to build a quadratic estimator for long-wavelength modes. We demonstrate in the first paper that our quadratic estimator works well on a dark-matter-only N-body simulation of the snapshot $z=0$. Here we generalize our theory to the case of a light cone with halo bias taken into consideration. We successfully apply our generalized version of the quadratic estimator to a light cone halo catalog of a N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
 \end{abstract}
 \maketitle
+
 \section{Introduction} \label{sec1}
 \noindent Directly measuring the distribution of matter on large scales is extremely difficult right now as pointed out, e.g., by \cite{Modi:2019hydr}. The attempt to use small scale perturbations to infer large scale information has been frequently discussed in recent years \cite{Baldauf:2011fer}\cite{Jeong:2012foss}\cite{Li:2014ssc}\cite{Zhu:2016tidal}\cite{Barreira:2017res}. In our first work \cite{Li:2020fir}, we proposed a method of indirectly measuring large scale structure using the small scale density contrast. Physically, long- and short-wavelength modes are correlated because small scale modes will grow differently depending on the large scale structure they reside in. This phenomenon leaves a signature in Fourier space: the two-point statistics of short-wavelength matter density modes will have non-zero off-diagonal terms proportional to long-wavelength modes. This is our starting point for constructing the quadratic estimator for long-wavelength modes. We tested the power of the quadratic estimator using a dark-matter-only catalog from an N-body simulation in the first paper. In this work, we generalize Ref.~\cite{Li:2020fir} to account for three effects that must be accounted for before applying the techniques to upcoming surveys~\cite{LSST:2012ls}\cite{Wfirst:2012jg}\cite{DESI:2019ds}: (i) we observe galaxies, not the dark matter field; (ii) we observe on a light cone not a snapshot; and (iii) peculiar velocities lead to redshift space distortions.
 %the previous to a halo catalog within a light cone for observational requirements.
 
 First we need to account for halo bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev}. Halo bias is a term relating the halo number density contrast to the matter density contrast. We consider only the leading order of halo bias in this work, as done in recent treatments of galaxy surveys \cite{Seljak:2004sj}\cite{Chang:2016npo}\cite{Prat:2016xor}. One of the main difficulties with this generalization is that the linear halo bias depends on both redshift and halo mass. We will account for this and construct an estimator of the matter density contrast from halo information.
 
-Observationally a galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. The typical  treatment is to cut a light cone into several thin redshift bins \cite{Troxel:2017xyo}\scott{This reference is not a good example since it is a photometric survey and this paper is only cosmic shear, not galaxy clustering. Can you find a Sloan or eboss reference?} and analyze the properties within each bin. Doing this, though, loses information about the long-wavelength modes along line of sight. Thus in this paper we propose a method of considering all the halos/galaxies in a light cone together, accounting for the redshift difference by multiplying by an extra factor proportional to the inverse of the linear growth function. Since the universe is linear at sufficiently large scales, linear matter density modes at different redshift will still be correlated. With this knowledge we can recover the linear power spectrum on large scales. Using a cubic volume, we construct the quadratic estimator for long-wavelength modes using information from non-zero off-diagonal terms as in Ref.~.\cite{Li:2020fir}.
+Observationally a galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. The typical  treatment is to cut a light cone into several thin redshift bins \cite{Chuang:2016uuz}\scott{This reference is not a good example since it is a photometric survey and this paper is only cosmic shear, not galaxy clustering. Can you find a Sloan or eboss reference?} and analyze the properties within each bin. Doing this, though, loses information about the long-wavelength modes along line of sight. Thus in this paper we propose a method of considering all the halos/galaxies in a light cone together, accounting for the redshift difference by multiplying by an extra factor proportional to the inverse of the linear growth function. Since the universe is linear at sufficiently large scales, linear matter density modes at different redshift will still be correlated. With this knowledge we can recover the linear power spectrum on large scales. Using a cubic volume, we construct the quadratic estimator for long-wavelength modes using information from non-zero off-diagonal terms as in Ref.~.\cite{Li:2020fir}.
 
 Another observational effect we need to take into account is redshift space distortion~\cite{Kaiser:1987rsd}. This effect can be straightforwardly included by combining the Kaiser formalism with the perturbative expansion developed in real space.
 % similar formalism of perturbative series as real space's.
 
-We begin with a brief review of the formalism developed in Ref.~\cite{Li:2020fir}, then present our treatment of halo bias in a snapshot by constructing the approximate form of the matter perturbation field using the information from a halo catalog. We then deal with the matter density contrast in a light cone and then build the quadratic estimator, finally adding in redshift space distortions. Finally we apply the estimator to different N-body simulations and successfully extract large scale modes accounting for all three effects. 
+We begin with a brief review of the formalism developed in Ref.~\cite{Li:2020fir}, then present our treatment of halo bias in a snapshot by constructing the approximate form of the matter perturbation field using the information from a halo catalog. We then deal with the matter density contrast in a light cone and then build the quadratic estimator, finally adding in redshift space distortions. Finally we apply the estimator to different N-body simulations and successfully extract large scale modes accounting for all three effects. \peikai{In table \ref{tb} we list important symbols and notation used in this work.}
+\clearpage
+
+\begin{table}[h!]\label{tb}
+\centering
+\begin{tabular}{ |p{7.5cm}||p{2 cm}|p{7.5cm}|  }
+ \hline
+Name & Symbol &Defining Relation\\
+ \hline
+ \hline
+ Matter Density Contrast   & $\delta_{\rm m}(\vrr;a)$    & $\delta_{\rm m}(\vrr;a)\equiv (\rho_{\rm m}(\vrr;a)-\bar{\rho}_{\rm m}(a))/{\bar{\rho}_{\rm m}(a)}$\\
+ Initial Matter Density Contrast   & $\delta^{(1)}_{\rm m,ini}(\vrr)$    & $\delta^{(1)}_{\rm m,ini}(\vrr)= \delta^{(1)}_{\rm m}(\vrr;a_{\ini})$\\
+  Halo (Number) Density Field & $n_{\rm h}(\vrr;a)$ & $n_{\rm h}(\vrr;a)=\sum_{i=1}^{N_{\rm h}}\delta_{\rm D}(\vrr-\vrr_{i})$\\
+ Halo (Number) Density Contrast &   $\delta_{\rm h}(\vrr;a)$  &  \ec{hdc}; $\delta_{\rm h}(\vrr;a)\equiv (n_{\rm h}(\vrr;a)-\bar{n}_{\rm h}(a))/{\bar{n}_{\rm h}(a)}$ \\
+ Weighted Halo (Number) Density Field & $\eta_{\rm h}(\vrr;a)$ & \ec{wnob}; $\eta_{\rm h}(\vrr;a)=\sum_{i=1}^{N_{\rm h}}(\delta_{\rm D}(\vrr-\vrr_{i})/b_{1}(M_{i};a_{i}))$\\
+ Approximate Matter Density Contrast    & $\delta_{\rm m}^{\rm h}(\vrr;a)$ & \ec{hm}; $\dmh(\vrr;a) \equiv {(\eta_{\rm h}(\vrr;a)-\bar{\eta}_{\rm h}(a))}/{\bar{n}_{\rm h}(a)}$\\
+  \hline
+ Modified Matter Density Contrast &   $d_{\rm m}(\vrr)$ & \ec{LC}; $d_{\rm m}(\vrr) \equiv \delta_{\rm m}(\vrr;a(r)) {D_{\ini}}/{D_{1}(a(r))} $\\
+ Approximate Modified Matter Density Contrast& $d_{\rm m}^{\rm h}(\vrr)$  & $d_{\rm m}^{\rm h}(\vrr) \equiv \delta_{\rm m}^{\rm h}(\vrr;a(r)) {D_{\ini}}/{D_{1}(a(r))} $  \\
+ \hline
+ Linear Matter Power Spectrum &$P_{\rm m,lin}(k;a)$ & $\langle \delta^{(\rm 1)}_{\rm m}(\vk;a) \delta^{(\rm 1)}_{\rm m}(\vk';a) \rangle \equiv (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,lin}(k;a)$\\
+ Nonlinear Matter Power Spectrum &$P_{\rm m,nl}(k;a)$ & $\langle \delta^{}_{\rm m}(\vk;a) \delta^{}_{\rm m}(\vk';a) \rangle \equiv (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,nl}(k;a)$\\
+ Initial Matter Power Spectrum & $ P_{\rm m,ini}(k)$ & $P_{\rm m,ini}(k)=(D_{\ini}/D_{1}(a))^2P_{\rm m,lin}(k;a)$ or \ec{lps} \\
+ Light Cone Matter Power Spectrum & $\mathcal{P}_{\rm m}^{}(k)$ & \ec{2ptlc}; $\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle \equiv(2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}(k)$\\
+ Approximate Light Cone Matter Power Spectrum & $\mathcal{P}_{\rm m}^{\rm h}(k)$ &  $\langle d_{\rm m}^{\rm h} (\vk)d_{\rm m}^{\rm h}(\vk')\rangle \equiv (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}^{\rm h}(k)$\\
+ \hline
+\end{tabular}
+\caption{Table of symbols and notation. Extra subscript ``rs'' stands for the corresponding quantity in redshift space.}
+\label{table:1}
+\end{table}
+
+%$\delta_{\rm h}(\vrr;a)\equiv (n_{\rm h}(\vrr;a)-\bar{n}_{\rm h}(a))/{\bar{n}_{\rm h}(a)}$
 
 \section{Review of Quadratic Estimator}
 
@@ -148,6 +180,9 @@ Here $\vk_s$ and $\vk_s'$ are two short-wavelength modes and $\vk_l$ is a long-w
 f(\vec{k}_s,\vec{k}_s')&=&2F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,lin}(k_s;a)\vs
 &+&2F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,lin}(k_s';a)       .
 \eea 
+
+\vspace*{22.6\baselineskip} 
+
 Here $P_{\rm m,lin}$ is the linear matter power spectrum and $F_{2}$ is a function particularly insensitive to the choice of cosmological parameters in a dark-energy-dominated universe \cite{Takahashi:2008to}:
 \be
 F_{2}(\vk_1,\vk_2)=\frac{5}{7}+\frac{2}{7}\frac{(\vk_1\cdot \vk_2)^2}{k_1^2 k_2^2}+\frac{\vk_1\cdot \vk_2}{2k_1k_2}\bigg[\frac{k_1}{k_2}+\frac{k_2}{k_1}\bigg].\eql{f2}
@@ -174,17 +209,17 @@ Ignoring higher order halo bias, the number density contrast of halos can be rel
 \be 
 \delta_{\rm h}(\vrr;a) \equiv \frac{n_{\rm h}(\vrr;a)-\bar{n}_{\rm h}(a)}{\bar{n}_{\rm h}(a)}=b_{1}\delta_{\rm m}(\vrr;a) \eql{hdc}
 \ee 
-here ``$\rm h$" denotes halo, $n_{\rm h}$ is the halo number density field at a given position, $\bar{n}_{\rm h}$ is the mean number density of halos and $b_{1}$ is the linear bias parameter relating halo and matter density contrasts. The linear bias $b_{1}$ is a function of halo mass and position and has been well approximated using analytical expressions \cite{Seljak:2004SW}\cite{Bhattacharya:2011MF}. We will use the Tinker halo bias function throughout this paper \cite{Tinker:2010Tinker}. Since the linear bias $b_1$ depends not only on halo mass but also halo redshift, it will be more challenging for us to use $\delta_{\rm h}$ than $\delta_{\rm m}$ within a light cone unless we use a very narrow mass bin. Therefore we choose to build an approximate matter density contrast out of halo positions in a snapshot following \cite{Pervical:2007GPS}. To distinguish this from the standard matter contrast, we add an $h$ to the subscript. Then,
+here ``$\rm h$" denotes halo, $n_{\rm h}$ is the halo number density field at a given position, $\bar{n}_{\rm h}$ is the mean number density of halos and $b_{1}$ is the linear bias parameter relating halo and matter density contrasts. The linear bias $b_{1}$ is a function of halo mass and position and has been well approximated using analytical expressions \cite{Seljak:2004SW}\cite{Bhattacharya:2011MF}. We will use the Tinker halo bias function throughout this paper \cite{Tinker:2010Tinker}. Since the linear bias $b_1$ depends not only on halo mass but also halo redshift, it will be more challenging for us to use $\delta_{\rm h}$ than $\delta_{\rm m}$ within a light cone unless we use a very narrow mass bin. Therefore we choose to build an approximate matter density contrast out of halo positions in a snapshot following \cite{Pervical:2007GPS}. To distinguish this from the standard matter contrast, we add an ``h'' to the superscript. Then,
 \be 
 \dmh(\vrr;a) \equiv \frac{\eta_{\rm h}(\vrr;a)-\bar{\eta}_{\rm h}(a)}{\bar{n}_{\rm h}(a)} \eql{hm}
 \ee 
 where $\eta_{\rm h}(\vrr;a)$ is the usual halo density field with each halo weighted by the inverse of its own halo bias, and $\bar{\eta}_{\rm h}(a)$ is its mean value. They can be explicitly written as:
 \bea
-\eta_{\rm h}(\vrr;a)&=&\sum_{i=1}^{N_{\rm h}}\frac{\delta_{\rm D}(\vrr-\vrr_{i})}{b_{1}(M_{i};a_{i})}\bigg|_{a_{i}=a} \eql{nob}\\
-\bar{\eta}_{\rm h}(a)&=&\langle \eta_{\rm h}(\vrr;a)\rangle_{a=a(|\vrr|)}
+\eta_{\rm h}(\vrr;a)&=&\sum_{i=1}^{N_{\rm h}}\frac{\delta_{\rm D}(\vrr-\vrr_{i})}{b_{1}(M_{i};a_{i})}\bigg|_{a_{i}=a} \eql{wnob}\\
+\bar{\eta}_{\rm h}(a)&=&\langle \eta_{\rm h}(\vrr;a)\rangle|_{a} \eql{nob}
 %n_{\rm h}(\vrr;a)&=&\sum_{i=1}^{N_{\rm h}}\delta_{\rm D}(\vrr-\vrr_{i})\bigg|_{a}
 \eea
-where $\delta_{\rm D}$ is the Dirac delta function, $N_{\rm h}$ is the total number of halos and $a_{i}$, $M_{i}$ and $\vrr_{i}$ are the cosmological scale factor, mass and position of the $i$-th halo, respectively.\scott{I changed the second equation above and propose to add this sentence:} In the second line, the brackets denote an average over all $\vrr$ in the shell defined by $a(|\vrr|)=a$. Since we consider only a fixed time in this section, we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$. We can use the Cloud-in-Cell (CIC) or the Triangular Shaped Cloud (TSC) scheme \cite{Sefusatti:2015CIC} to smooth the sharply peaked Dirac delta function numerically\footnote{We use the TSC scheme in this work.}.
+where $\delta_{\rm D}$ is the Dirac delta function, $N_{\rm h}$ is the total number of halos and $a_{i}$, $M_{i}$ and $\vrr_{i}$ are the cosmological scale factor, mass and position of the $i$-th halo, respectively.\scott{I changed the second equation above and propose to add this sentence:} \peikai{In the second line, the brackets denote an average over all $\vrr$ in the shell defined by $a(|\vrr|)=a$.} Since we consider only a fixed time in this section, we can use the simplification $b_{1}(M_{i},a_{i})=b_{1}(M_i)$. We can use the Cloud-in-Cell (CIC) or the Triangular Shaped Cloud (TSC) scheme \cite{Sefusatti:2015CIC} to smooth the sharply peaked Dirac delta function numerically\footnote{We use the TSC scheme in this work.}.
 
 \Sfig{real_comp}{Comparison between the real matter density contrast $\delta_{\rm m}(\vrr)$ and the approximate matter density contrast using halo information $\dmh(\vrr)$ at a snapshot when $z=0$. We use the halo catalog from BIGMDPL.}
 
@@ -218,7 +253,7 @@ The difficulty with applying this formalism to real data is that we are able to 
 
 \newcommand\dm{\delta_{\rm m}}
 \newcommand\dlc{d_{\rm m}}
-\newcommand\dmi{d_{\rm m,ini}}
+\newcommand\dmi{\delta_{\rm m,ini}}
 \newcommand\dlch{d^{\rm h}_{\rm m}}
 \newcommand\dolc{d^{ (1)}_{\rm m}}
 \newcommand\dtlc{d^{ (2)}_{\rm m}}
@@ -275,22 +310,22 @@ Theoretically, we know that
 \eea 
 where $\delta_{\rm m,ini}^{(1)}(\vk)\equiv\delta_{\rm m}^{(1)}(\vk;a_{\ini})$ and where $P_{\rm m,ini}$ is the linear matter power spectrum at the initial time $a_{\rm ini}$. Equating the second and third lines shows that the first order term of $d^{(1)}_{\rm m}$ satisfies \scott{why is this approximate? Isn't is exact?}
 \be 
-\langle d^{(\rm 1)}_{\rm m}(\vk) d^{(\rm 1)}_{\rm m}(\vk') \rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k).\eql{lps}
+\langle d^{(\rm 1)}_{\rm m}(\vk) d^{(\rm 1)}_{\rm m}(\vk') \rangle \equiv (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k).\eql{lps}
 \ee 
-This relation \ec{lps} tells us that the first order term of the modified light cone matter density contrast $d_{\rm m}(\vk)$ (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since the redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$. We define $\mathcal{P}_{\rm m}^{}(k)\equiv P_{\rm m}^{\rm LC}(k)$ so that
+This relation \ec{lps} tells us that the first order term of the modified light cone matter density contrast $d_{\rm m}(\vk)$ (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since the redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$. We define the light cone matter power spectrum $\mathcal{P}_{\rm m}^{}(k)$ as:
 \be 
-\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle \simeq (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}(k) \eql{2ptlc}
+\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle \equiv (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}(k) \eql{2ptlc}
 \ee 
 Fig.~\rf{psLC} shows that this power spectrum is approximately equal to the matter power spectrum on large scales.
 %\simeq P_{\rm m,ini}(k)$ for long-wavelength modes (when $k\rightarrow 0$), as shown in Fig..
 There are also off-diagonal terms in \ec{2ptlc} which contains extremely valuable information, and we will look into them in next section \ref{sec5}.
 
-\Sfig{psLC}{\scott{I think it would be simplest to remove the line connecting the points with error bars.} Comparison of the light cone power spectrum $\mathcal{P}_{\rm m}^{\rm h}(k)$ (the superscript ``$\rm h$'' means $\mathcal{P}$ is computed using halo information as was $P_{\rm m}^{\rm h}$ in Fig.~\rf{hm}). with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. Here $P_{\rm m,ini}(k)$ is plotted according to theory predicted linear power spectrum, and $\mathcal{P}_{\rm m}^{\rm h}(k)$ is computed using halo catalog of MICE Grand Challenge light cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error. The error bars shows errors due to limited number of independent modes in each bin.}
+\Sfig{psLC}{\scott{I think it would be simplest to remove the line connecting the points with error bars.} Comparison of the light cone power spectrum $\mathcal{P}_{\rm m}^{\rm h}(k)$ (the superscript ``$\rm h$'' means $\mathcal{P}$ is computed using halo information as was $P_{\rm m}^{\rm h}$ in Fig.~\rf{hm}) with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. Here $P_{\rm m,ini}(k)$ is plotted according to \peikai{the?} theory predicted linear power spectrum, and $\mathcal{P}_{\rm m}^{\rm h}(k)$ is computed using \peikai{the?} halo catalog of MICE Grand Challenge light cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error. The error bars shows errors due to limited number of independent modes in each bin.}
 
 \scott{I think there is enough complicated notation with 4 or so different delta's and a similar number of different power spectra that it makes sense to have a table that explains/defines each of them.}
 
 \section{Quadratic Estimator} \label{sec5}
-Using the expressions of \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d_{\rm m}(\vk_s)$ and $d_{\rm m}(\vk_s')$. Again we assume the squeezed limit $\vk_l=\vk_s+\vk_s'$:
+Using the expressions of \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d_{\rm m}(\vk_s)$ and $d_{\rm m}(\vk_s')$ \peikai{up to second order}. Again we assume the squeezed limit $\vk_l=\vk_s+\vk_s'$:
 \bea 
  &&\langle d_{\rm m}(\vk_s)d_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
  =&&\langle d^{(1)}_{\rm m}(\vk_s)d^{(2)}_{\rm m}(\vk_s') \rangle+\langle d^{(2)}_{\rm m}(\vk_s)d^{(1)}_{\rm m}(\vk_s') \rangle \vs \eql{2p}
