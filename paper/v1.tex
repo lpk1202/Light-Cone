@@ -146,7 +146,7 @@ When evaluating the two-point function of the full density contrast, cross-terms
 Here $\vk_s$ and $\vk_s'$ are two short-wavelength modes and $\vk_l$ is a long-wavelength mode ($\vk_s,\vk_s' \gg \vk_l$). They satisfy the squeezed-limit condition $\vk_s+\vk_s'=\vk_l$ and $f$ is given by:
 \bea
 f(\vec{k}_s,\vec{k}_s')&=&2F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,lin}(k_s;a)\vs
-&+&2F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,lin}(k_s';a)       .
+&+&2F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,lin}(k_s';a)       .\eql{deff}
 \eea 
 Here $P_{\rm m,lin}$ is the linear matter power spectrum and $F_{2}$ is a function particularly insensitive to the choice of cosmological parameters in a dark-energy-dominated universe \cite{Takahashi:2008to}:
 \be
@@ -290,12 +290,12 @@ There are also off-diagonal terms in \ec{2ptlc} which contains extremely valuabl
 \scott{I think there is enough complicated notation with 4 or so different delta's and a similar number of different power spectra that it makes sense to have a table that explains/defines each of them.}
 
 \section{Quadratic Estimator} \label{sec5}
-Using the expressions of \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d_{\rm m}(\vk_s)$ and $d_{\rm m}(\vk_s')$. Again we assume the squeezed limit $\vk_l=\vk_s+\vk_s'$:
+Using \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d_{\rm m}(\vk_s)$ and $d_{\rm m}(\vk_s')$ where the sum of the two is chosen to be a long wavelength mode, $\vk_l=\vk_s+\vk_s'$:
 \bea 
  &&\langle d_{\rm m}(\vk_s)d_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l}\vs
- =&&\langle d^{(1)}_{\rm m}(\vk_s)d^{(2)}_{\rm m}(\vk_s') \rangle+\langle d^{(2)}_{\rm m}(\vk_s)d^{(1)}_{\rm m}(\vk_s') \rangle \vs \eql{2p}
+ =&&\langle d^{(1)}_{\rm m}(\vk_s)d^{(2)}_{\rm m}(\vk_s') \rangle+\langle d^{(2)}_{\rm m}(\vk_s)d^{(1)}_{\rm m}(\vk_s') \rangle . \eql{2p}
 \eea 
-Substituting \ec{exp} into \ec{2p} and evaluate the first bracket as an example:
+Substituting \ec{exp} into \ec{2p} and evaluating the first bracket as an example:
 \bea 
 &&\langle d^{(1)}_{\rm m}(\vk_s)d^{(2)}_{\rm m}(\vk_s') \rangle \vs 
 &=& \int \frac{d^{3}\vk}{(2\pi)^3}\int \frac{d^{3}\vk'}{(2\pi)^3} \int_V d^{3}\vrr\int_{V} d^{3} \vrr\, '\vs
@@ -312,34 +312,35 @@ We can use this result to further determine the value of the bracket in \ec{od}:
 &=&2\frac{D_{1}(a(r))}{D_{\ini}}\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}\langle \delta_{\rm m,ini}^{(1)}(\vk)\delta_{\rm m,ini}^{(2)}(\vk') \rangle  \vs 
 &=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}F_{2}(-\vk,\vk+\vk')P_{\rm m,\ini}(k)\delta_{\rm m}^{(1)}(\vk+\vk';a(r)) \eql{odb} \vs
 \eea 
-where we make use of the definition of the the linear growth factor $D_1(a(r))$. Plugging \ec{odb} into \ec{od}, the only $\vrr\, '$ dependent integral can be written as (here we simply choose a cube volume):
+where we make use of the definition of the the linear growth factor $D_1(a(r))$. After plugging \ec{odb} into \ec{od}, the $\vrr\, '$ integral becomes
 \be 
 \int_{V} d^{3}\vrr\, 'e^{-i(\vk'-\vk_s')\vrr\, '}\frac{D_{1}(a(r'))}{D_{\ini}}  \simeq C\,(2\pi)^3\delta_{\rm D}(\vk'-\vk_s')\eql{dt}
 \ee 
-since $D_1(a(r'))$ is a slowly varying function. See appendix \ref{appenda} for a more detailed analysis. Constant $C$ can be further determined via integrating over $\vk\, '$ on both sides of \ec{dt}, which gives:
+since $D_1(a(r'))$ is a slowly varying function. See appendix \ref{appenda} for a more detailed analysis. The constant $C$ can be further determined via integrating over $\vk\, '$ on both sides of \ec{dt}, which gives:
 \be 
-C=\frac{D_{1}(a=1)}{D_{\rm ini}}
+C=\frac{D_{1}(a=1)}{D_{\rm ini}}.
 \ee 
-thus:
+Therefore, \scott{I think the second equality is exact, just redefining k, is that right? Also, changed the argument of $\delta_m$ in the 3rd equality. I also reworded after this. Please check.}
 \bea 
 && \langle d^{(1)}_{\rm m}(\vk_s)d^{(2)}_{\rm m}(\vk_s') \rangle \vs 
 &\simeq &2C\int_{V} d^{3} \vrr\int \frac{d^{3}\vk}{(2\pi)^3}F_2(\vk,-\vk+\vk_s')P_{\rm m,\ini}(|\vk-\vk_s'|) \vs
 &&\times \frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r)) \vs
-&\simeq & 2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s) \vs
-&& \times \int_{V} d^{3} \vrr\int \frac{d^{3}\vk}{(2\pi)^3}\frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk;a(r))\vs
+&=& 2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s) \,\int \frac{d^{3}\vk}{(2\pi)^3}  \vs
+&& \times\int_{V} d^{3} \vrr\frac{D_{\ini}}{D_{1}(a(r))}e^{-i(\vk-\vk_s-\vk_s')\vrr}\delta_{\rm m}^{(1)}(\vk+\vk_s';a(r))\vs
 &= &2C\,F_{2}(-\vk_s,\vk_s+\vk_s')P_{\rm m,\ini}(k_s)d_{\rm m}^{(1)}(\vk_s+\vk_s') \eql{appr}
 \eea 
-where in the first step, we perform a redefinition of the integration dummy variable. And we use an approximation in the second step in order to get the first order term $d_{\rm m}^{(1)}(\vk_s+\vk'_s)$ from the integral. 
+where in the second step, we redefined the dummy variable from $\vk\rightarrow \vk-\vk_s'$. Then the integral over $d^3r$ is a Dirac delta function, leaving the final result.
 
-Again, we have proved that with this construction in \ec{LC}, we can obtain the long-wavelength modes from the off-diagonal terms of short-wavelength modes:
+With this definition of $d_{\rm m}$, then, we can obtain the long-wavelength modes from the off-diagonal two-point functions of short-wavelength modes:
 \be 
 \langle d^{}_{\rm m}(\vk_s)d^{}_{\rm m}(\vk_s') \rangle|_{\vk_s+\vk_s'=\vk_l} =\mathpzc{f}(\vec{k}_s,\vec{k}_s'){d}^{(1)}_{\rm m}(\vec{k}_l) \eql{2ptdd}
 \ee 
 with 
 \bea
 \mathpzc{f}(\vec{k}_s,\vec{k}_s')&=&2C\,F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s)\vs
-&+&2C\,F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s')       
+&+&2C\,F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s') .      
 \eea 
+Note that $\mathpzc{f}$ here differs from the $f$ defined in \ec{deff} by a factor of $C$ only.
 
 The quadratic estimator can be similarly formed as:
 \be
@@ -362,15 +363,15 @@ with this choice of $\mathpzc{g}$ the noise term $\mathpzc{N}$ is identical to t
 %In Fig.~\rf{SN_LC}, we show the projected error of measuring the initial power spectrum using this quadratic estimator \ec{estlc} in a light cone. The difference of the error bar in this plot from the error bar of the cosmic variance ($\mathpzc{A}=0$) is very tiny.
 
 %\Sfig{SN_LC}{Initial power spectrum of a light cone and its error from \ec{error1} which can be expressed as $P_{\rm m, ini}(k_l)\sigma_{\rm LC}(k_l)$. Boxsize of the survey is assumed to be $L=1.773\, h^{-1}\rm\, Gpc$ thus volume $V=L^3$ and width $\Delta k = 2\pi/L$. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.22\,h\,\rm Mpc^{-1}$.}
-Using the quadratic estimator \ec{estlc} we can use small scale information of the whole light cone (for now we only consider a cube-shaped volume) to infer large scale field of the modified matter density contrast $d_{\rm m}(\vrr)$. According to \ec{lps}, this is equivalent to the large scale linear matter perturbations in the light cone.
+Using the quadratic estimator \ec{estlc} we can use small scale information of the whole light cone (although below we consider only a cube-shaped sub-volume) to infer the large scale field of the modified matter density contrast $d_{\rm m}(\vrr)$. According to \ec{lps}, this is equivalent to the large scale linear matter perturbations in the light cone.
 
 \section{Demonstration with N-body simulation II} \label{sec6}
 \subsection{Real Space}
-\noindent We use the MICE Grand Challenge light cone N-body simulation (MICE-GC) to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LCM}, as shown in Fig.~\rf{Cube}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. We also assume $D_{\ini}=1$ throughout this section\footnote{$D_{\rm ini}=1$ is physically ill-defined, because the maximum value of $D_{\rm ini}$ is about $0.997$ for a flat universe with $\Omega_{\rm m}=0.25$. But $D_{\rm ini}$ is simply a normalization constant and the choice of its value does not affect the feature of the final result.}. 
+\noindent We use the MICE Grand Challenge light cone N-body simulation (MICE-GC) to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition. We use the largest cube that can be fit into the octant as the region $V$ of integration in \ec{LCM}, as shown in Fig.~\rf{Cube}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. We also assume \scott{Change "assume" to "normalize" and drop the footnote? I don't think this is an assumption, just a normalization choice.} $D_{\ini}=1$ throughout this section\footnote{$D_{\rm ini}=1$ is physically ill-defined, because the maximum value of $D_{\rm ini}$ is about $0.997$ for a flat universe with $\Omega_{\rm m}=0.25$. But $D_{\rm ini}$ is simply a normalization constant and the choice of its value does not affect the feature of the final result.}. 
 
 \Sfig{Cube}{Boxsize of the cube is $L=3072/\sqrt{3}\, h^{-1}\, \rm Mpc\sim 1774\, h^{-1}\, \rm Mpc$. Volume is $V=L^3\sim 5.6\,(h^{-1}\,\rm Mpc)^3$. Only one point in the cube can reach the redshift of $1.4$, and $z=0$ is at the origin $O$ of the octant.}
 
-We first extract $1$ in $700$  matter particles' positions in the full the light cone of MICE-GC simulation and then focus on the largest cube within it. This corresponds to $\sim 5.14\times 10^{7}$ particles in total each with $2.9\times 10^{10} h^{-1}M_{\odot}$ particle mass. Thus we have a number density of $3.4\times 10^{-3}$ $\rm particles/(Mpc/h)^3$, which is similar to Dark Energy Survey (DES) \cite{DES:2016DES} full sample of galaxies. We use Nbodykit \cite{Hand:2018nby} to compute the modified matter density contrast field in Fourier space and get the estimated one using \ec{estlc}. Than we transform them back into real space and compare them it Fig.~\rf{real_dm}. The cube with volume $\sim5.6\,(h^{-1}\,\rm Gpc)^3$ is divided into $7^3$ cells. Each row in Fig.~\rf{real_dm} contains 7 panels; each panel is a slice of the cube. We can see that this estimator does an amazing job of extracting the large scale density job - we are able to reproduce almost every cell with large over- or under-densities, and the difference is apparently much smaller than the density field itself.
+We first extract $1$ in $700$  matter particles' positions in the full light cone of the MICE-GC simulation and then focus on the largest cube within it. This corresponds to $\sim 5.14\times 10^{7}$ particles in total each with $2.9\times 10^{10} h^{-1}M_{\odot}$ particle mass. Thus we have a number density of $3.4\times 10^{-3}$ $\rm particles/(Mpc/h)^3$, which is similar to Dark Energy Survey (DES) \cite{DES:2016DES} full sample of galaxies. We use Nbodykit \cite{Hand:2018nby} to compute the modified matter density contrast field $d_m$ in Fourier space and get the estimated one $\hat d_m$ using \ec{estlc}. Than we transform them back into real space and compare them it Fig.~\rf{real_dm}. The cube with volume $\sim5.6\,(h^{-1}\,\rm Gpc)^3$ is divided into $7^3$ cells. Each row in Fig.~\rf{real_dm} contains 7 panels; each panel is a slice of the cube. We see that the quadratic estimator does an excellent job of extracting the large scale density - it reproduces almost every cell with large over- or under-densities, and the difference is much smaller than the density field itself.
 
 In Fig.~\rf{real_dm}, the left top cell of each row corresponds to the cell containing the origin ($z=0$) in it; and the right bottom cell corresponds to the farthest cell from the origin ($z\sim 1.4$). We can use Fig.~\rf{cube_dm} to get a better view of this in a light cone, where in each row we still show the usual directly measure field $d_{\rm m}(\vrr)$, estimated field $\hat{d}_{\rm m}(\vrr)$ and their difference $(d_{\rm m}-\hat{d}_{\rm m})(\vrr)$ respectively. We have two columns here, the left column shows cells near the origin and the right column shows cells far from the origin. While all the information in this figure is contained in Fig.~\rf{real_dm}, it still is a more straightforward way of expressing our result in a light cone. 
 
