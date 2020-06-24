@@ -379,31 +379,33 @@ In Fig.~\rf{real_dm}, the left top cell of each row corresponds to the cell cont
 \Sfig{real_dm}{Comparison of the true density field of the $1$ in $700$ matter particles of the Mice-GC simulation ($\delta_{\rm m}(\vrr)$, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row). The bottom row shows their difference. Each panel represents a slice through the simulation volume, $1774\,h^{-1}\rm \, Mpc$ wide, and one cell $\sim 253\,h^{-1}\rm \, Mpc$ thick. The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.22\, h \rm \, Mpc^{-1}$.}
 \Sfig{cube_dm}{Comparison of the true density field and the estimated density field of dark-matter-only catalog in a light cone with the same colorbar as Fig.~\rf{real_dm}. First row shows the modified matter density contrast near the origin (inner surfaces of the cube, $0\leqslant z \lesssim 0.69$); second row shows the modified matter density contrast far from the origin (outer surfaces of the cube, $0.69\lesssim z \lesssim 1.4$).}
 
-Then we consider the halo catalog in the same light cone with halo masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ for brevity. We have similar results in other mass bins as well. We use \ec{hm} as the approximated matter density contrast, $\mathpzc{n}_{\rm h}(\vrr)$ can be easily computed using halo positions and the Tinker bias function. We cut the whole light cone (the octant) into several slices and compute the mean density field $\bar{{n}}_{\rm h}$ and $\bar{\mathpzc{n}}_{\rm h}$ of each slice, then get the mean field  $\bar{{n}}_{\rm h}(a(r))$ and $\bar{\mathpzc{n}}_{\rm h}(a(r))$ at each position by interpolation. We compute the directly measured modified matter contrast $d_{\rm m}^{\rm h}(\vrr)$ and also the power spectrum in Fig.~\rf{psLC}. The power spectrum perfectly characterizes linear matter power spectrum on large scales. We use the quadratic estimator \ec{estlc} to get the reconstructed modified field and transform them back into real space. Again we have two similar plots Fig.~\rf{real_halo} and Fig.~\rf{cube_halo}. From Fig.~\rf{real_halo} we can see that our quadratic estimator is still able to extract large scale information, especially large over- or under-density cells on first few low-redshift panels. The difference seems larger when we go higher into redshift, and we have the worst performance on the very right panel. We observe the same feature in Fig.~\rf{cube_halo} where the cells near the origin match each other better than cells far from the origin. The main reason for this effect is that nonlinear bias ($b_{2}$, $b_{3}\,\cdots$) becomes more important when we go deeper into the light cone \cite{Lazeyras:2016nbs}.
+Then we consider the halo catalog in the same light cone with halo masses between $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$. We obtained similar results in other mass bins as well. We use \ec{hm} as the approximate matter density contrast, $\mathpzc{n}_{\rm h}(\vrr)$ \scott{What is $\mathpzc{n}_h$? How does it differ from $n_h$?} can be easily computed using halo positions and the Tinker bias function. We cut the whole light cone (the octant) into several slices and compute the mean density field $\bar{{n}}_{\rm h}$ and $\bar{\mathpzc{n}}_{\rm h}$ of each slice, then get the mean field  $\bar{{n}}_{\rm h}(a(r))$ and $\bar{\mathpzc{n}}_{\rm h}(a(r))$ at each position by interpolation. We compute the directly measured modified matter contrast $d_{\rm m}^{\rm h}(\vrr)$ and also the power spectrum in Fig.~\rf{psLC}. The power spectrum agrees well with the linear matter power spectrum on large scales. We use the quadratic estimator \ec{estlc} to get the reconstructed modified field and transform them back into real space. Again we have two similar plots Fig.~\rf{real_halo} and Fig.~\rf{cube_halo}. From Fig.~\rf{real_halo} we can see that our quadratic estimator is still able to extract large scale information, especially large over- or under-density cells in the first few low-redshift panels. The difference seems larger when we go to higher redshift and is worst on the very right panel. We observe the same feature in Fig.~\rf{cube_halo} where the cells near the origin match each other better than cells far from the origin. The main reason for this effect is that nonlinear bias ($b_{2}$, $b_{3}\,\cdots$) becomes more important when we go deeper into the light cone \cite{Lazeyras:2016nbs} \scott{Why is this? I would have thought higher redshift was simpler?}.
 
 \Sfig{real_halo}{Comparison of the true density field of the halo number density contrast in mass bin $2.2 \times 10^{12}h^{-1}M_{\odot}<M < 10^{14}h^{-1}M_{\odot}$ of the Mice-GC simulation ($\delta_{\rm m}(\vrr)$, top row) and the density field from the quadratic estimator ($\hat{\delta}_{\rm m}(\vrr)$, middle row) in the same light cone as Fig.~\rf{real_dm}, and their difference (bottom row). The integration range of $\vk_{s}$ is from $0.03\, h \rm \, Mpc^{-1}$ to $0.35\, h \rm \, Mpc^{-1}$. We use a larger upper limit to slightly reduce the noise term.} 
 \Sfig{cube_halo}{Comparison of the true density field and the estimated density field of halo catalog in a light cone with the same colorbar as Fig.~\rf{real_dm} (or Fig.~\rf{real_halo}). First row shows the modified matter density contrast near the origin (inner surfaces of the cube, $0\leqslant z \lesssim 0.69$); second row shows the modified matter density contrast far from the origin (outer surfaces of the cube, $0.69\lesssim z \lesssim 1.4$).}
 
 \subsection{Redshift Space} \label{sec7}
-Distribution of halos (and galaxies) is distorted and squashed observationally, when we use their redshift as an indicator of their radial distance due to halos' peculiar velocity. In the plane-parallel approximation, the mapping from real space to redshift space is given by \cite{Bernardeau:2002rev}:
+In a spectroscopic survey, the observed distribution of halos (and galaxies) is distorted and squashed when we use their redshift as an indicator of their radial distance due to halos' peculiar velocity. In the plane-parallel approximation, the mapping from real space to redshift space is given by (e.g., see \cite{Bernardeau:2002rev}):
 \be 
 \vrr_{\rs} = \vrr + \frac{(\vec{u}\cdot \hat{n})\hat{n}}{aH(a)}
 \ee 
-where $\vrr_{\rs}$ is the redshift space coordinates, ``$\rs$'' stands for ``redshift space'', $\vec{u}$ is the peculiar velocity field, $\hat{n}$ is the direction of the line of sight and $H(a)$ is the Hubble parameter. Similarly, the matter density contrast in the redshift space can be written as a perturbative series:
+where $\vrr_{\rs}$ denotes redshift space coordinates, $\vec{u}$ is the peculiar velocity field, $\hat{n}$ is the direction of the line of sight, and $H(a)$ is the Hubble parameter. As before, the matter density contrast in the redshift space can be written as a perturbative series:
 \bea 
 \delta_{\m,\rs}(\vk;a)&=&\sum_{n=1}^{\infty} \int\frac{d^3 \vk_1}{(2\pi)^3} \cdots \int \frac{d^3 \vk_n}{(2\pi)^3} \delta_{\rm D}(\vk-\vk_1 - \cdots -\vk_n) \nonumber \\
 &\times & Z_n (\vk_1,\cdots,\vk_n;a)\delta_{\m}^{(1)}(\vk_1;a)\cdots \delta_{\m}^{(1)}(\vk_n;a) \eql{rspt} \vs
 \eea
-where 
+where now the window functions are
 \bea 
 &&Z_1(\vk;a)=1+f\mu^2 \\ 
 &&Z_2(\vk_1,\vk_2;a)=F_{2}(\vk_1,\vk_2)+f\mu^2 G_2(\vk_1,\vk_2)\vs 
 &&\qquad \qquad\quad+\frac{f\mu k}{2}\bigg[ \frac{\mu_1}{k_1}(1+f\mu_2^2)+\frac{\mu_2}{k_2}(1+f\mu_1^2)\bigg]
 \eea 
-with $\mu \equiv \vk \cdot \hat{n}/k$ and $\mu_{1,2} \equiv \vk_{1,2} \cdot \hat{n}/k_{1,2}$, and,
+with $\mu \equiv \vk \cdot \hat{n}/k$ and $\mu_{1,2} \equiv \vk_{1,2} \cdot \hat{n}/k_{1,2}$.  The window functions now depend on the growth rate
 \bea 
-f(a)&\equiv & \frac{d \ln D_{1}(a)}{d \ln a}\\
-G_2(\vk_1,\vk_2)&=&\frac{3}{7}+\frac{4}{7}\frac{(\vk_1\cdot \vk_2)^2}{k_1^2 k_2^2}+\frac{\vk_1\cdot \vk_2}{2k_1k_2}\bigg[\frac{k_1}{k_2}+\frac{k_2}{k_1}\bigg]\vs
+f(a)&\equiv & \frac{d \ln D_{1}(a)}{d \ln a}\eea
+and on
+\bea
+G_2(\vk_1,\vk_2)&=&\frac{3}{7}+\frac{4}{7}\frac{(\vk_1\cdot \vk_2)^2}{k_1^2 k_2^2}+\frac{\vk_1\cdot \vk_2}{2k_1k_2}\bigg[\frac{k_1}{k_2}+\frac{k_2}{k_1}\bigg].\vs
 \eea 
 The modified matter density contrast in the redshift space of a light cone can then be expressed as: 
 \be 
@@ -419,7 +421,7 @@ with
 &\times&\bigg[\,Z_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s';a=1)P_{\rm m,ini}(k_s)\vs
 &&+\,Z_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s';a=1)P_{\rm m,ini}(k_s')\bigg]  \vs   
 \eea 
-where $L=3072\, h^{-1}\, \rm Mpc$ when we use MICE-GC simulation which is the depth of the simulation. It comes from the approximation when we take the ratio term out of the integrand. The redshift dependence of the $f$ function is solved similarly as \ec{dt}. 
+where $L=3072\, h^{-1}\, \rm Mpc$ when we use MICE-GC simulation which is the depth of the simulation. It comes from the approximation when we take the ratio term out of the integrand. The redshift dependence of the $f$ function is solved as in \ec{dt}. 
 
 In Fig.~\rf{SN_RS} we use the halo catalog of MICE-GC simulation to reconstruct the monopole moment of the redshift space matter power spectrum.
 
