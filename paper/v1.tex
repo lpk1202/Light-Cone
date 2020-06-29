@@ -134,7 +134,7 @@ We begin with a brief review of the formalism developed in Ref.~\cite{Li:2020fir
 
 \begin{table}[h!]\label{tb}
 \centering
-\begin{tabular}{ |p{7.5cm}||p{2 cm}|p{7.5cm}|  }
+\begin{tabular}{ |p{7.5cm}||p{1.7 cm}|p{7.7cm}|  }
  \hline
 Name & Symbol &Defining Relation\\
  \hline
@@ -144,16 +144,17 @@ Name & Symbol &Defining Relation\\
   Halo (Number) Density Field & $n_{\rm h}(\vrr;a)$ & $n_{\rm h}(\vrr;a)=\sum_{i=1}^{N_{\rm h}}\delta_{\rm D}(\vrr-\vrr_{i})$\\
  Halo (Number) Density Contrast &   $\delta_{\rm h}(\vrr;a)$  &  \ec{hdc}; $\delta_{\rm h}(\vrr;a)\equiv (n_{\rm h}(\vrr;a)-\bar{n}_{\rm h}(a))/{\bar{n}_{\rm h}(a)}$ \\
  Weighted Halo (Number) Density Field & $\eta_{\rm h}(\vrr;a)$ & \ec{wnob}; $\eta_{\rm h}(\vrr;a)=\sum_{i=1}^{N_{\rm h}}(\delta_{\rm D}(\vrr-\vrr_{i})/b_{1}(M_{i};a_{i}))$\\
- Approximate Matter Density Contrast (from Halo)   & $\delta_{\rm m}^{\rm h}(\vrr;a)$ & \ec{hm}; $\dmh(\vrr;a) \equiv {(\eta_{\rm h}(\vrr;a)-\bar{\eta}_{\rm h}(a))}/{\bar{n}_{\rm h}(a)}$\\
+ Approximate Matter Density Contrast (from Halo)  & $\delta_{\rm m}^{\rm h}(\vrr;a)$ & \ec{hm}; $\dmh(\vrr;a) \equiv {(\eta_{\rm h}(\vrr;a)-\bar{\eta}_{\rm h}(a))}/{\bar{n}_{\rm h}(a)}$\\
   \hline
  Modified Matter Density Contrast &   $d_{\rm m}(\vrr)$ & \ec{LC}; $d_{\rm m}(\vrr) \equiv \delta_{\rm m}(\vrr;a(r)) {D_{\ini}}/{D_{1}(a(r))} $\\
  Approximate Modified Matter Density Contrast& $d_{\rm m}^{\rm h}(\vrr)$  & $d_{\rm m}^{\rm h}(\vrr) \equiv \delta_{\rm m}^{\rm h}(\vrr;a(r)) {D_{\ini}}/{D_{1}(a(r))} $  \\
  \hline
  Linear Matter Power Spectrum &$P_{\rm m,lin}(k;a)$ & $\langle \delta^{(\rm 1)}_{\rm m}(\vk;a) \delta^{(\rm 1)}_{\rm m}(\vk';a) \rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,lin}(k;a)$\\
  Nonlinear Matter Power Spectrum &$P_{\rm m,nl}(k;a)$ & $\langle \delta^{}_{\rm m}(\vk;a) \delta^{}_{\rm m}(\vk';a) \rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,nl}(k;a)+\cdots$\\
+ Approximate Nonlinear Matter Power Spectrum &$P^{\rm h}_{\rm m,nl}(k;a)$ & $\langle \delta^{\rm h}_{\rm m}(\vk;a) \delta^{\rm h}_{\rm m}(\vk';a) \rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')P^{\rm h}_{\rm m,nl}(k;a)+\cdots$\\
  Initial Matter Power Spectrum & $ P_{\rm m,ini}(k)$ & $P_{\rm m,ini}(k)=(D_{\ini}/D_{1}(a))^2P_{\rm m,lin}(k;a)$ or \ec{lps} \\
- Light Cone Matter Power Spectrum & $\mathcal{P}_{\rm m}^{}(k)$ & \ec{2ptlc}; $\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle =(2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}(k)+\cdots$\\
- Approximate Light Cone Matter Power Spectrum & $\mathcal{P}_{\rm m}^{\rm h}(k)$ &  $\langle d_{\rm m}^{\rm h} (\vk)d_{\rm m}^{\rm h}(\vk')\rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}^{\rm h}(k)+\cdots$\\
+ Light Cone Matter Power Spectrum & $\mathcal{P}_{\rm m,nl}^{}(k)$ & \ec{2ptlc}; $\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle =(2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m,nl}(k)+\cdots$\\
+ Approximate Light Cone Matter Power Spectrum & $\mathcal{P}_{\rm m,nl}^{\rm h}(k)$ &  $\langle d_{\rm m}^{\rm h} (\vk)d_{\rm m}^{\rm h}(\vk')\rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m,nl}^{\rm h}(k)+\cdots$\\
  \hline
 \end{tabular}
 \caption{Table of symbols and notation. Extra subscript ``rs'' stands for the corresponding quantity in redshift space.}
@@ -228,7 +229,7 @@ We test this using a halo catalog from a cosmological N-body simulation. We use 
 
 The top panel of Fig.~\rf{real_snap} shows the actual matter density $\delta_{\rm m}$ in a set of seven slices, each broken up into 49 square regions on volume $(2.5\, h^{-1}\rm\, Gpc)^3$. The second panel shows the matter density inferred via \ec{hm} and the fourth panel shows the difference between them. The differences are small, showing the $\dmh$ is a good estimator for the underlying matter density on large scales.
 
-\Sfig{hm}{$P_{\rm m}^{\rm h}(k)$ is the approximate matter power spectrum using the halo catalog from BIGMDPL at a snapshot $z=0$ and \ec{hm}, while $P_m(k)$ is the true matter spectrum; the bottom panel is the ratio of the two, showing that over the scales of interest, $\dmh$ is a good estimator for the density contrast.}
+\Sfig{hm}{$ P^{\rm h}_{\rm m,nl}(k)$ is the approximate matter power spectrum using the halo catalog from BIGMDPL at a snapshot $z=0$ and \ec{hm}, while $ P_{\rm m,nl}(k)$ is the true matter spectrum from the corresponding dark-matter-only catalog; the bottom panel is the ratio of the two, showing that over the scales of interest, $\dmh$ is a good estimator for the density contrast.}
 
 We use the approximate density contrast defined in \ec{hm} and compute its power spectrum; as shown in Fig.~\rf{hm} this is equal to the true matter power spectrum within ten percent. Note that the plot covers the scales of interest, those that will be used to construct the quadratic estimator.
 We therefore expect the projected detectability will be the same as when applied to the dark matter field itself, as in  \cite{Li:2020fir}. 
@@ -241,7 +242,7 @@ Fig.~\rf{SN_BIGMDPL} shows the large-scale power spectrum obtained using the qua
 %\section{Demonstration with N-body simulation I} \label{sec3}
 
 
-\Sfig{SN_BIGMDPL}{Long-wavelength power spectrum using the BigMDPL halo catalog, and its error from \ec{error} which can be expressed as $P_{\rm m, lin}(k_l)\sigma(k_l)$. Solid curve is drawn from the theoretical linear matter power spectrum.The box size of the survey is be $L=2.5\, h^{-1}\rm\, Gpc$ thus volume $V=L^3$ and width $\Delta k = 2\pi/L$. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.22\,h\,\rm Mpc^{-1}$.}
+\Sfig{SN_BIGMDPL}{Long-wavelength power spectrum using the BigMDPL halo catalog at $a=1$, and its error from \ec{error} which can be expressed as $P_{\rm m, lin}(k_l)\sigma(k_l)$. Solid curve is drawn from the theoretical linear matter power spectrum.The box size of the survey is be $L=2.5\, h^{-1}\rm\, Gpc$ thus volume $V=L^3$ and width $\Delta k = 2\pi/L$. The integration range for $\vk_s$ is from $0.03 \,h \,\rm Mpc^{-1}$ to $0.22\,h\,\rm Mpc^{-1}$.}
 
  
 
@@ -315,15 +316,15 @@ since there's no $\vrr$ dependence in the bracket given that $\dm^{(1)}(\vk';a(r
 \be 
 \langle d^{(\rm 1)}_{\rm m}(\vk) d^{(\rm 1)}_{\rm m}(\vk') \rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')P_{\rm m,ini}(k).\eql{lps}
 \ee 
-where $P_{\rm m,ini}$ is the linear matter power spectrum at the initial time $a_{\rm ini}$. This relation \ec{lps} tells us that the first order term of the modified light cone matter density contrast $d_{\rm m}(\vk)$ (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since the redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$. We define the light cone matter power spectrum $\mathcal{P}_{\rm m}^{}(k)$ as:
+where $P_{\rm m,ini}$ is the linear matter power spectrum at the initial time $a_{\rm ini}$. This relation \ec{lps} tells us that the first order term of the modified light cone matter density contrast $d_{\rm m}(\vk)$ (which corresponds to long-wavelength modes) still characterizes the linear evolution information of the light cone, since the redshift difference in the light cone has been cancelled by the extra factor $D_{\ini}/D_{1}(a(r))$. We define the light cone matter power spectrum $\mathcal{P}_{\rm m,nl}^{}(k)$ as:
 \be 
-\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m}(k) +\cdots\eql{2ptlc}
+\langle d_{\rm m} (\vk)d_{\rm m}(\vk')\rangle = (2\pi)^3 \delta_{\rm D}(\vk+\vk')\mathcal{P}_{\rm m,nl}(k) +\cdots\eql{2ptlc}
 \ee 
 Fig.~\rf{psLC} shows that this power spectrum is approximately equal to the matter power spectrum on large scales.
 %\simeq P_{\rm m,ini}(k)$ for long-wavelength modes (when $k\rightarrow 0$), as shown in Fig..
 There are also off-diagonal terms in \ec{2ptlc} which contains extremely valuable information, and we will look into them in the next section \ref{sec5}.
 
-\Sfig{psLC}{Comparison of the light cone power spectrum $\mathcal{P}_{\rm m}^{\rm h}(k)$ (the superscript ``$\rm h$'' means $\mathcal{P}$ is computed using halo information as was $P_{\rm m}^{\rm h}$ in Fig.~\rf{hm}) with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. Here $P_{\rm m,ini}(k)$ is plotted according to the theory predicted linear power spectrum, and $\mathcal{P}_{\rm m}^{\rm h}(k)$ is computed using the halo catalog of MICE Grand Challenge light cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error. The error bars shows errors due to limited number of independent modes in each bin.}
+\Sfig{psLC}{Comparison of the light cone power spectrum $\mathcal{P}_{\rm m,nl}^{\rm h}(k)$ (the superscript ``$\rm h$'' means $\mathcal{P}$ is computed using halo information as was $P_{\rm m,nl}^{\rm h}$ in Fig.~\rf{hm}) with the initial power spectrum $P_{\rm m,ini}(k)$, both scaled by $1/D_{\ini}^{2}$. Here $P_{\rm m,ini}(k)$ is plotted according to the theory predicted linear power spectrum, and $\mathcal{P}_{\rm m,nl}^{\rm h}(k)$ is computed using the halo catalog of MICE Grand Challenge light cone simulation \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}. Halo mass bin is chosen to be $[2.2 \times 10^{12}h^{-1}M_{\odot},10^{14}h^{-1}M_{\odot}]$. They match each other pretty well on large scales ($k\lesssim 0.02 \,h\,\rm Mpc^{-1}$) despite tiny systematic error. The error bars shows errors due to limited number of independent modes in each bin.}
 
 \section{Quadratic Estimator} \label{sec5}
 Using the expressions of \ec{exp}, we can compute the two-point correlations of two short-wavelength Fourier modes $d_{\rm m}(\vk_s)$ and $d_{\rm m}(\vk_s')$ up to second order. Again we assume the squeezed limit $\vk_l=\vk_s+\vk_s'$:
@@ -386,8 +387,8 @@ with $\vk_s' = \vk_l-\vk_s$ and $\mathpzc{g}$ being the weighting function. By r
 Similar to our last work, by minimizing the noise we get the expression for the weighting function $\mathpzc{g}$:
 \begin{eqnarray}
 &&\mathpzc{g}(\vec{k}_{s},\vec{k}_{s}')
-=\frac{\mathpzc{f}(\vec{k}_{s},\vec{k}_{s}')}{2\mathcal{P}_{\rm m}(k_{s})\mathcal{P}_{\rm m}(k_{s}')}\vs
-&=&C\frac{F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s)+F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s')}{\mathcal{P}_{\rm m}(k_{s})\mathcal{P}_{\rm m}(k_{s}')}\vs 
+=\frac{\mathpzc{f}(\vec{k}_{s},\vec{k}_{s}')}{2\mathcal{P}_{\rm m,nl}(k_{s})\mathcal{P}_{\rm m,nl}(k_{s}')}\vs
+&=&C\frac{F_2(-\vec{k}_s,\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s)+F_2(-\vec{k}_s',\vec{k}_s+\vec{k}_s')P_{\rm m,ini}(k_s')}{\mathcal{P}_{\rm m,nl}(k_{s})\mathcal{P}_{\rm m,nl}(k_{s}')}\vs 
 \end{eqnarray} 
 with this choice of $\mathpzc{g}$ the noise term $\mathpzc{N}$ is identical to the normalization factor $\mathpzc{A}$. And the projected detectability is defined similarly as \ec{error}:
 \be
