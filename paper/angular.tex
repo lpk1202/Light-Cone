@@ -59,7 +59,7 @@
 \newcommand{\Spng}[2]{
    \begin{figure}[thbp]
    \begin{center}
-    \sfigg{../plots/#1.png}{\columnwidth}
+    \sfigg{../plots/#1.png}{.7\columnwidth}
     \caption{{\small #2}}
     \label{fig:#1}
      \end{center}
@@ -162,24 +162,161 @@ w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\,
 .
 \ee
 
-Fig.~\rf{mask} shows the mask in Fourier space for a one degree patch. Large $l$ modes are clearly suppressed. Analytically,
+Fig.~\rf{mask} shows the mask in Fourier space for patches of two different radii . Large $l$ modes are clearly suppressed on scales $l>1/R$. Analytically,
+\bea
+M_R(l) &=& \int d^2\theta_{\theta<R} e^{-i\vec l\cdot\vec\theta} 
+\vs
+&=&
+\int_0^R d\theta\,\theta \int_0^{2\pi} d\phi e^{-il\theta\cos\phi}
+\vs
+&=&
+2\pi \int_0^R d\theta\,\theta\,J_0(l\theta)
+\vs
+&=&
+\frac{2\pi}{l^2} xJ_1(x)\bigg\vert^{lR}_0.
+\eea
+So
 \be
-M_R(l) = \frac{2\pi J_1(lR)}{l}.\ee
+M_R(l) = \frac{2\pi R J_1(lR)}{l}.\ee
 Also,
 \be
 \int \frac{d^2l}{(2\pi)^2} \, M_R^2(l) =A\ee
 the area observed.
-\Spng{mask}{The mask in Fourier space for a one degree patch.}
+\Spng{mask}{The mask in Fourier space for patches of radius $1^\circ$ and $3^\circ$.}
 
 The zeroth order term is obtained by setting
 \be
-\langle\delta(\vec l)\delta(\vec l')\rangle = (2\pi)^2\delta^2(\vec l+\vec l') C_l\ee
-so that 
+\langle\delta(\vec l)\delta(\vec l')\rangle = (2\pi)^2\delta^2(\vec l+\vec l') C_l.\ee
+If we call this zeroth order term $\bar w_R$, then
 \be
-w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, \int \frac{d^2l'}{(2\pi)^2}\, M_R^2(\vec l_1-\vec l') 
+\bar w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, \int \frac{d^2l'}{(2\pi)^2}\, M_R^2(\vec l_1-\vec l') 
 \, C_{l'}
 .
 \ee
+The jupyter notebook argues that -- at least for very thin bins -- 
+\be
+\tilde \Theta_\theta(\vec l)=\frac{J_0(l\theta)}{A}.\ee
+Here the area normalizes the function so that its integral over two angle with $w$ as the integrand yields $w$. That is, $\Theta$ has dimensions of radians$^{-4}$, so $\tilde\Theta$ has dimensions of radians$^{-2}$.
+
+To obtain information about the field that induces the inhomogeneity, call it $\Phi$, we want to go to the next order, to consider the off-diagonal elements of $\langle\delta(\vec l)\delta(\vec l')\rangle$. We assume that in general
+\be
+\langle\delta(\vec l)\delta(\vec l')\rangle = F(\vec l,\vec l') \Phi(\vec L)
+\ee
+where $\vec L\equiv \vec l + \vec l'$ and $F$ is some known function of its variables. E.g., in CMB lensing,
+\be
+F(\vec l,\vec l') = C_{\vec l-\vec L} \vec L\cdot (\vec l-\vec L).\ee
+Inserting this leads to
+\be
+w_R(\theta) =  -\int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, \int \frac{d^2l'}{(2\pi)^2}\, M_R(\vec l_1-\vec l') 
+\,\int \frac{d^2l''}{(2\pi)^2}\, M_R(\vec l_1+\vec l'')C_{l''} (\vec l'+\vec l'') \cdot \vec l''\,\Phi(\vec l'+\vec l'')
+.
+\ee
+There are 3 combinations of vectors that are constrained to be relatively small:
+\be
+l_1, l', l'' \gg |\vec l_1-\vec l'|, |\vec l_1+\vec l''|, |\vec l'+\vec l''|.\ee
+Define $\vec L\equiv \vec l'+\vec l''$ and change the variable of integration from $\vec l'$ to $\vec L$:
+\be
+w_R(\theta) =  -\int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, \vec L \cdot
+\,\int \frac{d^2l}{(2\pi)^2}\,C_{l}\vec l\,
+\int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, 
+ M_R(\vec l_1+\vec l-\vec L)  M_R(\vec l_1+\vec l)
+.
+\ee
+Here $l''\rightarrow l$. But $\vec l_1+\vec l$ is also small so replace the dummy variable $l_1$ with $\vec L'\equiv \vec l_1 + \vec l$:
+\be
+w_R(\theta) =  -\int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, \vec L \cdot
+\int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')
+\,\int \frac{d^2l}{(2\pi)^2}\,C_{l}\vec l\,\tilde \Theta_\theta^*(\vec L'-\vec l)\, 
+ .
+\ee
+
+Let's consider the final integral, recalling that $l\gg L'$. It makes sense therefore to Taylor expand $\tilde\Theta$ in powers of $L'/l$. Explicitly,
+\bea
+A\tilde \Theta_\theta^*(\vec L'-\vec l) &=& J_0(\sqrt{l^2-2lL'\cos\phi'+L'^2}\theta)
+\vs
+&\simeq& J_0\left(l\theta - L'\theta\cos\phi'\right)
+\simeq
+J_0(l\theta) - \frac{dJ_0}{dx}\bigg\vert_{x=l\theta}\, L'\theta\cos\phi'
+\vs
+&=&J_0(l\theta) + J_1(l\theta)\, L'\theta\cos\phi'
+\eea
+Here $\phi'$ is the angle between $\vec L'$ and $\vec l$. The $l$ integral also has a factor of $\cos\phi$, where $\phi$ is the angle between $\vec l$ and $\vec L$. So, the innermost integral becomes
+\be
+\frac{L'\theta}A\int \frac{d^2l}{(2\pi)^2}\,C_{l} l\cos\phi J_1(l\theta)\, \cos\phi'\ee
+where the leading term vanishes because the angular integral over $\cos\phi$ vanishes. It is useful to redefine the angles to make them with respect to $\vec L$. Then, the angle between $l$ and $L$ is still $\phi\rightarrow \phi$ but the angle between $L'$ and $L$ becomes $\phi'\rightarrow \phi-\phi'$ so 
+\be
+\vec L\cdot\,\int \frac{d^2l}{(2\pi)^2}\,C_{l}\vec l\,\tilde \Theta_\theta^*(\vec L'-\vec l)\, 
+= \frac{LL'\theta}{(2\pi)^2A} \int_0^\infty dl l^2C_l J_1(l\theta) \,\int_0^{2\pi} d\phi\cos\phi \cos(\phi-\phi').
+\ee
+The only piece of the inner integral that survives is the part proportional to $\cos\phi\cos\phi'$ which leads to $\pi\cos\phi'$ so
+\be
+w_R(\theta) =  - \frac{\theta}{A} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L 
+\int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'
+\,\int_0^\infty dl \frac{l^2C_l}{4\pi}\,J_1(l\theta)  .
+\ee
+The last integral is very closely related to $\langle (\nabla T)^2\rangle$. If we multiply numerator and denominator by $l\theta$ then it can be written as $\theta\langle (\nabla T)^2\rangle_\theta$ where the subscript $\theta$ denotes the scale above which we suppress the contribution to the average. Explicitly
+\be
+\theta^2\langle (\nabla T)^2\rangle_\theta \equiv \theta\int_0^\infty dl \frac{l^2C_l}{4\pi}\,J_1(l\theta).\eql{dlnt}\ee
+Then,
+\be
+w_R(\theta) =  - \frac{\theta^2\langle (\nabla T)^2\rangle_\theta}{A} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L 
+\int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'.\ee
+We can now define the inner integral as
+\be
+ALF_R(L) \equiv \int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'.\ee
+This makes sense since we know that the integral of $M_R^2$ is the area and we also know that the $M$'s will cut off $F_R(L)$ on scales smaller than $L\gg R^{-1}$. We are left with
+\be
+w_R(\theta) =  - {\theta^2\langle (\nabla T)^2\rangle_\theta} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L^2 F_R(L) 
+.\ee
+
+
+Note that the two terms in the spatially varying part of $w_R(\theta)$ are independent of one another: one depends only on the angular separation at which one makes the correlation measurement, $\theta$, while the other depends only on the radius of the circular regions over which the measurements are made, $R$. We can therefore optimize each independently. For the fiducial cosmology, $\theta^2\langle (\nabla T)^2\rangle_\theta$ peaks at $\theta=39'$, and Fig.~\rf{dlntheta} gives a good indication of the range of $l$'s to which the measurement is sensitive: $100<l<300-1000$. We will see that this is separate from $L$'s as we have assumed throughout. Note that the absolute value of this variance is 2400$\mu K^2$. (We will be comparing with the mean $w(\theta)$, which is of order 6000 $\mu K^2$.) 
+\Spng{dlntheta}{The variance of the logarithmic derivative of the temperature, as defined in \ec{dlnt} as a function of $l_{min}$ and $l_{max}$. The true value is when $l_{min}$ is equal to 2, but even taking $l_{min}=100$ does not change the result. Similarly, $l_{max}$ can be as small as 300 to get the rough result.}
+
+The variance of this estimator will be proportional to an integral over the power spectrum of the projected gravitational potential. Specifically,
+we want
+\be
+\langle  \left[\int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L^2 F_R(L)\right]^2  \rangle
+=
+\int_0^\infty \frac{dL}{L}\, L^2F_R^2(L) \, \frac{L^4\, C_{\Phi\Phi}(L)}{2\pi}
+.\eql{wrint}\ee
+So the relevant combination that modulates the logarithmic integral over the deflection power (which peaks at $L\sim 40$) is $L^2F_R^2$. This is shown for several different values of $R$ in Fig.~\rf{mrsq}.
+\Spng{mrsq}{The combination $L^2F_R^2$ that multiplies the deflection power in the integral that determines the variance of the angular correlation function in real space.} 
+Note that this function peaks at $L\sim40$ when $R=3^\circ$. Therefore, this suggests that $R=3^\circ$ would be the optimal region over which to measure $w(\theta)$, so that it coincides with the peak of the deflection power. However, note that $F_L(R)$ depends only on the product $LR$, so for fixed $L$, the amplitude of $L^2F_L(R)\propto R^{-2}$. Indeed, this scaling is apparent in Fig.~\rf{mrsq}. Although the deflection power peaks at $L=40$, it is a broad peak, and the slow decline after $L=40$ cannot compete with the $R^{-2}$ falloff of $L^2F_L(R)$. The integrand is shown in Fig.~\rf{wrint}. The reduction in the amplitude going from $R=1^\circ$ to $R=3^\circ$ is about 6, so the overall scaling is roughly $R^{-1.7}$.
+\Spng{wrint}{The integrand in \ec{wrint} for three different values of the $R$, the region over which $w(\theta)$ is averaged. Note that even though the deflection power ($L^4C_{\Phi\Phi}(L)$) peaks at $L=40$ coincident with the $R=3^\circ$ peak of $L^2F_R^2(L)$, the smaller regions have larger amplitudes, so the product continues to increase for smaller values of $R$.}
+
+
+In regions with radii ranging from $1-3^\circ$ then, the signal squared will be of order $\frac{(2400 \mu K^2)^2}{(6000 \mu K^2)^2}\times [0.15-1]\times 10^{-4}$.  So we expect the relative variation from patch to patch -- the signal! -- to be of order
+\be
+\frac{\Delta w_R(\theta)_{\rm signal}}{\bar w_R(\theta)} \sim 4\times 10^{-3} \left(\frac{1^\circ}{R}\right)^{0.85}.\eql{signal}\ee
+This seems very small but it actually may not be and helps resolve something that may be bothering you. Why is CMB lensing in Fourier space known to require arcminute scale measurements, whereas in real space, it seems as if $l<500$ would work fine? The reason is that to get high signal to noise in the measurement requires many pairs of pixels separated by an angular distance $\theta$. The number of such pairs in a circular region with radius $R$ depends on the resolution of the measurement. Consider an experiment with arcminute pixels and neglect boundary effects in a region with radius $R=3^\circ$. There are $\pi R^2/(1')^2=10^5$ pixels in the region. Each of those pixels (neglecting boundary effects) is surrounded by an annulus  of radius $\theta=39'$ and width $d\theta=1'$. In that annulus, there are $2\pi \theta d\theta/(1')^2=245$ pixels. So there are $2.5\times 10^7$ pairs of pixels separated by $39'$. This means the fractional error on the measurement will be of order $1/\sqrt{N}\simeq 2\times 10^{-4}$, well below the signal estimated in \ec{signal}. That rough estimate suggests a signal to noise in each region of 10:1! Apart from the neglected boundary effects, this is likely too optimistic as it assumes that each pair is an independent measurement of the correlation function. That is certainly not true: pixels separated by $1'$ are very highly correlated. However, it does seem likely/possible that some of the signal can be extracted using real space techniques, and it is worth noting the scaling:
+\be
+\frac{\Delta w_R(\theta)_{\rm signal}}{\Delta w_R(\theta)_{\rm noise}} \sim 8 \left( \frac{R}{3^\circ} \right)^{0.15}.\ee
+
+
+\subsection{Calculating $F_R$}
+Consider the 2D integral $F_R$:
+\be
+ F_R(L) = \frac1{(2\pi)^2AL}\, \int_0^\infty dL' L'^2 M_R(L')  \int_0^{2\pi} d\phi M_R\left(\sqrt{L^2+L'^2-2LL'\cos\phi}\right)  \,\cos\phi.\ee
+ It is useful to introduce the parameters
+ \bea
+ y &\equiv& LR\vs
+ x &\equiv& L'/L.\eea
+ Then, recalling that $M_R(L) = 2A J_1(LR)/LR$, we have
+ \bea
+ F_R(L) &=& \frac1{(2\pi)^2AL}\, \int_0^\infty dL' L'^2 \, \frac{2AJ_1(xy)}{xy} \int_0^{2\pi} d\phi \,\frac{2A J_1(y\sqrt{1+x^2-2x\cos\phi})}{y\sqrt{1+x^2-2x\cos\phi}}
+ \,\cos\phi
+ \vs
+ &=&\frac{1}{\pi}\, \int_0^\infty dx x \, {J_1(xy)}\int_0^{2\pi} d\phi \,\frac{J_1(y\sqrt{1+x^2-2x\cos\phi})}{\sqrt{1+x^2-2x\cos\phi}}
+ \,\cos\phi.\eql{phiint}
+ \eea
+ The inner integrand is shown in Fig.~\rf{phiinty}. Note that very small values of $y$ are suppressed (by $J_1$) when $x=1$ and both large and small values of $x$ lead to a small integrand when $y=1$. %This suggests that the dominant contribution will come when $y
+ %\Spng{phiint}{The integrand in the innermost integral in \ec{phiint}.}
+ \Spng{phiinty}{The integrand in the innermost integral in \ec{phiint} for different values of $x$.}
+ The full integrand begins to osciallte at $\sim\pi/y$ and the integral seems to converge when integrating out to $\sim20/y$. Using this rule of thumb, Fig.~\rf{mr} shows the function $F_R$, 
+ which depends only of the dimensionless combination $LR$. As expected, it suppresses the contribution of $\Phi$ on scales $L$ larger than $\pi/R$.
+ \Spng{mr}{The dimensionless function $F_R(L)$, suppressed on small scales, as expected.}
+% \Spng{mrint}{The $M_R$ integrand. Note that the oscillations begin around the value $x\simeq\pi/y$.}
 
 \subsection{Take 2}
 
