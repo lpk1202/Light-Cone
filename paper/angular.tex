@@ -1,0 +1,203 @@
+\documentclass[prd,amsmath,amssymb,floatfix,superscriptaddress,nofootinbib]{revtex4-1}
+
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\eea{\end{eqnarray}}
+\newcommand{\C}{\rm C}
+\newcommand{\m}{\rm m}
+\newcommand{\rs}{\rm rs}
+\newcommand{\LC}{\rm LC}
+\newcommand{\ini}{\rm ini}
+\newcommand{\vbk}{\vec{\bar{k}}}
+\newcommand{\vq}{\vec{q}}
+\newcommand{\vrr}{\vec{r}}
+\newcommand{\vbkp}{\vec{\bar{k'}}}
+\newcommand{\bk}{{\bar{k}}}
+\newcommand{\vs}{\nonumber\\}
+\newcommand{\Var}{\rm Var}
+\newcommand{\vk}{\vec{k}}
+\newcommand{\ec}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\eec}[2]{Eqs.~(\ref{eq:#1}) and (\ref{eq:#2})}
+\newcommand{\Ec}[1]{(\ref{eq:#1})}
+\newcommand{\eql}[1]{\label{eq:#1}}
+\newcommand{\rf}[1]{\ref{fig:#1}}
+\newcommand{\sfig}[2]{
+\includegraphics[width=#2]{../plots/#1}
+        }
+%\newcommand{\sfigg}[2]{
+%\includegraphics[width=0.424\paperwidth]{../plots/#1}
+%        }
+\newcommand{\sfigg}[2]{
+\includegraphics[width=#2]{../plots/#1}
+        }
+\newcommand{\sfiggg}[2]{
+\includegraphics[width=0.4\paperwidth]{../plots/#1}
+        }
+\newcommand{\sfigr}[2]{
+\includegraphics[angle=270,origin=c,width=#2]{#1}
+        }
+\newcommand{\sfigra}[2]{
+\includegraphics[angle=90,origin=c,width=#2]{#1}
+        }
+\newcommand{\Sfig}[2]{
+   \begin{figure}[thbp]
+   \begin{center}
+    \sfig{../plots/#1.pdf}{\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+     \end{center}
+   \end{figure}
+}
+\newcommand{\Sfigg}[2]{
+   \begin{figure}[thbp]
+    \sfigg{../plots/#1.pdf}{.8\paperwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+   \end{figure}
+}
+\newcommand{\Spng}[2]{
+   \begin{figure}[thbp]
+   \begin{center}
+    \sfigg{../plots/#1.png}{\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+     \end{center}
+   \end{figure}
+}
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{simplewick}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[linktocpage=true]{hyperref} 
+\hypersetup{
+    colorlinks=true,       
+    linkcolor=red,         
+    citecolor=blue,        
+    filecolor=magenta,      
+    urlcolor=blue           
+}
+\usepackage[all]{hypcap} 
+\definecolor{darkgreen}{cmyk}{0.85,0.1,1.00,0} 
+\definecolor{darkorange}{rgb}{1.0,0.2,0.0}
+\newcommand{\scott}[1]{{\color{darkgreen} \, [Scott: #1]}}
+\newcommand{\peikai}[1]{{\color{blue} #1}}
+\newcommand{\prvs}[1]{{\color{magenta} #1}}
+\newcommand{\AL}[1]{{\color{magenta} AL: #1}}
+\newcommand{\MR}[1]{{\color{blue} MR: #1}}
+\newcommand{\RC}[1]{{\color{darkorange} #1}}
+\newcommand{\nl}{\\ \indent}
+\newcommand\dmh{\delta_{\rm m}^{\rm h}}
+\newcommand\hdmh{\hat{\delta}_{\rm m}^{\rm h}}
+\begin{document}
+\title{Angular Clustering}
+%\author{\large Peikai Li}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\author{\large Rupert A. C. Croft}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\author{\large Scott Dodelson}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%
+%\date{\today}
+%\begin{abstract}
+%\noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information from small scale perturbations. The idea is to build a quadratic estimator from small scale modes that provides a map of structure on large scales.
+%We demonstrated in the first paper that the quadratic estimator works well on a dark-matter-only N-body simulation at a snapshot of $z=0$. Here we generalize the theory to the case of a light-cone with halo bias and redshift space distortions taken into consideration. We successfully apply the generalized version of the quadratic estimator to a light cone halo catalog of an N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
+%%\noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information of small scale perturbations. The idea is to use two-point off-diagonal terms of density contrast modes to build a quadratic estimator for long-wavelength modes. We demonstrate in the first paper that our quadratic estimator works well on a dark-matter-only N-body simulation of the snapshot $z=0$. Here we generalize our theory to the case of a light-cone with halo bias taken into consideration. We successfully apply our generalized version of the quadratic estimator to a light cone halo catalog of a N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
+%%
+%%\noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information of small scale perturbations. The idea is to use two-point off-diagonal terms of density contrast modes to build a quadratic estimator for long-wavelength modes. We demonstrate in the first paper that our quadratic estimator works well on a dark-matter-only N-body simulation of the snapshot $z=0$. Here we generalize our theory to the case of a light cone with halo bias taken into consideration. We successfully apply our generalized version of the quadratic estimator to a light cone halo catalog of a N-body simulation of size $\sim5.6\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
+%\end{abstract}
+\maketitle
+
+\section{Introduction} \label{sec1}
+Consider an angular measurement
+\be
+f(\vec\theta) = \int d\chi W_f(\chi) \delta(\chi\vec\theta,\chi)
+\ee
+where I work in the Limber approximation. Then the Fourier transform of this field is
+\bea
+\tilde f(\vec l) &=& \int d\chi W_f(\chi) \int \frac{d^2l}{(2\pi)^2}\, e^{-i\vec l\cdot\vec\theta}\,\int \frac{d^3k}{(2\pi)^3}\, e^{i\chi\vec k_\perp\cdot \vec \theta} e^{ik_z\chi} \tilde\delta(\vec k;\chi)
+\vs
+&=& 
+\int d\chi \frac{W_f(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, e^{ik_z\chi}  \tilde\delta(\vec l/\chi;k_z;\chi).
+\eea
+Then the two-point function becomes:
+\be
+\langle \tilde f(\vec l)  \tilde g(\vec l') \rangle 
+= \int d\chi \frac{W_f(\chi) }{\chi^2} \, \int d\chi \frac{W_g(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  
+\langle \tilde\delta(\vec l/\chi;k_z;\chi) \tilde\delta(\vec l'/\chi';k_z';\chi')\rangle\eql{twop}
+\ee
+We now write
+\newcommand\de[1]{\tilde\delta^{(#1)}}
+\be
+\delta = \de1+\de2
+\ee
+where
+\be
+\de1 = \de{L} D(\chi)
+\ee
+the linear overdensity at some early time propagated forward with the growth factor. Then,
+\be
+\de2(\vec k;\chi) = \int \frac{d^3k_1}{(2\pi)^3}\, F_2(\vec k_1,\vec k-\vec k_1) \de1(\vec k_1;\chi) \de1(\vec k-\vec k_1;\chi).
+\ee
+We know that the linear terms in \ec{twop} will lead to the diagonal power spectrum. We are interested in the off-diagonal terms, when $\vec l\ne-\vec l'$. For that, we need to explore the contribution from the $\langle \de1\de2\rangle$ terms. Consider one of these:
+\bea
+\langle \tilde f(\vec l)  \tilde g(\vec l') \rangle_{l\ne l'} &=& \int d\chi \frac{W_f(\chi) }{\chi^2} \, \int d\chi \frac{W_g(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  
+\langle\de2(\vec l/\chi;k_z;\chi) \de1(\vec l'/\chi';k_z';\chi')\rangle \vs
+&=&
+\int d\chi \frac{W_f(\chi) }{\chi^2} \, \int d\chi \frac{W_g(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  
+\vs
+&&\times 
+\int \frac{d^3k_1}{(2\pi)^3}\, F_2(\vec k_1,\vec k-\vec k_1) \langle \de1(\vec k_1;\chi) \de1(\vec k-\vec k_1;\chi) \de1(\vec l'/\chi';k_z';\chi')\rangle 
+\eea
+where on the last line $\vec k = [\vec l/\chi,k_z]$. It is the last two $\delta$'s that are small scale perturbations and we want to understand their behavior in the presence of a long-wavelength perturbation $\de1(\vec k_1)$. When contracting those last two, we get a delta function that constrains:
+\bea
+\vec l/\chi - \vec k_{1,\perp} + \vec l'/\chi' &=& 0
+\vs
+k_z-k_{1,z} + k_z' &=& 0
+\eea
+or
+\be
+\vec k_1 = [\vec l/\chi+\vec l'/\chi',k_z+k_z'].
+\ee
+So, we are left with
+\be
+\langle \tilde f(\vec l)  \tilde g(\vec l') \rangle_{l\ne l'} =
+\int d\chi \frac{W_f(\chi) D(\chi)}{\chi^2} \, \int d\chi'\frac{W_g(\chi') D(\chi')}{\chi'^2} \, \int \frac{dk_z}{2\pi}\,  \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  \de1(\vec k_1;\chi)
+F_2(\vec k_1,\vec k-\vec k_1) P(l'/\chi',k_z') \ee
+
+One way to make progress here would be to cross-correlate this with the true 3D density field, $\de{L}(\vec K)$. This is not as crazy as it sounds since galaxies in a spectroscopic survey presumably trace the overdensity with a simple bias factor on large scales and the density is linear on those scales. In that case, the 3-point function would lead to a 3D Dirac delta function, eliminating 3 of the integrals. The delta function would be
+\be
+\delta^3(\vec K + \vec k_1) = \delta^2(\vec l/\chi + \vec l'/\chi'+\vec K_\perp) \delta(k_z+k_z'+K_z).
+\ee
+Going slowly, the $k_z'$ integral goes away leaving
+\bea
+\langle \de{L}(\vec K;\bar\chi)) \tilde f(\vec l)  \tilde g(\vec l') \rangle &=& P(K) D(\bar\chi)
+\int d\chi \frac{W_f(\chi) D^2(\chi)}{\chi^2} \, \int d\chi'\frac{W_g(\chi') D(\chi')}{\chi'^2} \, (2\pi)^2  \delta^2(\vec l/\chi + \vec l'/\chi'+\vec K_\perp) 
+\vs
+&&\times
+\int \frac{dk_z}{2\pi}\,  e^{ik_z\chi-i(k_z+K_z)\chi'}  
+F_2(-\vec K,\vec k+\vec K) P(l'/\chi',-k_z-K_z) 
+\eea
+where again 
+\be
+\vec k = [\vec l/\chi,k_z]
+\ee
+and $\bar\chi$ is simply the mean distance of galaxies for which you think you have measured $\delta(\vec K)$.
+Consider the $\chi'$ integral; use one of the remaining delta functions to do it:
+\be
+\delta(l_x/\chi+l'_x/\chi'+K_x) =\chi'^2 \frac{\delta(\chi'+ l'_x/[l_x/\chi+ K_x])}{l'_x}
+\ee
+\bibliography{refs}
+
+
+\end{document}
