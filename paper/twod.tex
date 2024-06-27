@@ -1,0 +1,468 @@
+\documentclass[prd,amsmath,amssymb,floatfix,superscriptaddress,nofootinbib]{revtex4-1}
+
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\eea{\end{eqnarray}}
+\newcommand{\C}{\rm C}
+\newcommand{\m}{\rm m}
+\newcommand{\rs}{\rm rs}
+\newcommand{\LC}{\rm LC}
+\newcommand{\ini}{\rm ini}
+\newcommand{\vbk}{\vec{\bar{k}}}
+\newcommand{\vq}{\vec{q}}
+\newcommand{\vrr}{\vec{r}}
+\newcommand{\vbkp}{\vec{\bar{k'}}}
+\newcommand{\bk}{{\bar{k}}}
+\newcommand{\vs}{\nonumber\\}
+\newcommand{\Var}{\rm Var}
+\newcommand{\vk}{\vec{k}}
+\newcommand{\ec}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\eec}[2]{Eqs.~(\ref{eq:#1}) and (\ref{eq:#2})}
+\newcommand{\Ec}[1]{(\ref{eq:#1})}
+\newcommand{\eql}[1]{\label{eq:#1}}
+\newcommand{\rf}[1]{\ref{fig:#1}}
+\newcommand{\sfig}[2]{
+\includegraphics[width=#2]{../plots/#1}
+        }
+%\newcommand{\sfigg}[2]{
+%\includegraphics[width=0.424\paperwidth]{../plots/#1}
+%        }
+\newcommand{\sfigg}[2]{
+\includegraphics[width=#2]{../plots/#1}
+        }
+\newcommand{\sfiggg}[2]{
+\includegraphics[width=0.4\paperwidth]{../plots/#1}
+        }
+\newcommand{\sfigr}[2]{
+\includegraphics[angle=270,origin=c,width=#2]{#1}
+        }
+\newcommand{\sfigra}[2]{
+\includegraphics[angle=90,origin=c,width=#2]{#1}
+        }
+\newcommand{\Sfig}[2]{
+   \begin{figure}[thbp]
+   \begin{center}
+    \sfig{../plots/#1.pdf}{\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+     \end{center}
+   \end{figure}
+}
+\newcommand{\Sfigg}[2]{
+   \begin{figure}[thbp]
+    \sfigg{../plots/#1.pdf}{.8\paperwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+   \end{figure}
+}
+\newcommand{\Spng}[2]{
+   \begin{figure}[thbp]
+   \begin{center}
+    \sfigg{../plots/#1.png}{.7\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+     \end{center}
+   \end{figure}
+}
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{simplewick}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[linktocpage=true]{hyperref} 
+\hypersetup{
+    colorlinks=true,       
+    linkcolor=red,         
+    citecolor=blue,        
+    filecolor=magenta,      
+    urlcolor=blue           
+}
+\usepackage[all]{hypcap} 
+\definecolor{darkgreen}{cmyk}{0.85,0.1,1.00,0} 
+\definecolor{darkorange}{rgb}{1.0,0.2,0.0}
+\newcommand{\scott}[1]{{\color{darkgreen} \, [Scott: #1]}}
+\newcommand{\peikai}[1]{{\color{blue} #1}}
+\newcommand{\prvs}[1]{{\color{magenta} #1}}
+\newcommand{\AL}[1]{{\color{magenta} AL: #1}}
+\newcommand{\MR}[1]{{\color{blue} MR: #1}}
+\newcommand{\RC}[1]{{\color{darkorange} #1}}
+\newcommand{\nl}{\\ \indent}
+\newcommand\dmh{\delta_{\rm m}^{\rm h}}
+\newcommand\hdmh{\hat{\delta}_{\rm m}^{\rm h}}
+\begin{document}
+\title{Spatially Varying Two-Point Functions}
+\author{\large Scott Dodelson}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\author{\large Rupert A. C. Croft}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\author{\large Scott Dodelson}
+%\affiliation{Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%\affiliation{McWilliams Center for Cosmology, Carnegie Mellon University, Pittsburgh, PA 15213, USA}
+%
+%\date{\today}
+\begin{abstract}
+In a homogenous universe, two-dimensional two-point functions depend only on the magnitude of the angular separation, not on the location of the objects or quantities. Often, though, large scale perturbations effectively create inhomogeneous environments on small scales. The most famous example lensing of the cosmic microwave background by
+the foreground gravitational potential. Another example is the impact of large scale density perturbations on small scale clustering. Here we develop the formalism to analyze these effects in real space, as opposed to Fourier space where they are traditionally discussed.
+
+\end{abstract}
+%\section{Estimator}
+\maketitle
+\section{Introduction}
+\section{General Formalism}
+Consider measuring a 2-point function on angular scales $\theta$ in a circular region of radius $R\gg\theta$. Set the mask $M_R(\vec\theta)$ to be zero outside of the large $R$ region and one inside, so that the masked measurement $\delta_R(\vec\theta) = \delta(\theta)M_R(\vec\theta)$ vanishes outside the mask. 
+Here, $\delta$ could be the matter overdensity, the galaxy overdensity, cosmic shear, or the cosmic microwave background temperature.
+Then, in the relevant region, the 2-point function is
+\be
+w_R(\theta)= \int d^2\theta_1 \int d^2\theta_2 \delta_R(\vec\theta_1) \delta_R(\vec\theta_2) \Theta_\theta(|\vec\theta_1-\vec\theta_2|)
+\ee
+where $\Theta_\theta()$ is non-zero only when its argument falls in the $\theta$ bin.
+The product in real space becomes a convolution in Fourier space:
+\be
+\delta_R(\vec l) = \int \frac{d^2l'}{(2\pi)^2}\, \delta(\vec l') M_R(\vec l-\vec l') 
+.\ee
+Therefore,
+\bea
+w_R(\theta) &=& \int d^2\theta_1 \int d^2\theta_2 \int \frac{d^2l_1}{(2\pi)^2}\, e^{i\vec l_1\cdot \vec\theta_1}\int \frac{d^2l'}{(2\pi)^2}\, \delta(\vec l') M_R(\vec l_1-\vec l') 
+\vs
+&\times&
+\int \frac{d^2l_2}{(2\pi)^2}\, e^{i\vec l_2\cdot \vec\theta_2}\int \frac{d^2l''}{(2\pi)^2}\, \delta(\vec l'') M_R(\vec l_2-\vec l'') 
+ \Theta_\theta(|\vec\theta_1-\vec\theta_2|).
+\eea
+Define $\vec\theta_\pm \equiv (\vec\theta_1\pm\vec\theta_2)$, so that $\vec\theta_1=\frac12(\vec\theta_++\vec\theta_-)$ and $\vec\theta_2=\frac12(\vec\theta_+-\vec\theta_-)$. The Jacobian is $4$ so,
+\be
+ \int d^2\theta_1 \int d^2\theta_2  =  \frac14\int d^2\theta_+ \int d^2\theta_- 
+\ee
+and
+\bea
+w_R(\theta) &=& \frac14\int d^2\theta_+ \int d^2\theta_- \int \frac{d^2l_1}{(2\pi)^2}\, e^{\frac{i}2\vec l_1\cdot (\vec\theta_++\vec\theta_-)}\int \frac{d^2l'}{(2\pi)^2}\, \delta(\vec l') M_R(\vec l_1-\vec l') 
+\vs
+&\times&
+\int \frac{d^2l_2}{(2\pi)^2}\, e^{\frac{i}2\vec l_2\cdot (\vec\theta_+-\vec\theta_-)}\int \frac{d^2l''}{(2\pi)^2}\, \delta(\vec l'') M_R(\vec l_2-\vec l'') 
+ \Theta_\theta(\theta_-).
+\eea
+The $\vec\theta_+$ integral then gives a delta function in $\vec l_1+\vec l_2$, so
+\be
+w_R(\theta) =  \int d^2\theta_- \int \frac{d^2l_1}{(2\pi)^2}\, e^{i\vec l_1\cdot\vec\theta_-}\, \int \frac{d^2l'}{(2\pi)^2}\, \delta(\vec l') M_R(\vec l_1-\vec l') 
+\,\int \frac{d^2l''}{(2\pi)^2}\, \delta(\vec l'') M_R(\vec l_1+\vec l'') 
+ \Theta_\theta(\theta_-).
+\ee
+The $\theta_-$ integral then just gives the complex conjugate of the Fourier transform of $\Theta_\theta$ so
+\be
+w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, \int \frac{d^2l'}{(2\pi)^2}\, M_R(\vec l_1-\vec l') 
+\,\int \frac{d^2l''}{(2\pi)^2}\, M_R(\vec l_1+\vec l'') \delta(\vec l') \delta(\vec l'') 
+.
+\ee
+
+Fig.~\rf{mask} shows the mask in Fourier space for patches of two different radii . Large $l$ modes are clearly suppressed on scales $l>1/R$. Analytically,
+\bea
+M_R(l) &=& \int d^2\theta_{\theta<R} e^{-i\vec l\cdot\vec\theta} 
+\vs
+&=&
+\int_0^R d\theta\,\theta \int_0^{2\pi} d\phi e^{-il\theta\cos\phi}
+\vs
+&=&
+2\pi \int_0^R d\theta\,\theta\,J_0(l\theta)
+\vs
+&=&
+\frac{2\pi}{l^2} xJ_1(x)\bigg\vert^{lR}_0.
+\eea
+So
+\be
+M_R(l) = \frac{2\pi R J_1(lR)}{l}.\ee
+Also,
+\be
+\int \frac{d^2l}{(2\pi)^2} \, M_R^2(l) =A\ee
+the area observed.
+\Spng{mask}{The mask in Fourier space for patches of radius $1^\circ$ and $3^\circ$.}
+
+The zeroth order term is obtained by setting
+\be
+\langle\delta(\vec l)\delta(\vec l')\rangle = (2\pi)^2\delta^2(\vec l+\vec l') C_l.\ee
+If we call this zeroth order term $\bar w_R$, then
+\be
+\bar w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, \int \frac{d^2l'}{(2\pi)^2}\, M_R^2(\vec l_1-\vec l') 
+\, C_{l'}
+.
+\ee
+At least for very thin bins,
+\be
+\tilde \Theta_\theta(\vec l)=\frac{J_0(l\theta)}{A}.\ee
+Here, the area normalizes the function so that its integral over two angles with $w$ as the integrand yields $w$. That is, $\Theta$ has dimensions of radians$^{-4}$, so $\tilde\Theta$ has dimensions of radians$^{-2}$. 
+%Putting these together we get
+%\be
+%\bar w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, \frac{J_0(l_1\theta)}{A}\, \int \frac{d^2l'}{(2\pi)^2}\, \left( \frac{2\pi RJ_1(R(|\vec l_1-\vec l'|))}{|\vec l_1-\vec l'|} \right)^2
+%\, C_{l'}
+%.\ee
+Since $R$ is large, the vectors $\vec l'$ and $\vec l_1$, although individually quite large must be very close to one another. So, a good approximation is to set $C_{l'}\rightarrow C_{l_1}$ and bring it outside the integral. Then, the normalization of $M_R$ leads to
+\be
+\bar w_R(\theta) =  \int \frac{d^2l_1}{(2\pi)^2}\, C_{l_1} J_0(l_1\theta).
+\ee
+
+To obtain information about the field that induces the inhomogeneity, call it $\Phi$, we want to go to the next order, to consider the off-diagonal elements of $\langle\delta(\vec l)\delta(\vec l')\rangle$. We assume that in general
+\be
+\langle\delta(\vec l)\delta(\vec l')\rangle = F(\vec l,\vec l') \Phi(\vec L)
+\ee
+where $\vec L\equiv \vec l + \vec l'$ and $F$ is some known function of its variables. E.g., in CMB lensing,
+\be
+F(\vec l,\vec l') = C_{\vec l-\vec L} \vec L\cdot (\vec l-\vec L).\ee
+Inserting this leads to
+\be
+w_R(\theta) =  -2 \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, \int \frac{d^2l'}{(2\pi)^2}\, M_R(\vec l_1-\vec l') 
+\,\int \frac{d^2l''}{(2\pi)^2}\, M_R(\vec l_1+\vec l'')C_{l''} (\vec l'+\vec l'') \cdot \vec l''\,\Phi(\vec l'+\vec l'')
+.\eql{barw}
+\ee
+
+We will work through the CMB lensing case. Appendix A shows that \ec{barw} reduces to
+\be
+w_R(\theta) =  - \frac{\theta^2\langle (\nabla T)^2\rangle_\theta}{A} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L 
+\int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'.\ee
+We can now define the inner integral as
+\be
+ALF_R(L) \equiv \int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'.\ee
+This makes sense since we know that the integral of $M_R^2$ is the area and we also know that the $M$'s will cut off $F_R(L)$ on scales smaller than $L\gg R^{-1}$. We are left with
+\be
+w_R(\theta) =  - {\theta^2\langle (\nabla T)^2\rangle_\theta} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L^2 F_R(L) 
+.\ee
+
+
+Note that the two terms in the spatially varying part of $w_R(\theta)$ are independent of one another: one depends only on the angular separation at which one makes the correlation measurement, $\theta$, while the other depends only on the radius of the circular regions over which the measurements are made, $R$. We can therefore optimize each independently. For the fiducial cosmology, $\theta^2\langle (\nabla T)^2\rangle_\theta$ peaks at $\theta=39'$, and Fig.~\rf{dlntheta} gives a good indication of the range of $l$'s to which the measurement is sensitive: $100<l<300-1000$. We will see that this is separate from $L$'s as we have assumed throughout. Note that the absolute value of this variance is 2400$\mu K^2$. (We will be comparing with the mean $w(\theta)$, which is of order 6000 $\mu K^2$.) 
+\Spng{dlntheta}{The variance of the logarithmic derivative of the temperature, as defined in \ec{dlnt} as a function of $l_{min}$ and $l_{max}$. The true value is when $l_{min}$ is equal to 2, but even taking $l_{min}=100$ does not change the result. Similarly, $l_{max}$ can be as small as 300 to get the rough result.}
+
+The variance of this estimator will be proportional to an integral over the power spectrum of the projected gravitational potential. Specifically,
+we want
+\be
+\langle  \left[\int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L^2 F_R(L)\right]^2  \rangle
+=
+\int_0^\infty \frac{dL}{L}\, L^2F_R^2(L) \, \frac{L^4\, C_{\Phi\Phi}(L)}{2\pi}
+.\eql{wrint}\ee
+So the relevant combination that modulates the logarithmic integral over the deflection power (which peaks at $L\sim 40$) is $L^2F_R^2$. This is shown for several different values of $R$ in Fig.~\rf{mrsq}.
+\Spng{mrsq}{The combination $L^2F_R^2$ that multiplies the deflection power in the integral that determines the variance of the angular correlation function in real space.} 
+Note that this function peaks at $L\sim40$ when $R=3^\circ$. Therefore, this suggests that $R=3^\circ$ would be the optimal region over which to measure $w(\theta)$, so that it coincides with the peak of the deflection power. However, note that $F_L(R)$ depends only on the product $LR$, so for fixed $L$, the amplitude of $L^2F_L(R)\propto R^{-2}$. Indeed, this scaling is apparent in Fig.~\rf{mrsq}. Although the deflection power peaks at $L=40$, it is a broad peak, and the slow decline after $L=40$ cannot compete with the $R^{-2}$ falloff of $L^2F_L(R)$. The integrand is shown in Fig.~\rf{wrint}. The reduction in the amplitude going from $R=1^\circ$ to $R=3^\circ$ is about 6, so the overall scaling is roughly $R^{-1.7}$.
+\Spng{wrint}{The integrand in \ec{wrint} for three different values of the $R$, the region over which $w(\theta)$ is averaged. Note that even though the deflection power ($L^4C_{\Phi\Phi}(L)$) peaks at $L=40$ coincident with the $R=3^\circ$ peak of $L^2F_R^2(L)$, the smaller regions have larger amplitudes, so the product continues to increase for smaller values of $R$.}
+
+
+In regions with radii ranging from $1-3^\circ$ then, the signal squared will be of order $\frac{(2400 \mu K^2)^2}{(6000 \mu K^2)^2}\times [0.15-1]\times 10^{-4}$.  So we expect the relative variation from patch to patch -- the signal! -- to be of order
+\be
+\frac{\Delta w_R(\theta)_{\rm signal}}{\bar w_R(\theta)} \sim 4\times 10^{-3} \left(\frac{1^\circ}{R}\right)^{0.85}.\eql{signal}\ee
+This seems very small but it actually may not be and helps resolve something that may be bothering you. Why is CMB lensing in Fourier space known to require arcminute scale measurements, whereas in real space, it seems as if $l<500$ would work fine? The reason is that to get high signal to noise in the measurement requires many pairs of pixels separated by an angular distance $\theta$. The number of such pairs in a circular region with radius $R$ depends on the resolution of the measurement. Consider an experiment with arcminute pixels and neglect boundary effects in a region with radius $R=3^\circ$. There are $\pi R^2/(1')^2=10^5$ pixels in the region. Each of those pixels (neglecting boundary effects) is surrounded by an annulus  of radius $\theta=39'$ and width $d\theta=1'$. In that annulus, there are $2\pi \theta d\theta/(1')^2=245$ pixels. So there are $2.5\times 10^7$ pairs of pixels separated by $39'$. This means the fractional error on the measurement will be of order $1/\sqrt{N}\simeq 2\times 10^{-4}$, well below the signal estimated in \ec{signal}. That rough estimate suggests a signal to noise in each region of 10:1! Apart from the neglected boundary effects, this is likely too optimistic as it assumes that each pair is an independent measurement of the correlation function. That is certainly not true: pixels separated by $1'$ are very highly correlated. However, it does seem likely/possible that some of the signal can be extracted using real space techniques, and it is worth noting the scaling:
+\be
+\frac{\Delta w_R(\theta)_{\rm signal}}{\Delta w_R(\theta)_{\rm noise}} \sim 8 \left( \frac{R}{3^\circ} \right)^{0.15}.\ee
+
+\appendix
+\section{Off-Diagonal Integrals}
+To evaluate \ec{barw}, it is useful to note that 
+there are 3 combinations of vectors that are constrained to be relatively small:
+\be
+l_1, l', l'' \gg |\vec l_1-\vec l'|, |\vec l_1+\vec l''|, |\vec l'+\vec l''|.\ee
+Define $\vec L\equiv \vec l'+\vec l''$ and change the variable of integration from $\vec l'$ to $\vec L$:
+\be
+w_R(\theta) =  -\int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, \vec L \cdot
+\,\int \frac{d^2l}{(2\pi)^2}\,C_{l}\vec l\,
+\int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1)\, 
+ M_R(\vec l_1+\vec l-\vec L)  M_R(\vec l_1+\vec l)
+.
+\ee
+Here $l''\rightarrow l$. But $\vec l_1+\vec l$ is also small so replace the dummy variable $l_1$ with $\vec L'\equiv \vec l_1 + \vec l$:
+\be
+w_R(\theta) =  -\int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, \vec L \cdot
+\int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')
+\,\int \frac{d^2l}{(2\pi)^2}\,C_{l}\vec l\,\tilde \Theta_\theta^*(\vec L'-\vec l)\, 
+ .
+\ee
+
+Let's consider the final integral, recalling that $l\gg L'$. It makes sense therefore to Taylor expand $\tilde\Theta$ in powers of $L'/l$. Explicitly,
+\bea
+A\tilde \Theta_\theta^*(\vec L'-\vec l) &=& J_0(\sqrt{l^2-2lL'\cos\phi'+L'^2}\theta)
+\vs
+&\simeq& J_0\left(l\theta - L'\theta\cos\phi'\right)
+\simeq
+J_0(l\theta) - \frac{dJ_0}{dx}\bigg\vert_{x=l\theta}\, L'\theta\cos\phi'
+\vs
+&=&J_0(l\theta) + J_1(l\theta)\, L'\theta\cos\phi'
+\eea
+Here $\phi'$ is the angle between $\vec L'$ and $\vec l$. The $l$ integral also has a factor of $\cos\phi$, where $\phi$ is the angle between $\vec l$ and $\vec L$. So, the innermost integral becomes
+\be
+\frac{L'\theta}A\int \frac{d^2l}{(2\pi)^2}\,C_{l} l\cos\phi J_1(l\theta)\, \cos\phi'\ee
+where the leading term vanishes because the angular integral over $\cos\phi$ vanishes. It is useful to redefine the angles to make them with respect to $\vec L$. Then, the angle between $l$ and $L$ is still $\phi\rightarrow \phi$ but the angle between $L'$ and $L$ becomes $\phi'\rightarrow \phi-\phi'$ so 
+\be
+\vec L\cdot\,\int \frac{d^2l}{(2\pi)^2}\,C_{l}\vec l\,\tilde \Theta_\theta^*(\vec L'-\vec l)\, 
+= \frac{LL'\theta}{(2\pi)^2A} \int_0^\infty dl l^2C_l J_1(l\theta) \,\int_0^{2\pi} d\phi\cos\phi \cos(\phi-\phi').
+\ee
+The only piece of the inner integral that survives is the part proportional to $\cos\phi\cos\phi'$ which leads to $\pi\cos\phi'$ so
+\be
+w_R(\theta) =  - \frac{\theta}{A} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L 
+\int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'
+\,\int_0^\infty dl \frac{l^2C_l}{4\pi}\,J_1(l\theta)  .
+\ee
+The last integral is very closely related to $\langle (\nabla T)^2\rangle$. If we multiply numerator and denominator by $l\theta$ then it can be written as $\theta\langle (\nabla T)^2\rangle_\theta$ where the subscript $\theta$ denotes the scale above which we suppress the contribution to the average. Explicitly
+\be
+\theta^2\langle (\nabla T)^2\rangle_\theta \equiv \theta\int_0^\infty dl \frac{l^2C_l}{4\pi}\,J_1(l\theta).\eql{dlnt}\ee
+Then,
+
+\section{Calculating $F_R$}
+Consider the 2D integral $F_R$:
+\be
+ F_R(L) = \frac1{(2\pi)^2AL}\, \int_0^\infty dL' L'^2 M_R(L')  \int_0^{2\pi} d\phi M_R\left(\sqrt{L^2+L'^2-2LL'\cos\phi}\right)  \,\cos\phi.\ee
+ It is useful to introduce the parameters
+ \bea
+ y &\equiv& LR\vs
+ x &\equiv& L'/L.\eea
+ Then, recalling that $M_R(L) = 2A J_1(LR)/LR$, we have
+ \bea
+ F_R(L) &=& \frac1{(2\pi)^2AL}\, \int_0^\infty dL' L'^2 \, \frac{2AJ_1(xy)}{xy} \int_0^{2\pi} d\phi \,\frac{2A J_1(y\sqrt{1+x^2-2x\cos\phi})}{y\sqrt{1+x^2-2x\cos\phi}}
+ \,\cos\phi
+ \vs
+ &=&\frac{1}{\pi}\, \int_0^\infty dx x \, {J_1(xy)}\int_0^{2\pi} d\phi \,\frac{J_1(y\sqrt{1+x^2-2x\cos\phi})}{\sqrt{1+x^2-2x\cos\phi}}
+ \,\cos\phi.\eql{phiint}
+ \eea
+ The inner integrand is shown in Fig.~\rf{phiinty}. Note that very small values of $y$ are suppressed (by $J_1$) when $x=1$ and both large and small values of $x$ lead to a small integrand when $y=1$. %This suggests that the dominant contribution will come when $y
+ %\Spng{phiint}{The integrand in the innermost integral in \ec{phiint}.}
+ \Spng{phiinty}{The integrand in the innermost integral in \ec{phiint} for different values of $x$.}
+ The full integrand begins to osciallte at $\sim\pi/y$ and the integral seems to converge when integrating out to $\sim20/y$. Using this rule of thumb, Fig.~\rf{mr} shows the function $F_R$, 
+ which depends only of the dimensionless combination $LR$. As expected, it suppresses the contribution of $\Phi$ on scales $L$ larger than $\pi/R$.
+ \Spng{mr}{The dimensionless function $F_R(L)$, suppressed on small scales, as expected.}
+% \Spng{mrint}{The $M_R$ integrand. Note that the oscillations begin around the value $x\simeq\pi/y$.}
+
+\bibliography{refs}
+
+
+\end{document}
+
+
+\subsection{Take 2}
+
+Suppose that as in the 3D case, it was true that 
+\be
+\langle \delta(\vec L-\vec l)\delta(\vec l)\rangle  = R(\vec L,\vec l) \delta (\vec L)\ee
+where the response function $R$ is calculable. Here $\delta$ is taken to mean any 2D field that can be measure, e.g., shear or $\kappa$ or galaxy overdensity. 
+How would this translate to real space? On the face of it, simply take the Fourier transform of both sides:
+\be
+\hat \delta(\vec\theta) = \int \frac{d^2L}{(2\pi)^2}\, e^{i\vec L\cdot\vec\theta} \, \frac{\delta(\vec L-\vec l)\delta(\vec l)}{R(\vec L,\vec l) }
+.\ee
+There are two tweaks to make this more realistic. First, this expression is in principle true for any large value of $l$ and presumably the $l$ dependence drops out when the expectation value on the right is taken. Ideally, though, one sums over many values of $\vec l$ with some weighting factor, which presumably depends on both $\vec l$ and $\vec L$. We can absorb $R$ into this weighting factor, call it $F$, and form an estimator
+\be
+\hat \delta(\vec\theta) = \int \frac{d^2L}{(2\pi)^2}\, e^{i\vec L\cdot\vec\theta} \, \int \frac{d^2l}{(2\pi)^2}\, F(\vec L,\vec l)\, \delta(\vec L-\vec l)\delta(\vec l)
+.\ee
+The second tweak is to enforce the idea that we are trying to create an estimator of $\delta(\vec\theta)$ on large scales. We can make this more explicit by integrating both sides of $\vec\theta$ centered at some value $\vec\Theta$ with a smoothing function $W_\phi(\vec\Theta,\vec\theta)$. For example, $W_\phi$ might be a tophat that is equal to one whenever $|\vec\Theta-\vec\theta|<\phi$ and zero otherwise. In this case,
+\be
+\hat \delta(\vec\Theta) = \int d^2\theta W_\phi(\vec\Theta,\vec\theta)\, \int \frac{d^2L}{(2\pi)^2}\, e^{i\vec L\cdot\vec\theta} \, \int \frac{d^2l}{(2\pi)^2}\, F(\vec L,\vec l)\, \delta(\vec L-\vec l)\delta(\vec l)
+.\ee
+With $\vec\theta=\vec\Theta+\vec\alpha$, the angular integral then becomes
+\be
+e^{i\vec L\cdot\vec\Theta}\, \int d^2\alpha e^{i\vec L\cdot\vec\alpha} W_\phi(\vec\alpha)
+= e^{i\vec L\cdot\vec\Theta}\, \int_0^\phi d\alpha \alpha \int_0^{2\pi} d\beta e^{iL\alpha\cos\beta}.\ee
+The inner integral is $2\pi J_0(L\alpha)$. When doing the full integral, the result should be a low pass filter, cutting off all $L$-modes with $L>1/\phi$, the smoothing scale.
+
+
+To see what this might look like in Fourier space, expand the $\delta$'s in the integrand as inverse Fourier transforms. Then,
+\bea
+\hat \delta(\vec\theta) &=& \int \frac{d^2L}{(2\pi)^2}\, e^{i\vec L\cdot\vec\theta} \, \int \frac{d^2l}{(2\pi)^2}\, W(\vec L, \vec l)
+\vs
+&\times&\int d^2\theta_1 e^{-i\vec\theta_1\cdot(\vec L - \vec l)} \,
+\int d^2\theta_2 e^{-i\vec\theta_2\cdot\vec l} \delta(\vec\theta_1)\delta(\vec\theta_2)
+\eea
+
+
+
+It is possible then to sum over many small scale $l$ modes in order to create an optimal estimator of $\delta(\vec L)$. Let's write that generally as
+\be
+\hat\delta(\vec L) = \int \frac{d^2l}{(2\pi)^2}\, W(\vec L, \vec l) \delta(\vec L-\vec l)\delta(\vec l)
+\ee
+where $W$ is normalized so that the estimator is unbiased.
+
+
+We can take the individual Fourier transforms of each of these
+\be
+\frac1{R(\vec L,\vec l)}\, \int d^2\theta \int d^2\theta' e^{-i(\vec L-\vec l)\cdot\vec\theta}\, e^{-i\vec l\cdot\vec\theta'} \, \langle \delta(\vec\theta)\delta(\vec\theta') \rangle
+= \int d^2\Theta\, e^{-i\vec L\cdot\vec\Theta} \delta(\vec \Theta)
+\ee
+
+
+\section{Projection} \label{sec1}
+Consider an angular measurement
+\be
+f(\vec\theta) = \int d\chi W_f(\chi) \delta(\chi\vec\theta,\chi)
+\ee
+where I work in the Limber approximation. Then the Fourier transform of this field is
+\bea
+\tilde f(\vec l) &=& \int d\chi W_f(\chi) \int \frac{d^2l}{(2\pi)^2}\, e^{-i\vec l\cdot\vec\theta}\,\int \frac{d^3k}{(2\pi)^3}\, e^{i\chi\vec k_\perp\cdot \vec \theta} e^{ik_z\chi} \tilde\delta(\vec k;\chi)
+\vs
+&=& 
+\int d\chi \frac{W_f(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, e^{ik_z\chi}  \tilde\delta(\vec l/\chi;k_z;\chi).
+\eea
+Then the two-point function becomes:
+\be
+\langle \tilde f(\vec l)  \tilde g(\vec l') \rangle 
+= \int d\chi \frac{W_f(\chi) }{\chi^2} \, \int d\chi \frac{W_g(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  
+\langle \tilde\delta(\vec l/\chi;k_z;\chi) \tilde\delta(\vec l'/\chi';k_z';\chi')\rangle\eql{twop}
+\ee
+We now write
+\newcommand\de[1]{\tilde\delta^{(#1)}}
+\be
+\delta = \de1+\de2
+\ee
+where
+\be
+\de1 = \de{L} D(\chi)
+\ee
+the linear overdensity at some early time propagated forward with the growth factor. Then,
+\be
+\de2(\vec k;\chi) = \int \frac{d^3k_1}{(2\pi)^3}\, F_2(\vec k_1,\vec k-\vec k_1) \de1(\vec k_1;\chi) \de1(\vec k-\vec k_1;\chi).
+\ee
+We know that the linear terms in \ec{twop} will lead to the diagonal power spectrum. We are interested in the off-diagonal terms, when $\vec l\ne-\vec l'$. For that, we need to explore the contribution from the $\langle \de1\de2\rangle$ terms. Consider one of these:
+\bea
+\langle \tilde f(\vec l)  \tilde g(\vec l') \rangle_{l\ne l'} &=& \int d\chi \frac{W_f(\chi) }{\chi^2} \, \int d\chi \frac{W_g(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  
+\langle\de2(\vec l/\chi;k_z;\chi) \de1(\vec l'/\chi';k_z';\chi')\rangle \vs
+&=&
+\int d\chi \frac{W_f(\chi) }{\chi^2} \, \int d\chi \frac{W_g(\chi) }{\chi^2} \, \int \frac{dk_z}{2\pi}\, \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  
+\vs
+&&\times 
+\int \frac{d^3k_1}{(2\pi)^3}\, F_2(\vec k_1,\vec k-\vec k_1) \langle \de1(\vec k_1;\chi) \de1(\vec k-\vec k_1;\chi) \de1(\vec l'/\chi';k_z';\chi')\rangle 
+\eea
+where on the last line $\vec k = [\vec l/\chi,k_z]$. It is the last two $\delta$'s that are small scale perturbations and we want to understand their behavior in the presence of a long-wavelength perturbation $\de1(\vec k_1)$. When contracting those last two, we get a delta function that constrains:
+\bea
+\vec l/\chi - \vec k_{1,\perp} + \vec l'/\chi' &=& 0
+\vs
+k_z-k_{1,z} + k_z' &=& 0
+\eea
+or
+\be
+\vec k_1 = [\vec l/\chi+\vec l'/\chi',k_z+k_z'].
+\ee
+So, we are left with
+\be
+\langle \tilde f(\vec l)  \tilde g(\vec l') \rangle_{l\ne l'} =
+\int d\chi \frac{W_f(\chi) D(\chi)}{\chi^2} \, \int d\chi'\frac{W_g(\chi') D(\chi')}{\chi'^2} \, \int \frac{dk_z}{2\pi}\,  \int \frac{dk_z'}{2\pi}\, e^{ik_z\chi+ik_z'\chi'}  \de1(\vec k_1;\chi)
+F_2(\vec k_1,\vec k-\vec k_1) P(l'/\chi',k_z') \ee
+
+One way to make progress here would be to cross-correlate this with the true 3D density field, $\de{L}(\vec K)$. This is not as crazy as it sounds since galaxies in a spectroscopic survey presumably trace the overdensity with a simple bias factor on large scales and the density is linear on those scales. In that case, the 3-point function would lead to a 3D Dirac delta function, eliminating 3 of the integrals. The delta function would be
+\be
+\delta^3(\vec K + \vec k_1) = \delta^2(\vec l/\chi + \vec l'/\chi'+\vec K_\perp) \delta(k_z+k_z'+K_z).
+\ee
+Going slowly, the $k_z'$ integral goes away leaving
+\bea
+\langle \de{L}(\vec K;\bar\chi)) \tilde f(\vec l)  \tilde g(\vec l') \rangle &=& P(K) D(\bar\chi)
+\int d\chi \frac{W_f(\chi) D^2(\chi)}{\chi^2} \, \int d\chi'\frac{W_g(\chi') D(\chi')}{\chi'^2} \, (2\pi)^2  \delta^2(\vec l/\chi + \vec l'/\chi'+\vec K_\perp) 
+\vs
+&&\times
+\int \frac{dk_z}{2\pi}\,  e^{ik_z\chi-i(k_z+K_z)\chi'}  
+F_2(-\vec K,\vec k+\vec K) P(l'/\chi',-k_z-K_z) 
+\eea
+where again 
+\be
+\vec k = [\vec l/\chi,k_z]
+\ee
+and $\bar\chi$ is simply the mean distance of galaxies for which you think you have measured $\delta(\vec K)$.
+Consider the $\chi'$ integral; use one of the remaining delta functions to do it:
+\be
+\delta(l_x/\chi+l'_x/\chi'+K_x) =\chi'^2 \frac{\delta(\chi'+ l'_x/[l_x/\chi+ K_x])}{l'_x}
+\ee
