@@ -203,7 +203,7 @@ w_R(\theta) =  -2 \int \frac{d^2l_1}{(2\pi)^2}\, \tilde \Theta_\theta^*(\vec l_1
 
 We will work through the CMB lensing case. Appendix B shows that \ec{barw} reduces to
 \be
-w_R(\theta) =  - 2\frac{\theta^2\langle (\nabla T)^2\rangle_\theta}{A} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L 
+w_R(\theta) =  - \frac{2}{A}\, \frac{\partial}{\partial\ln\theta}\bar w(\theta) \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L 
 \int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L'\,\cos\phi'.\ee
 We can now define the inner integral as
 \be
@@ -211,7 +211,7 @@ ALF_R(L) \equiv \int \frac{d^2L'}{(2\pi)^2}\, M_R(\vec L'-\vec L)  M_R(\vec L')L
 This makes sense since we know that the integral of $M_R^2$ is the area and the additional factor of $L$ in front simply makes $F_R(L)$ dimensionless (no factors of radians). %we also know that the $M$'s will cut off $F_R(L)$ on scales smaller than $L\gg R^{-1}$. 
 We are left with
 \be
-w_R(\theta) =  - {\theta^2\langle (\nabla T)^2\rangle_\theta} \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L^2 F_R(L) 
+w_R(\theta) =  \bar w(\theta) \, -2  \frac{\partial}{\partial\ln\theta}\bar w(\theta)\,  \int \frac{d^2L}{(2\pi)^2}\, \Phi(\vec L)\, L^2 F_R(L) 
 .\ee
 $F_R$ is discussed more fully in Appendix C.
 
